@@ -1,0 +1,36 @@
+.form-level {
+  margin-bottom: 20px;
+}
+
+.form-horizontal {
+  display: flex;
+  gap: 20px;
+}
+
+th, td {
+  text-align: center;
+}
+
+.form-select {
+  width: 200px; /* Ajusta este valor para cambiar el ancho */
+}
+
+#carouselExampleFade {
+  z-index: 0;
+}
+
+.carousel {
+  height: 100%;
+  width: 100%;
+}
+
+.carousel .carousel-item {
+  height: 100%;
+  width: 100%;
+}
+
+.carousel .carousel-item img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover; /* Asegura que las imágenes se escalen correctamente */
+}

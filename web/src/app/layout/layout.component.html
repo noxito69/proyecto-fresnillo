@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://kit.fontawesome.com/03ac15b1f7.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  
+
+</head>
+<body>
+    
+    <!-- layout.component.html -->
+    
+        
+        <nav class="navbar">
+            <div class="navbar-content">
+                <div class="logo-container">
+                    <img src="../../assets/Saved Pictures/Logo_de_Fresnillo_plc.svg.png" alt="Logo" width="10%">
+                </div>
+            </div>
+            <div class="dropdown dropdown-move-left custom-dropdown" data-bs-theme="dark">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Opciones
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Cambiar Contraseña</a></li>
+                    <li><a class="dropdown-item" href="#">Salir</a></li>
+                  
+                </ul>
+            </div>
+        </nav>
+        
+            <div class="sidebar">
+                <div class="sidebar-item">
+                    <h1>Bienvenido </h1>
+                    <h3>Erik Saucedo Rivera</h3>
+                    <hr>
+                </div>
+                <div class="sidebar-item" (click)="toggleSubmenu('accessories')">
+                    <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-archive-fill" viewBox="0 0 16 16">
+                        <path d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15zM5.5 7h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1M.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8z"/>
+                      </svg> Accesorios</span>
+                    <div *ngIf="openMenu === 'accessories'" class="submenu">
+                        <a href="#">• Stock</a>
+                        <a href="#">• Historial</a>
+                        <a href="#">• Nuevo Accesorio</a>
+                        <a href="#">• Llegada de Accesorio</a>
+                        <a href="#">• Entrega de Accesorio</a>
+                    </div>
+                </div>
+                <div class="sidebar-item" (click)="toggleSubmenu('ti')">
+                    <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-laptop" viewBox="0 0 16 16">
+                        <path d="M13.5 3a.5.5 0 0 1 .5.5V11H2V3.5a.5.5 0 0 1 .5-.5zm-11-1A1.5 1.5 0 0 0 1 3.5V12h14V3.5A1.5 1.5 0 0 0 13.5 2zM0 12.5h16a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 12.5"/>
+                      </svg> TI</span>
+                    <div *ngIf="openMenu === 'ti'" class="submenu">
+                        <a href="#">• Nuevo departamento</a>
+                        <a href="#">• Nuevo usuario Penmont</a>
+                        <a href="#">• Nuevo usuario TI</a>        
+                    </div>
+                </div>
+                <div class="sidebar-item" (click)="toggleSubmenu('labels')">
+                    <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ticket-detailed" viewBox="0 0 16 16">
+                        <path d="M4 5.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5M5 7a1 1 0 0 0 0 2h6a1 1 0 1 0 0-2z"/>
+                        <path d="M0 4.5A1.5 1.5 0 0 1 1.5 3h13A1.5 1.5 0 0 1 16 4.5V6a.5.5 0 0 1-.5.5 1.5 1.5 0 0 0 0 3 .5.5 0 0 1 .5.5v1.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 11.5V10a.5.5 0 0 1 .5-.5 1.5 1.5 0 1 0 0-3A.5.5 0 0 1 0 6zM1.5 4a.5.5 0 0 0-.5.5v1.05a2.5 2.5 0 0 1 0 4.9v1.05a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-1.05a2.5 2.5 0 0 1 0-4.9V4.5a.5.5 0 0 0-.5-.5z"/>
+                      </svg> Etiquetas</span>
+                    <div *ngIf="openMenu === 'labels'" class="submenu">
+                        <a href="#">• Contratistas</a>
+                        <a href="#">• Empleados</a>
+                     
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+                <ng-content></ng-content>
+            </div>
+     
+ 
+
+</body>
+</html>

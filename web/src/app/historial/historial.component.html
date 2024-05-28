@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-row {
+            display: flex;
+            justify-content: left;
+            gap: 20px;
+        }
+
+        .modal.right .modal-dialog {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            margin: 0;
+            transition: transform 0.3s ease-out;
+        }
+        .modal.right .modal-content {
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .modal.right .modal-body {
+            padding: 1rem;
+        }
+
+        th, td {
+            text-align: center;
+        }
+
+        .form-select {
+            width: 200px; /* Ajusta este valor para cambiar el ancho */
+        }
+
+        .container {
+            display: flex;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content {
+            flex: 1;
+            padding: 20px;
+        }
+
+        #carouselExampleFade {
+            z-index: 0;
+        }
+
+        .carousel {
+            height: 100%;
+            width: 100%;
+        }
+
+        .carousel .carousel-item {
+            height: 100%;
+            width: 100%;
+        }
+
+        .carousel .carousel-item img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover; /* Asegura que las imágenes se escalen correctamente */
+        }
+    </style>
+</head>
+<body>
+    
+    <app-layout>
+
+        <section>
+            <div class="form-container">
+                <div class="form-row">
+                    <div class="form-floating">
+                        <select class="form-select" id="floatingSelect2" aria-label="Floating label select example">
+                            <option value="1">Option</option>
+                            <option value="2">Option</option>
+                        </select>
+                        <label for="floatingSelect2">Centro de Costos</label>
+                    </div>
+
+                    <div class="form-floating">
+                        <select class="form-select" id="floatingSelect3" aria-label="Floating label select example">
+                            <option value="1">Option</option>
+                            <option value="2">Option</option>
+                        </select>
+                        <label for="floatingSelect3">Departamento</label>
+
+                        
+                    </div>
+
+                    <div class="form-floating">
+                        <div class="input-group mb-3">
+                            <button type="button" class="btn btn-info btn-lg">Buscar 🔎</button>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Folio</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    </div>
+                    
+                    <div class="input-group mb-3">
+                        <input type="date" class="form-control" id="fecha">
+                    </div>
+                    
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Clave Empleado</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    </div>
+                    
+                    
+                </div>
+            </div>
+        </section>
+
+        <br>
+        <section>
+            <table class="table table-bordered ">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Folio</th>
+                        <th>Fecha</th>
+                        <th>Numero de Empleado</th>
+                        <th>Nombre</th>
+                        <th>Articulo</th>
+                        <th>Marca</th>
+                        <th>Cantidad</th>
+                        <th>Departamento</th>
+                        <th>Centro de costos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>09/22/20</td>
+                        <td>abcv1234</td>
+                        <td>Erik Saucedo Rivera</td>
+                        <td>Audifonos diadema con microfono MB-919074</td>
+                        <td>VIZIFLEX SEELS</td>
+                        <td>1</td>
+                        <td>Adm. Sist. y Tecnologia (M)</td>
+                        <td>00000</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </app-layout>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</html>
