@@ -25,7 +25,6 @@ class UserController extends Controller
                 "name"=>"required|max:30",
                 "email"=>"required|unique:users|email",
                 "role_id"=>"numeric|between:1,3",
-                "clave_empleado"=>"required|unique:users|string|max:8|min:8",
                 "password"=>"required|min:8|string"
             ]
         );

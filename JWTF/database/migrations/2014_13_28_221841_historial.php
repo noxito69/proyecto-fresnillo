@@ -1,4 +1,4 @@
-usuarios <?php
+<?php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -13,23 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('historial', function (Blueprint $table) {
             $table->id();
+            $table->date('fecha');
             $table->integer('num_empleado');
-            $table->string('email')->unique();
-            $table->string('name',30);
+            $table->string('usuario');
+            $table->foreignId('articulo_id')->constrained('accesorios')->onDelete('cascade');
+            $table->integer('cantidad');
             $table->foreignId('departamento_id')->constrained('departamentos')->onDelete('cascade');
-
-            $table->timestamp('email_verified_at')->nullable();
-            $table->unsignedBigInteger('rol_id')->default(3);
-            $table->foreign('rol_id')->references('id')->on('roles');
-            $table->boolean('is_active')->default(false);
-            $table->string('password');
+            $table->foreignId('centro_costos_id')->constrained('centro_costos')->onDelete('cascade');
+            $table->timestamps();
 
             $table->foreign('num_empleado')->references('num_empleado')->on('usuarios_penmont')->onDelete('cascade');
-
-            $table->rememberToken();
-            $table->timestamps();
         });
     }
 
@@ -40,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('historial');
     }
 };

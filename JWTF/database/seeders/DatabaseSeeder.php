@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\CentroCosto;
+use App\Models\EmpresaContratista;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -22,7 +25,21 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call([
 
-            //RoleSeeder::class,
+
+
+            RoleSeeder::class,
+            CentroCostoSeeder::class,
+            DepartamentoSeeder::class,
+            AccesorioSeeder::class,
+            AnexoSeeder::class,
+            equipoSeeder::class,
+            EmpresaC::class,
+            UserPnmntSeeder::class,
+            ECseeder::class,
+            EtiEmpleado::class,
+            Hseeder::class
+
+
         ]);
 
     }

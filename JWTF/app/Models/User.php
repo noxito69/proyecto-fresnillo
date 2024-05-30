@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use App\Models\Role;
+use App\Models\Rol;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
 
@@ -24,14 +24,27 @@ class User extends Authenticatable implements JWTSubject
         'name',
         'email',
         'password',
-        'clave_empleado',
+        'verificacion',
+        'num_empleado',
+        'departamento_id'
+        
     ];
+
+    public function departamento()
+    {
+        return $this->belongsTo(Departamento::class);
+    }
+
+    public function usuarioPenmont()
+    {
+        return $this->belongsTo(UsuarioPenmont::class, 'num_empleado', 'num_empleado');
+    }
 
     /**
      * The attributes that should be hidden for serialization.
      *
      * @var array<int, string>
-     */ 
+     */
     protected $hidden = [
         'password',
         'remember_token',
@@ -61,6 +74,12 @@ class User extends Authenticatable implements JWTSubject
     }
 
     public function Rol(){
-        return $this->belongsTo(Role::class,'role_id');
+        return $this->belongsTo(Rol::class,'rol_id');
     }
+
+
+
+   
+
+    
 }

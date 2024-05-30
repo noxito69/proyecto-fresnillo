@@ -15,9 +15,9 @@ class RoleSeeder extends Seeder
     public function run()
     {
         $array=[
-            ['role'=>'Admin'],
-            ['role'=>'User'],
-            ['role'=>'Guest']
+            ['rol'=>'Admin'],
+            ['rol'=>'User'],
+            ['rol'=>'Guest']
         ];
 
         foreach($array as $key=>$row){

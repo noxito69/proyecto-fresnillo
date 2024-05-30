@@ -99,7 +99,6 @@ class AuthController extends Controller
             $request->all(),[
                 "name"=>"required|max:30",
                 "email"=>"required|unique:users|email",
-                "clave_empleado"=>"required|unique:users|string|max:8|min:8",
                 "password"=>"required|min:8|string"
             ]
             );
@@ -114,7 +113,7 @@ class AuthController extends Controller
             $user->email = $request->email;
             //$user->role_id=3;
             //$user->is_active=false;
-            $user->clave_empleado = $request->clave_empleado;
+            
             $user->password = Hash::make($request->password);
             $user->save();
             $signedroute = URL::temporarySignedRoute(
