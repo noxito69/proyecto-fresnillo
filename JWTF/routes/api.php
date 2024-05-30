@@ -4,7 +4,11 @@ use App\Mail\ValidatorEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
-
+use App\Http\Controllers\DepartamentoController;
+use App\Http\Controllers\AccesorioController;
+use App\Http\Controllers\AnexoController;
+use App\Http\Controllers\UsuarioPenmontController;
+use App\Http\Controllers\EtiquetasEmpleadosController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,6 +25,12 @@ use Illuminate\Support\Facades\Mail;
 });*/
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CentroCostoController;
+use App\Http\Controllers\EmpresaContratistaController;
+use App\Http\Controllers\EquipoController;
+use App\Http\Controllers\EtiquetaContratistaController;
+use App\Http\Controllers\UsuariosPenmontController;
+use GuzzleHttp\Middleware;
 
 Route::group([
 
@@ -29,6 +39,8 @@ Route::group([
 
 ], function ($router) {
 
+
+    //user
     Route::post('login', [AuthController::class,'login'])->middleware('auth.active');
     Route::post('logout', 'App\Http\Controllers\AuthController@logout');
     Route::post('refresh', 'App\Http\Controllers\AuthController@refresh');
@@ -40,7 +52,98 @@ Route::group([
     Route::post('post',[UserController::class,'store'])->middleware('authrole2');
     Route::delete('delete/{id}',[UserController::class,'destroy'])->middleware('authrole')->where('id','[0-9]+');
     Route::put('put/{id}',[UserController::class,'update'])->middleware('authrole2')->where('id','[0-9]+');
-   
+
+
+
+    //centro de costos
+    Route::get('centro_costos/index', [CentroCostoController::class, 'index']);
+    Route::post('centro_costos/post', [CentroCostoController::class, 'store']); 
+    Route::get('centro_costos/get/{id}', [CentroCostoController::class, 'show']); 
+    Route::put('centro_costos/put/{id}', [CentroCostoController::class, 'update']); 
+    Route::delete('centro_costos/delete/{id}', [CentroCostoController::class, 'destroy']); 
+
+
+    //departamentos
+    Route::get('departamentos/index', [DepartamentoController::class, 'index']); 
+    Route::post('departamentos/post', [DepartamentoController::class, 'store']); 
+    Route::get('departamentos/get/{id}', [DepartamentoController::class, 'show']);
+    Route::put('departamentos/put/{id}', [DepartamentoController::class, 'update']); 
+    Route::delete('departamentos/delete/{id}', [DepartamentoController::class, 'destroy']); 
+
+
+
+    //accesorios
+    
+    Route::get('accesorios/index', [AccesorioController::class, 'index']); 
+    Route::post('accesorios/post', [AccesorioController::class, 'store']); 
+    Route::get('accesorios/get/{id}', [AccesorioController::class, 'show']); 
+    Route::put('accesorios/put/{id}', [AccesorioController::class, 'update']); 
+    Route::delete('accesorios/delete/{id}', [AccesorioController::class, 'destroy']); 
+
+ 
+    //anexos
+
+    Route::get('anexos/index',[AnexoController::class,'index']);
+    Route::post('anexos/post',[AnexoController::class,'store']);
+    Route::get('anexos/get/{id}',[AnexoController::class,'show']);
+    Route::put('anexos/put/{id}',[AnexoController::class,'update']);
+    Route::delete('anexos/delete/{id}',[AnexoController::class,'destroy']);
+
+
+    //EmpresaContratista
+
+    Route::get('empresa_contratista/index',[EmpresaContratistaController::class,'index']);
+    Route::post('empresa_contratista/post',[EmpresaContratistaController::class,'store']);
+    Route::get('empresa_contratista/get/{id}',[EmpresaContratistaController::class,'show']);
+    Route::put('empresa_contratista/put/{id}',[EmpresaContratistaController::class,'update']);
+    Route::delete('empresa_contratista/delete/{id}',[EmpresaContratistaController::class,'destroy']);
+
+
+
+    //Equipos
+
+    Route::get('equipos/index',[EquipoController::class,'index']);
+    Route::post('equipos/post',[EquipoController::class,'store']);
+    Route::get('equipos/get/{id}',[EquipoController::class,'show']);
+    Route::put('equipos/put/{id}',[EquipoController::class,'update']);
+    Route::delete('equipos/delete/{id}',[EquipoController::class,'destroy']);
+    
+
+
+
+
+    //Etiquetas Contratistas
+
+    Route::get('etiquetas_contratistas/index',[EtiquetaContratistaController::class,'index']);
+    Route::post('etiquetas_contratistas/post',[EtiquetaContratistaController::class,'store']);
+    Route::get('etiquetas_contratistas/get/{id}',[EtiquetaContratistaController::class,'show']);
+    Route::put('etiquetas_contratistas/put/{id}',[EtiquetaContratistaController::class,'update']);
+    Route::delete('etiquetas_contratistas/delete/{id}',[EtiquetaContratistaController::class,'destroy']);
+
+    
+    //Usuarios Penmont
+
+    Route::get('usuarios_penmont/index',[UsuariosPenmontController::class,'index']);
+    Route::post('usuarios_penmont/post',[UsuariosPenmontController::class,'store']);
+    Route::get('usuarios_penmont/get/{id}',[UsuariosPenmontController::class,'show']);
+    Route::put('usuarios_penmont/put/{id}',[UsuariosPenmontController::class,'update']);
+    Route::delete('usuarios_penmont/delete/{id}',[UsuariosPenmontController::class,'destroy']);
+
+
+    //etiquetas empleados
+
+    Route::get('etiquetas_empleados/index',[EtiquetasEmpleadosController::class,'index']);
+    Route::post('etiquetas_empleados/post',[EtiquetasEmpleadosController::class,'store']);
+    Route::get('etiquetas_empleados/get/{id}',[EtiquetasEmpleadosController::class,'show']);
+    Route::put('etiquetas_empleados/put/{id}',[EtiquetasEmpleadosController::class,'update']);
+    Route::delete('etiquetas_empleados/delete/{id}',[EtiquetasEmpleadosController::class,'destroy']);
+
+    
+    
+    
+    
+
+  
 });
 
 

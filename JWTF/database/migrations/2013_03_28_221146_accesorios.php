@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('marca')->nullable();
             $table->string('codigo_barras')->unique();
             $table->timestamps();
+
+          
         });
     }
 

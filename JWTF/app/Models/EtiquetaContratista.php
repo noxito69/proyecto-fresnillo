@@ -26,3 +26,4 @@ class EtiquetaContratista extends Model
         return $this->belongsTo(EmpresaContratista::class, 'empresa_id');
     }
 }
+
