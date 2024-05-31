@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
 
 
-
+           
             RoleSeeder::class,
             CentroCostoSeeder::class,
             DepartamentoSeeder::class,
@@ -37,7 +37,11 @@ class DatabaseSeeder extends Seeder
             UserPnmntSeeder::class,
             ECseeder::class,
             EtiEmpleado::class,
-            Hseeder::class
+            Hseeder::class,
+            ImpresoraSeeder::class,
+            TonnerSeeder::class,
+            HistorialImpresoraSeeder::class,
+            HistorialTonnerSeeder::class
 
 
         ]);

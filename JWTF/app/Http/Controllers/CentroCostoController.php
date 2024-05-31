@@ -16,9 +16,15 @@ class CentroCostoController extends Controller
     // Store a newly created resource in storage
     public function store(Request $request)
     {
+        $messages = [
+            'nombre.required' => 'El campo nombre es requerido',
+            'nombre.unique' => 'El nombre ya ha sido tomado',
+            'nombre.max' => 'El nombre no puede tener más de 255 caracteres',
+        ];
+
         $request->validate([
             'nombre' => 'required|unique:centro_costos|max:255',
-        ]);
+        ], $messages);
 
         $centroCosto = CentroCosto::create($request->all());
 
@@ -40,9 +46,15 @@ class CentroCostoController extends Controller
     // Update the specified resource in storage
     public function update(Request $request, $id)
     {
+        $messages = [
+            'nombre.required' => 'El campo nombre es requerido',
+            'nombre.unique' => 'El nombre ya ha sido tomado',
+            'nombre.max' => 'El nombre no puede tener más de 255 caracteres',
+        ];
+
         $request->validate([
             'nombre' => 'required|unique:centro_costos,nombre,' . $id . '|max:255',
-        ]);
+        ], $messages);
 
         $centroCosto = CentroCosto::find($id);
 
