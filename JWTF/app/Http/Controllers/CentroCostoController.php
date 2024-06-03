@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\CentroCosto;
+use Illuminate\Support\Facades\Validator;
 
 use Illuminate\Http\Request;
 
@@ -13,22 +14,25 @@ class CentroCostoController extends Controller
         return response()->json($centroCostos);
     }
 
-    // Store a newly created resource in storage
+    
     public function store(Request $request)
     {
         $messages = [
-            'nombre.required' => 'El campo nombre es requerido',
-            'nombre.unique' => 'El nombre ya ha sido tomado',
-            'nombre.max' => 'El nombre no puede tener más de 255 caracteres',
+            'nombre.required' => 'El nombre es requerido.',
+            'nombre.unique' => 'Este número ya existe.',
+            'nombre.size' => 'El nombre debe tener exactamente 6 caracteres.',
         ];
 
-        $request->validate([
-            'nombre' => 'required|unique:centro_costos|max:255',
-        ], $messages);
+        $validated = Validator::make($request->all(),
+        ['nombre' => 'required|unique:centro_costos|size:6',], $messages);
 
-        $centroCosto = CentroCosto::create($request->all());
-
-        return response()->json($centroCosto, 201);
+        if($validated->fails()){
+            return response()->json(['message' => $validated->errors()], 400);
+        }
+        else{
+            $centroCosto = CentroCosto::create($request->all());
+            return response()->json($centroCosto, 201);
+        }
     }
 
     // Display the specified resource
@@ -43,28 +47,32 @@ class CentroCostoController extends Controller
         return response()->json($centroCosto);
     }
 
-    // Update the specified resource in storage
+  
     public function update(Request $request, $id)
     {
-        $messages = [
-            'nombre.required' => 'El campo nombre es requerido',
-            'nombre.unique' => 'El nombre ya ha sido tomado',
-            'nombre.max' => 'El nombre no puede tener más de 255 caracteres',
-        ];
+            $messages = [
+                'nombre.required' => 'El nombre es requerido.',
+                'nombre.unique' => 'Este número ya existe.',
+                'nombre.size' => 'El nombre debe tener exactamente 6 caracteres.',
+            ];
 
-        $request->validate([
-            'nombre' => 'required|unique:centro_costos,nombre,' . $id . '|max:255',
-        ], $messages);
+            $validated = Validator::make($request->all(),
+            ['nombre' => 'required|unique:centro_costos,nombre,' . $id . '|size:6',], $messages);
 
-        $centroCosto = CentroCosto::find($id);
+            if($validated->fails()){
+                return response()->json(['message' => $validated->errors()], 400);
+            }
+            else{
+                $centroCosto = CentroCosto::find($id);
 
-        if (!$centroCosto) {
-            return response()->json(['message' => 'Centro de costos no encontrado'], 404);
-        }
+                if (!$centroCosto) {
+                    return response()->json(['message' => 'Centro de costos no encontrado'], 404);
+                }
 
-        $centroCosto->update($request->all());
+                $centroCosto->update($request->all());
 
-        return response()->json($centroCosto);
+                return response()->json($centroCosto);
+            }
     }
 
     // Remove the specified resource from storage

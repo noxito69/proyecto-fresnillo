@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->date('fecha');
             $table->integer('cantidad');
-            $table->foreignId('departamento_id')->constrained('departamentos');
-            $table->foreignId('impresora_id')->constrained('impresoras');
+            $table->foreignId('departamento_id')->constrained('departamentos')->onDelete('cascade');
+            $table->foreignId('impresora_id')->constrained('impresoras')->onDelete('cascade');
             $table->foreignId('centro_costos_id')->constrained('centro_costos');
             $table->timestamps();
         });

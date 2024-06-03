@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Impresora;
+use Illuminate\Support\Facades\Validator;
 
 class ImpresoraController extends Controller
 {
@@ -15,26 +16,42 @@ class ImpresoraController extends Controller
 
     }
 
+
+    
     public function store(Request $request)
     {
+        $messages = [
+            'numero_serie.required' => 'El número de serie es requerido.',
+            'numero_serie.max' => 'El número de serie no debe exceder los 255 caracteres.',
+            'departamento_id.required' => 'El ID del departamento es requerido.',
+            'departamento_id.integer' => 'El ID del departamento debe ser un número entero.',
+            'departamento_id.exists' => 'El departamento con este ID no existe.',
+            'IP.required' => 'La IP es requerida.',
+            'IP.max' => 'La IP no debe exceder los 255 caracteres.',
+            'ubicacion.required' => 'La ubicación es requerida.',
+            'ubicacion.max' => 'La ubicación no debe exceder los 255 caracteres.',
+        ];
 
-        $request->validate([
-
-           
+        $validated = Validator::make($request->all(), [
             'numero_serie' => 'required|max:255',
-            'departamento_id' => 'required|integer',
+            'departamento_id' => 'required|integer|exists:departamentos,id',
             'IP' => 'required|max:255',
-            'ubicacion' => 'required|max:255'
+            'ubicacion' => 'required|max:255',
+        ], $messages);
 
-        ]);
-
-        $impresora = Impresora::create($request->all());
-        return response()->json([
-
-            'message' => 'Impresora created successfully',
-            'data' => $impresora], 201);
-
+        if($validated->fails()){
+            return response()->json(['message' => $validated->errors()], 400);
+        }
+        else{
+            $impresora = Impresora::create($request->all());
+            return response()->json([
+                'message' => 'Impresora created successfully',
+                'data' => $impresora], 201);
+        }
     }
+
+
+
 
     public function show($id)
     {

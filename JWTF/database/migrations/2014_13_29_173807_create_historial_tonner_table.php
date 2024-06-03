@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->date('fecha');
             $table->integer('cantidad');
-            $table->foreignId('tonner_id')->constrained('tonners');
+            $table->foreignId('tonner_id')->constrained('tonners')->onDelete('cascade');
             $table->timestamps();
         });
     }

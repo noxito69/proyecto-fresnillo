@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Equipo;
+use Illuminate\Support\Facades\Validator;
 
 use Illuminate\Http\Request;
 
@@ -18,19 +19,30 @@ class EquipoController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $messages = [
+            'modelo.required' => 'El modelo es requerido.',
+            'modelo.max' => 'El modelo no debe exceder los 255 caracteres.',
+            'marca.required' => 'La marca es requerida.',
+            'marca.max' => 'La marca no debe exceder los 255 caracteres.',
+            'tipo.required' => 'El tipo es requerido.',
+            'tipo.max' => 'El tipo no debe exceder los 255 caracteres.',
+        ];
 
+        $validated = Validator::make($request->all(), [
             'modelo' => 'required|max:255',
             'marca' => 'required|max:255',
             'tipo' => 'required|max:255',
-       
-        ]);
+        ], $messages);
 
-        $equipo = Equipo::create($request->all());
-
-        return response()->json([
-            'message' => 'Equipo created successfully',
-            'data' => $equipo], 201);
+        if($validated->fails()){
+            return response()->json(['message' => $validated->errors()], 400);
+        }
+        else{
+            $equipo = Equipo::create($request->all());
+            return response()->json([
+                'message' => 'Equipo created successfully',
+                'data' => $equipo], 201);
+        }
     }
 
     public function show($id)

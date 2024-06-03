@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('departamentos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre')->unique();
-            $table->foreignId('centro_costos_id')->constrained('centro_costos');
+            $table->foreignId('centro_costos_id')->constrained('centro_costos')->onDelete('cascade');
             $table->timestamps();
         });
     }
