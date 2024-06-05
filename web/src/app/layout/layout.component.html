@@ -42,11 +42,11 @@
                         <path d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15zM5.5 7h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1M.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8z"/>
                       </svg> Accesorios</span>
                     <div *ngIf="openMenu === 'accessories'" class="submenu">
-                        <a href="#">• Stock</a>
-                        <a href="#">• Historial</a>
-                        <a href="#">• Nuevo Accesorio</a>
-                        <a href="#">• Llegada de Accesorio</a>
-                        <a href="#">• Entrega de Accesorio</a>
+                        <a (click)="navigateTo('/stock')">• Stock</a>
+                        <a (click)="navigateTo('/historial')" >• Historial</a>
+                        <a (click)="navigateTo('/new-accesorios')">• Nuevo Accesorio</a>
+                        <a (click)="navigateTo('/llegada-accesorios')">• Llegada de Accesorio</a>
+                        <a (click)="navigateTo('/salida-accesorio')">• Entrega de Accesorio</a>
                     </div>
                 </div>
                 <div class="sidebar-item" (click)="toggleSubmenu('ti')">
@@ -54,9 +54,8 @@
                         <path d="M13.5 3a.5.5 0 0 1 .5.5V11H2V3.5a.5.5 0 0 1 .5-.5zm-11-1A1.5 1.5 0 0 0 1 3.5V12h14V3.5A1.5 1.5 0 0 0 13.5 2zM0 12.5h16a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 12.5"/>
                       </svg> TI</span>
                     <div *ngIf="openMenu === 'ti'" class="submenu">
-                        <a href="#">• Nuevo departamento</a>
-                        <a href="#">• Nuevo usuario Penmont</a>
-                        <a href="#">• Nuevo usuario TI</a>        
+                        <a (click)="navigateTo('/new-departamento')">• Nuevo departamento</a>
+                        <a (click)="navigateTo('/new-user-pnmnt')">• Nuevo usuario Penmont</a>     
                     </div>
                 </div>
                 <div class="sidebar-item" (click)="toggleSubmenu('labels')">
@@ -65,10 +64,11 @@
                         <path d="M0 4.5A1.5 1.5 0 0 1 1.5 3h13A1.5 1.5 0 0 1 16 4.5V6a.5.5 0 0 1-.5.5 1.5 1.5 0 0 0 0 3 .5.5 0 0 1 .5.5v1.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 11.5V10a.5.5 0 0 1 .5-.5 1.5 1.5 0 1 0 0-3A.5.5 0 0 1 0 6zM1.5 4a.5.5 0 0 0-.5.5v1.05a2.5 2.5 0 0 1 0 4.9v1.05a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-1.05a2.5 2.5 0 0 1 0-4.9V4.5a.5.5 0 0 0-.5-.5z"/>
                       </svg> Etiquetas</span>
                     <div *ngIf="openMenu === 'labels'" class="submenu">
-                        <a href="#">• Contratistas</a>
-                        <a href="#">• Empleados</a>
+                        <a (click)="navigateTo('/new-etiqueta-pnmnt')">• Contratistas</a>
+                        <a (click)="navigateTo('/new-etiqueta-pnmnt')">• Empleados</a>
                      
                     </div>
+                    
                 </div>
             </div>
             <div class="content">

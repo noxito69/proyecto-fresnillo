@@ -57,7 +57,9 @@
                 <div class="form-level form-horizontal">
                     <div class="mb-3">
                         <label for="cbarras" class="form-label">Codigo de barras:</label>
-                        <input type="number" class="form-control" id="cbarras" placeholder="">
+                        <input type="string" class="form-control" id="cbarras" [(ngModel)]="codigoBarras" placeholder="">
+                        <br>
+                        <button type="button" class="btn btn-success" (click)="getAccesorioByBarCode()" >Buscar</button>
                     </div>
                 
                 </div>
@@ -65,18 +67,16 @@
                 <div class="form-level form-horizontal">
                     <div class="mb-3">
                         <label for="articulo" class="form-label">Articulo:</label>
-                        <input type="text" class="form-control" id="articulo" placeholder="">
+                        <input type="text" class="form-control" id="articulo" [(ngModel)]="articulo" placeholder="">
                     </div>
                 
                 </div>
 
-
                 <div class="form-level form-horizontal">
                     <div class="mb-3">
                         <label for="cantidad" class="form-label">Cantidad:</label>
-                        <input type="number" class="form-control" id="cantidad" placeholder="">
+                        <input type="number" class="form-control" id="cantidad" [(ngModel)]="cantidad" placeholder="" step="any" min="0">
                     </div>
-                
                 </div>
                 
                 
@@ -86,23 +86,20 @@
 
                     <div class="mb-3">
                         <label for="marca" class="form-label">Marca:</label>
-                        <input type="text" class="form-control" id="marca" placeholder="">
+                        <input type="text" class="form-control" id="marca" [(ngModel)]="marca" placeholder="">
                     </div>
                 </div>
             
-                
             
-            
-            
-               
             
                 <!-- Octavo Nivel -->
                 <div class="form-level form-level-buttons">
-                    <button type="button" class="btn btn-primary">Ingresar</button>
-                    <button type="button" class="btn btn-warning">Limpiar</button>
-                    <button type="button" class="btn btn-danger">Salir</button>
+                    <button type="button" class="btn btn-primary" (click)="updateQuantity()">Ingresar</button>
+                    <button type="button" class="btn btn-warning" (click)="clearInputs()">Limpiar</button>
+                    <button type="button" class="btn btn-danger" (click)="navigateTo('/')">Salir</button>
                     
                 </div>
+               
             </div>
         </div>
     </app-layout>

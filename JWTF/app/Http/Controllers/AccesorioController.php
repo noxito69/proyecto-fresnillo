@@ -95,4 +95,41 @@ class AccesorioController extends Controller
 
         return response()->json(['message' => 'Accesorio eliminado con éxito']);
     }
+
+    public function getByBarCode($codigo_barras)
+    {
+        $accesorio = Accesorio::where('codigo_barras', $codigo_barras)->first();
+
+        if ($accesorio) {
+            return response()->json($accesorio, 200);
+        } else {
+            return response()->json(['message' => 'Accesorio no encontrado'], 404);
+        }
+    }
+
+    public function updateQuantity(Request $request, $codigo_barras)
+    {
+        $accesorio = Accesorio::where('codigo_barras', $codigo_barras)->first();
+
+        if (!$accesorio) {
+            return response()->json(['message' => 'Accesorio no encontrado'], 404);
+        }
+
+        $accesorio->cantidad += $request->cantidad;
+        $accesorio->save();
+
+        return response()->json(['message' => 'Cantidad actualizada con éxito']);
+    }
+
+    public function getTotal()
+    {
+        $total = Accesorio::count();
+
+        return response()->json(['total' => $total], 200);
+    }
+
+    
+
+
+
 }

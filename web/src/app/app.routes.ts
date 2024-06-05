@@ -13,7 +13,7 @@ export const routes: Routes = [
 {path:'new-etiqueta-pnmnt', loadComponent: () => import('./new-etiqueta-pnmnt/new-etiqueta-pnmnt.component').then(ne => ne.NewEtiquetaPNMNTComponent)},
 {path:'update-etiqueta-pnmnt', loadComponent: () => import('./update-etiqueta-pnmnt/update-etiqueta-pnmnt.component').then(ue => ue.UpdateEtiquetaPNMNTComponent)},
 {path:'new-departamento', loadComponent: () => import('./new-departamento/new-departamento.component').then(nd => nd.NewDepartamentoComponent)},
-{path:'new-user-pnmnt', loadComponent: () => import('./new-user-pnmnt/new-user-pnmnt.component').then(nu => NewUserPnmntComponent)},
+{path:'new-user-pnmnt', loadComponent: () => import('./new-user-pnmnt/new-user-pnmnt.component').then(nu => nu.NewUserPnmntComponent)},
 {path:'register', loadComponent: () => import('./register/register.component').then(r => r.RegisterComponent)},
 {path:'login', loadComponent: () => import('./login/login.component').then(l => l.LoginComponent)},
 {path:'recover', loadComponent: () => import('./recover/recover.component').then(r => r.RecoverComponent)},

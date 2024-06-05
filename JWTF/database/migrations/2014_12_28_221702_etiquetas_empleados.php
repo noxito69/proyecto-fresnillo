@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('etiquetas_empleados', function (Blueprint $table) {
             $table->id();
-            $table->string('numero_serie')->unique();
+            $table->string('numero_serie');
             $table->foreignId('usuario_id')->constrained('usuarios_penmont')->onDelete('cascade');
             $table->string('host');
             $table->foreignId('equipo_id')->constrained('equipos')->onDelete('cascade');
