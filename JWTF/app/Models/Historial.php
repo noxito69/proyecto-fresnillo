@@ -12,7 +12,7 @@ class Historial extends Model
 
     use HasFactory;
 
-    protected $fillable = ['fecha', 'num_empleado', 'usuario', 'articulo_id', 'cantidad', 'departamento_id', 'centro_costos_id'];
+    protected $fillable = ['fecha', 'num_empleado', 'usuario', 'articulo_id', 'cantidad', 'departamento', 'centro_costos'];
 
     public function usuarioPenmont()
     {
@@ -24,13 +24,5 @@ class Historial extends Model
         return $this->belongsTo(Accesorio::class, 'articulo_id');
     }
 
-    public function departamento()
-    {
-        return $this->belongsTo(Departamento::class);
-    }
-
-    public function centroCosto()
-    {
-        return $this->belongsTo(CentroCosto::class, 'centro_costos_id');
-    }
+  
 }

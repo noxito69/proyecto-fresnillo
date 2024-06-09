@@ -17,32 +17,32 @@ class Hseeder extends Seeder
     {
         Historial::create([
             'fecha' => '2024-01-01',
-            'num_empleado' => 1001,
+            'num_empleado' => '1001',
             'usuario' => 'Juan Perez',
             'articulo_id' => 1,
             'cantidad' => 2,
-            'departamento_id' => 1,
-            'centro_costos_id' => 1,
+            'departamento' => 'a',
+            'centro_costos' => 'aa',
         ]);
 
         Historial::create([
             'fecha' => '2024-01-02',
-            'num_empleado' => 1002,
+            'num_empleado' => '1002',
             'usuario' => 'Maria Garcia',
             'articulo_id' => 2,
             'cantidad' => 1,
-            'departamento_id' => 2,
-            'centro_costos_id' => 2,
+            'departamento' => 'aaaa',
+            'centro_costos' => 'aaaaa',
         ]);
 
         Historial::create([
             'fecha' => '2024-01-03',
-            'num_empleado' => 1003,
+            'num_empleado' => '1003',
             'usuario' => 'Luis Fernandez',
             'articulo_id' => 3,
             'cantidad' => 3,
-            'departamento_id' => 3,
-            'centro_costos_id' => 3,
+            'departamento' => 'aaaaa',
+            'centro_costos' => 'aaaaaa',
         ]);
     }
 }

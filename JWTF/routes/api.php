@@ -136,6 +136,7 @@ Route::group([
     Route::get('usuarios_penmont/get/{id}',[UsuariosPenmontController::class,'show']);
     Route::put('usuarios_penmont/put/{id}',[UsuariosPenmontController::class,'update']);
     Route::delete('usuarios_penmont/delete/{id}',[UsuariosPenmontController::class,'destroy']);
+    Route::get('usuarios_penmont/getByEmployeeNumber/{num_empleado}', [UsuariosPenmontController::class, 'getByEmployeeNumber']);
 
 
 

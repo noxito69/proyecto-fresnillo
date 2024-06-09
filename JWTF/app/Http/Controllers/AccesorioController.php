@@ -30,10 +30,11 @@ class AccesorioController extends Controller
             'codigo_barras.required' => 'El código de barras es requerido.',
             'codigo_barras.unique' => 'Este código de barras ya existe.',
             'codigo_barras.max' => 'El código de barras no debe exceder los 255 caracteres.',
+            'articulo.min' => 'El artículo debe tener al menos 1 caracter.',
         ];
 
         $validated = Validator::make($request->all(), [
-            'cantidad' => 'required|integer|max:999',
+            'cantidad' => 'required|integer|max:999|min:1',
             'articulo' => 'required|string|max:255',
             'marca' => 'required|string|max:255',
             'codigo_barras' => 'required|string|unique:accesorios|max:255',

@@ -71,7 +71,7 @@ export class StockComponent implements OnInit {
   }
 
   downloadAsExcel() {
-    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.filteredData); // Use filteredData instead of data
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.filteredData); 
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'tablastock');
     XLSX.writeFile(wb, 'inventario.xlsx');
@@ -79,7 +79,8 @@ export class StockComponent implements OnInit {
 
   downloadAsPdf() {
     const doc = new jsPDF();
-    autoTable(doc, { html: '#data-table' });  // Use the id of your table element
+    autoTable(doc, { html: '#data-table' });  // sip
     doc.save('inventario.pdf');
   }
 }
+

@@ -1,37 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
 .form-level {
     margin-bottom: 20px;
-  }
-  
-  .form-horizontal {
+}
+
+.form-horizontal {
     display: flex;
     gap: 20px;
-  }
-  
-  th, td {
+}
+
+#vale {
+    width: 210mm; /* A4 width */
+    height: 297mm; /* A4 height */
+    position: relative;
+}
+
+.nombre, .departamento, .centroCostos {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 21px;
+    position: absolute;
+    width: 100mm;
+    height: 10mm;
+}
+
+.nombre {
+    top: 47mm;
+    left: 35mm;
+}
+
+.x {
+  position: absolute;
+  font-family: 'Roboto Mono', monospace;
+  top: 263mm;
+  left: 79mm;
+}
+
+.departamento {
+    top: 58mm;
+    left: 35mm;
+}
+
+.centroCostos {
+    top: 58mm;
+    left: 160mm;
+}
+
+.tabla {
+    position: absolute;
+    top: 75mm;
+    left: 15mm;
+    width: 170mm; /* Adjust the width as needed */
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    border: 0;
+    border-top: 1px solid rgb(255, 255, 255); /* Top border for header and cells */
+    border-bottom: 1px solid black; /* Bottom border for header and cells */
+    padding: 1px 15px; /* Aumenta el padding a la izquierda y derecha */
     text-align: center;
-  }
-  
-  .form-select {
-    width: 200px; /* Ajusta este valor para cambiar el ancho */
-  }
-  
-  #carouselExampleFade {
-    z-index: 0;
-  }
-  
-  .carousel {
-    height: 100%;
-    width: 100%;
-  }
-  
-  .carousel .carousel-item {
-    height: 100%;
-    width: 100%;
-  }
-  
-  .carousel .carousel-item img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover; /* Asegura que las imágenes se escalen correctamente */
-  }
-  
+}
+
+.table th:first-child, .table td:first-child {
+    border-left: none; /* Remove left border for first column */
+}
+
+.table th:last-child, .table td:last-child {
+    border-right: none; /* Remove right border for last column */
+}

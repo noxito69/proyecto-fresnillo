@@ -15,9 +15,10 @@ return new class extends Migration
     {
         Schema::create('usuarios_penmont', function (Blueprint $table) {
             $table->id();
-            $table->integer('num_empleado')->unique();
+            $table->string('num_empleado')->unique();
             $table->string('email')->unique();
             $table->string('nombre');
+            $table->foreignId('centro_costos_id')->constrained('centro_costos')->onDelete('cascade');
             $table->foreignId('departamento_id')->constrained('departamentos')->onDelete('cascade');
             $table->timestamps();
         });

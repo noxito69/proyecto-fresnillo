@@ -55,7 +55,8 @@
                 <div class="form-level form-horizontal">
                     <div class="mb-3">
                         <label for="noEmpleado" class="form-label">Numero de Empleado:</label>
-                        <input type="number" class="form-control" id="noEmpleado" placeholder="">
+                        <input type="text" [(ngModel)]="numEmpleado"  class="form-control" id="noEmpleado" placeholder=""><br>
+                        <button type="button"  class="btn btn-success"  (click)="buscarEmpleado()">Buscar</button>
                     </div>
                 
                 </div>
@@ -64,7 +65,7 @@
                 <div class="form-level form-horizontal">
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre:</label>
-                        <input type="text" class="form-control" id="nombre" placeholder="">
+                        <input type="text" [(ngModel)]="nombre" disabled="true" class="form-control" id="nombre" placeholder="">
                     </div>
                 
                 </div>
@@ -74,62 +75,101 @@
 
                     <div class="mb-3">
                         <label for="departamento" class="form-label">Departamento</label>
-                        <select class="form-select" id="departamento">
-                            <option selected disabled>Seleccione el departamento</option>
-                            <option value="1">departamento 1</option>
-                            <option value="2">departamento 2</option>
-                        </select>
+                        <input type="text" [(ngModel)]="departamento" disabled="true" class="form-control" id="nombre" placeholder="">
                     </div>
                 </div>
             
                 <div class="form-level form-horizontal">
                     <div class="mb-3">
                         <label for="Ccostos" class="form-label">Centro de costos:</label>
-                        <input type="Ccostos" class="form-control" id="cbarras" placeholder="">
+                        <input type="Ccostos" [(ngModel)]="centroCostos" disabled="true" class="form-control" id="cbarras" placeholder="">
                     </div>
                 
                 </div>
 
-                <div class="form-level form-horizontal">
+
+                <div class="form-level form-horizontal" [hidden]="isBarcodeHidden">
                     <div class="mb-3">
-                        <label for="folio" class="form-label">Folio:</label>
-                        <input type="folio" class="form-control" id="cbarras" placeholder="">
+                        <label for="cb" class="form-label">Codigo de barras:</label>
+                        <input type="cb" class="form-control" id="cbarras" [(ngModel)]="codigoBarras" placeholder=""><br>
+                        <button type="button" class="btn btn-info" (click)="getAccesorioByBarCode()" >Agregar</button>
                     </div>
                 
                 </div>
             
             
                 <section>
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" [hidden]="isTableHidden" >
                         <thead class="table-dark">
                             <tr>
                                 <th>Cantidad</th>
                                 <th>Articulo</th>
                                 <th>Marca</th>
+                                <th>+ -</th>
                                 
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>NAMESPACE</td>
-                                <td>NAMESPACE</td>
-                                <td>NAMESPACE</td>
-                               
+                            <tr *ngFor="let articulo of articulos">
+                              <td>{{cantidad}}</td>
+                              <td>{{articulo.articulo}}</td>
+                              <td>{{articulo.marca}}</td>
+                              <td><button type="button" class="btn btn-danger">-</button>   <button type="button" class="btn btn-success">+</button></td>
+                              
+                              
+                                                         
                             </tr>
-                        </tbody>
+                          </tbody>
                     </table>
+                    
                 </section>
                
-            
+            <br>
                 <!-- Octavo Nivel -->
                 <div class="form-level form-level-buttons">
 
-                    <button type="button" class="btn btn-primary">Generar vale de custodia</button>
-                    <button type="button" class="btn btn-danger">Salir</button>
+                    <button type="button" class="btn btn-primary" (click)="generatePdf()" >Generar vale de custodia</button>
+                    <button type="button" class="btn btn-danger" (click)="navigateTo('/')">Salir</button>
                     
                 </div>
+
             </div>
         </div>
+
+        <br><br><br>
+
+
+        <section class="form-level form-horizontal" [hidden]="isDocHidden">
+            <div id="vale" #vale>
+                <img src="../../assets/Saved Pictures/hola.jpg" alt="Imagen de fondo" style="width: 100%; height: 100%;">
+                <div>
+                    <div class="nombre">{{nombre}}</div>
+                    <div class="x">{{x}}</div>
+                    <div class="departamento">{{departamento}}</div>
+                    <div class="centroCostos">{{centroCostos}}</div>
+                    
+                    <div class="tabla">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Cantidad</th>
+                                    <th scope="col">Articulo</th>
+                                    <th scope="col">Marca</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let articulo of articulos">
+                                    <td>{{articulo.cantidad}}</td>
+                                    <td>{{articulo.articulo}}</td>
+                                    <td>{{articulo.marca}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
     </app-layout>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

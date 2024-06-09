@@ -16,14 +16,13 @@ return new class extends Migration
         Schema::create('historial', function (Blueprint $table) {
             $table->id();
             $table->date('fecha');
-            $table->integer('num_empleado');
-            $table->string('usuario');
+            $table->string('num_empleado',17);
+            $table->string('usuario',50);
             $table->foreignId('articulo_id')->constrained('accesorios')->onDelete('cascade');
             $table->integer('cantidad');
-            $table->foreignId('departamento_id')->constrained('departamentos')->onDelete('cascade');
-            $table->foreignId('centro_costos_id')->constrained('centro_costos')->onDelete('cascade');
+            $table->string('departamento', 255);
+            $table->string('centro_costos', 255);
             $table->timestamps();
-
             $table->foreign('num_empleado')->references('num_empleado')->on('usuarios_penmont')->onDelete('cascade');
         });
     }

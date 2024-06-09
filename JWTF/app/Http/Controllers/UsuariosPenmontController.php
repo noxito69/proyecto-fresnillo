@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\UsuarioPenmont;
+use App\Models\Departamento;
 use Illuminate\Support\Facades\Validator;
 
 use Illuminate\Http\Request;
@@ -30,6 +31,9 @@ class UsuariosPenmontController extends Controller
             'departamento_id.required' => 'El ID del departamento es requerido.',
             'departamento_id.integer' => 'El ID del departamento debe ser un número entero.',
             'departamento_id.exists' => 'El ID del departamento no existe.',
+            'centro_costos_id.integer' => 'El ID del centro de costos debe ser un número entero.',
+            'centro_costos_id.exists' => 'El ID del centro de costos no existe.',
+
         ];
 
         $validated = Validator::make($request->all(), [
@@ -37,6 +41,7 @@ class UsuariosPenmontController extends Controller
             'email' => 'required|email',
             'nombre' => 'required|string',
             'departamento_id' => 'required|integer|exists:departamentos,id',
+            'centro_costos_id' => 'required|integer|exists:centro_costos,id'
         ], $messages);
 
         if($validated->fails()){
@@ -84,6 +89,9 @@ class UsuariosPenmontController extends Controller
                 'departamento_id.required' => 'El ID del departamento es requerido.',
                 'departamento_id.integer' => 'El ID del departamento debe ser un número entero.',
                 'departamento_id.exists' => 'El ID del departamento no existe.',
+                'centro_costos_id.required' => 'El ID del centro de costos es requerido.',
+                'centro_costos_id.integer' => 'El ID del centro de costos debe ser un número entero.',
+                'centro_costos_id.exists' => 'El ID del centro de costos no existe.',
             ];
 
             $validated = Validator::make($request->all(), [
@@ -91,6 +99,7 @@ class UsuariosPenmontController extends Controller
                 'email' => 'required|email',
                 'nombre' => 'required|string',
                 'departamento_id' => 'required|integer|exists:departamentos,id',
+                'centro_costos_id' => 'required|integer|exists:centro_costos,id'
             ], $messages);
 
             if($validated->fails()){
@@ -128,5 +137,16 @@ class UsuariosPenmontController extends Controller
                 'message' => 'UsuarioPenmont not found'
             ], 404);
         }
+    }
+
+    public function getByEmployeeNumber($employeeNumber)
+    {
+        return UsuarioPenmont::where('num_empleado', $employeeNumber)
+            ->with(['centroCosto' => function ($query) {
+                $query->select('id', 'nombre');
+            }, 'departamento' => function ($query) {
+                $query->select('id', 'nombre');
+            }])
+            ->get();
     }
 }

@@ -41,7 +41,7 @@ export class LlegadaAccesoriosComponent implements OnInit {
       this.marca = data.marca;
      
     }, error => {
-      Swal.fire('Error', error.error.message, 'error'); // Usa SweetAlert2 para mostrar el mensaje
+      Swal.fire('Error', error,'error'); 
     });
   }
 
@@ -50,7 +50,7 @@ export class LlegadaAccesoriosComponent implements OnInit {
     this.http.put(`http://127.0.0.1:8000/api/auth/accesorios/updateQuantity/${this.codigoBarras}`, { cantidad: this.cantidad }).subscribe((data: any) => {
       Swal.fire('Éxito', data.message, 'success'); // Usa SweetAlert2 para mostrar el mensaje
     }, error => {
-      Swal.fire('Error', error.error.message, 'error'); // Usa SweetAlert2 para mostrar el mensaje
+      Swal.fire('Error', error, 'error'); // Usa SweetAlert2 para mostrar el mensaje
     });
   }
 
