@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -92,7 +91,7 @@
                     <div class="mb-3">
                         <label for="cb" class="form-label">Codigo de barras:</label>
                         <input type="cb" class="form-control" id="cbarras" [(ngModel)]="codigoBarras" placeholder=""><br>
-                        <button type="button" class="btn btn-info" (click)="getAccesorioByBarCode()" >Agregar</button>
+                        <button type="button" class="btn btn-info" (click)="getAccesorioByBarCode()"  >Agregar</button>
                     </div>
                 
                 </div>
@@ -111,13 +110,13 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let articulo of articulos">
-                              <td>{{cantidad}}</td>
+                              <td>{{articulo.cantidad}}</td>
                               <td>{{articulo.articulo}}</td>
                               <td>{{articulo.marca}}</td>
-                              <td><button type="button" class="btn btn-danger">-</button>   <button type="button" class="btn btn-success">+</button></td>
-                              
-                              
-                                                         
+                              <td>
+                                <button type="button" class="btn btn-success" (click)="incrementarCantidad(articulo)">+</button>
+                                <button type="button" class="btn btn-danger" (click)="decrementarCantidad(articulo)">-</button>
+                              </td>
                             </tr>
                           </tbody>
                     </table>

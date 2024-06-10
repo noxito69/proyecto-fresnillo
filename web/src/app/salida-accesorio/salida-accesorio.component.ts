@@ -22,6 +22,7 @@ export class SalidaAccesorioComponent {
   numEmpleado: string = '';
 
   articulo: string = '';
+  articulosIds: any[] = [];
   marca: string = '';
   codigoBarras: string = '';
   cantidad: number = 0;
@@ -34,6 +35,7 @@ export class SalidaAccesorioComponent {
   isDocHidden = true;
 
   articulos: any[] = [];
+
 
   constructor(private http: HttpClient, private router:Router) { }
 
@@ -50,6 +52,56 @@ export class SalidaAccesorioComponent {
     });
   }
 
+  getAccesorioByBarCode() {
+    // Verifica si el código de barras ya ha sido agregado
+    const isBarCodeAdded = this.articulos.some(item => item.codigoBarras === this.codigoBarras);
+  
+    if (isBarCodeAdded) {
+      Swal.fire('Error', 'El código de barras ya ha sido agregado', 'error'); // Muestra un mensaje de error
+    } else {
+      this.http.get(`http://127.0.0.1:8000/api/auth/accesorios/getByBarCode/${this.codigoBarras}`).subscribe((data: any) => {
+        
+        this.articulos.push({
+          cantidad: data.cantidad,
+          articulo: data.articulo,
+          marca: data.marca,
+          codigoBarras: this.codigoBarras // Asegúrate de que estás agregando el código de barras al objeto
+        });
+  
+        this.articulosIds.push({
+          articulo_id: data.id,
+          departamento: this.departamento,
+          centro_costos: this.centroCostos,
+          usuario: this.nombre,
+          num_empleado: this.numEmpleado,
+          cantidad: 0
+        })
+  
+        this.isTableHidden = false;
+        this.isDocHidden = false;
+  
+        
+  
+      }, error => {
+        Swal.fire('Error', error.error.message, 'error'); // Muestra un mensaje de error
+      });
+    }
+  }
+
+  incrementarCantidad(articulo: any) {
+    // Incrementa la cantidad
+    articulo.cantidad++;
+  }
+  
+  decrementarCantidad(articulo: any) {
+    // Decrementa la cantidad si es mayor que 1
+    if (articulo.cantidad > 1) {
+      articulo.cantidad--;
+    }
+  }
+
+  
+
 
   generatePdf() {
     const vale = document.getElementById('vale');
@@ -57,6 +109,9 @@ export class SalidaAccesorioComponent {
       console.error("Element 'vale' not found");
       return;
     }
+
+    this.saveToHistory()
+
 
     html2canvas(vale).then(canvas => {
       const imgWidth = 208;
@@ -67,7 +122,7 @@ export class SalidaAccesorioComponent {
       const pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF
       const position = 0;
       pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
-      pdf.save('vale.pdf'); // Generated PDF
+      //pdf.save('vale.pdf'); // Generated PDF
     });
   }
 
@@ -76,22 +131,25 @@ export class SalidaAccesorioComponent {
     this.router.navigate([route]);
 
   }
+
+  saveToHistory(){
+    /*for(let history of this.articulosIds){
+      console.log(history);
+      this.http.post('http://127.0.0.1:8000/api/auth/historial/post', history).subscribe(data => {
+        console.log(data)
+        // Actualiza la cantidad del accesorio
+        this.http.put(`http://127.0.0.1:8000/api/auth/accesorios/updateQuantityMinus/${history.articulo_id}`, { cantidad: history.cantidad }).subscribe(data => {
+          console.log(data)
+        })
+      })
+    }*/
+
+
+      console.log(this.articulosIds);
+  }
+
   
 
-  getAccesorioByBarCode() {
-    this.http.get(`http://127.0.0.1:8000/api/auth/accesorios/getByBarCode/${this.codigoBarras}`).subscribe((data: any) => {
-      this.articulos.push({
-        cantidad: data.cantidad,
-        articulo: data.articulo,
-        marca: data.marca
-
-        
-
-        
-      });
-      this.isTableHidden = false;
-      this.isDocHidden = false;
-    });
-  }
+  
 
 }

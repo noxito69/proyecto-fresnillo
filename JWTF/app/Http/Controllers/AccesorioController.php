@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Accesorio;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 
 use Illuminate\Http\Request;
 
@@ -120,6 +121,31 @@ class AccesorioController extends Controller
         $accesorio->save();
 
         return response()->json(['message' => 'Cantidad actualizada con éxito']);
+    }
+
+    public function updateQuantityMinus(Request $request, $id)
+    {
+        $accesorio = Accesorio::find($id);
+
+        if ($accesorio) {
+            $cantidadRestar = $request->input('cantidad');
+            Log::info('Cantidad a restar: ' . $cantidadRestar);
+
+            if ($accesorio->cantidad >= $cantidadRestar) {
+                $accesorio->cantidad -= $cantidadRestar;
+                $accesorio->save();
+                Log::info('Nueva cantidad de accesorio: ' . $accesorio->cantidad);
+                return response()->json($accesorio);
+            } else {
+                return response()->json([
+                    'message' => 'Cantidad insuficiente en el inventario'
+                ], 400);
+            }
+        } else {
+            return response()->json([
+                'message' => 'Accesorio no encontrado'
+            ], 404);
+        }
     }
 
     public function getTotal()

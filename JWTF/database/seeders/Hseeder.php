@@ -16,7 +16,7 @@ class Hseeder extends Seeder
     public function run()
     {
         Historial::create([
-            'fecha' => '2024-01-01',
+           
             'num_empleado' => '1001',
             'usuario' => 'Juan Perez',
             'articulo_id' => 1,
@@ -26,7 +26,7 @@ class Hseeder extends Seeder
         ]);
 
         Historial::create([
-            'fecha' => '2024-01-02',
+           
             'num_empleado' => '1002',
             'usuario' => 'Maria Garcia',
             'articulo_id' => 2,
@@ -36,7 +36,7 @@ class Hseeder extends Seeder
         ]);
 
         Historial::create([
-            'fecha' => '2024-01-03',
+           
             'num_empleado' => '1003',
             'usuario' => 'Luis Fernandez',
             'articulo_id' => 3,

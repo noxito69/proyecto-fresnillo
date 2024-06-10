@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('historial', function (Blueprint $table) {
             $table->id();
-            $table->date('fecha');
             $table->string('num_empleado',17);
             $table->string('usuario',50);
             $table->foreignId('articulo_id')->constrained('accesorios')->onDelete('cascade');

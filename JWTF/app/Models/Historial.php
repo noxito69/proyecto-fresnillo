@@ -12,7 +12,7 @@ class Historial extends Model
 
     use HasFactory;
 
-    protected $fillable = ['fecha', 'num_empleado', 'usuario', 'articulo_id', 'cantidad', 'departamento', 'centro_costos'];
+    protected $fillable = ['num_empleado', 'usuario', 'articulo_id', 'cantidad', 'departamento', 'centro_costos'];
 
     public function usuarioPenmont()
     {

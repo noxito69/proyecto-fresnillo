@@ -87,6 +87,7 @@ Route::group([
     Route::delete('accesorios/delete/{id}', [AccesorioController::class, 'destroy']);
     Route::get('accesorios/getByBarCode/{codigo_barras}', [AccesorioController::class, 'getByBarCode']);
     Route::put('accesorios/updateQuantity/{codigo_barras}', [AccesorioController::class, 'updateQuantity']);
+    Route::put('accesorios/updateQuantityMinus/{id}', [AccesorioController::class, 'updateQuantityMinus']);
     Route::get('accesorios/getTotal', [AccesorioController::class, 'getTotal']);
 
 

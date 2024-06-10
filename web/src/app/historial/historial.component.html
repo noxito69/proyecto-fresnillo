@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -80,7 +81,7 @@
     </style>
 </head>
 <body>
-    
+
     <app-layout>
 
         <section>
@@ -101,7 +102,7 @@
                         </select>
                         <label for="floatingSelect3">Departamento</label>
 
-                        
+
                     </div>
 
                     <div class="form-floating">
@@ -117,17 +118,17 @@
                         <span class="input-group-text" id="inputGroup-sizing-default">Folio</span>
                         <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                     </div>
-                    
+
                     <div class="input-group mb-3">
                         <input type="date" class="form-control" id="fecha">
                     </div>
-                    
+
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="inputGroup-sizing-default">Clave Empleado</span>
                         <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                     </div>
-                    
-                    
+
+
                 </div>
             </div>
         </section>
@@ -149,16 +150,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>09/22/20</td>
-                        <td>abcv1234</td>
-                        <td>Erik Saucedo Rivera</td>
-                        <td>Audifonos diadema con microfono MB-919074</td>
-                        <td>VIZIFLEX SEELS</td>
-                        <td>1</td>
-                        <td>Adm. Sist. y Tecnologia (M)</td>
-                        <td>00000</td>
+                    <tr *ngFor="let history of historial">
+                      <td>{{ addLeadingZeros(history.id, 5) }}</td>
+                      <td>{{ isoDateToFormattedWithTime(history.created_at) }}</td>
+                      <td>{{ history.num_empleado }}</td>
+                      <td>{{ history.usuario }}</td>
+                      <td>{{ history.articulo }}</td>
+                      <td>{{ history.marca }}</td>
+                      <td>{{ history.cantidad }}</td>
+                      <td>{{ history.departamento }}</td>
+                      <td>{{ history.centro_costos }}</td>
                     </tr>
                 </tbody>
             </table>

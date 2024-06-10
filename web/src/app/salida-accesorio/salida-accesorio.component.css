@@ -55,9 +55,10 @@
 .table {
     width: 100%;
     border-collapse: collapse;
+    text-align: center;
 }
 
-.table th, .table td {
+.tabla th, .tabla td {
     border: 0;
     border-top: 1px solid rgb(255, 255, 255); /* Top border for header and cells */
     border-bottom: 1px solid black; /* Bottom border for header and cells */
@@ -65,10 +66,10 @@
     text-align: center;
 }
 
-.table th:first-child, .table td:first-child {
+.tabla th:first-child, .tabla td:first-child {
     border-left: none; /* Remove left border for first column */
 }
 
-.table th:last-child, .table td:last-child {
+.tabla th:last-child, .tabla td:last-child {
     border-right: none; /* Remove right border for last column */
 }
