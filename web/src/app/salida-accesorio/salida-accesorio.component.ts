@@ -53,6 +53,12 @@ export class SalidaAccesorioComponent {
   }
 
   getAccesorioByBarCode() {
+
+    if(this.codigoBarras == ''){
+      Swal.fire('Error', 'Favor de escribir un codigo de barras', 'warning')
+      return;
+    }
+
     const isBarCodeAdded = this.articulosIds.some(item => item.codigoBarras === this.codigoBarras);
 
     console.log({isBarCodeAdded})
