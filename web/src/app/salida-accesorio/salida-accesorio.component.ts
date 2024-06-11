@@ -40,7 +40,7 @@ export class SalidaAccesorioComponent {
   constructor(private http: HttpClient, private router:Router) { }
 
 
-  
+
 
   buscarEmpleado() {
     this.http.get(`http://127.0.0.1:8000/api/auth/usuarios_penmont/getByEmployeeNumber/${this.numEmpleado}`).subscribe((data: any) => {
@@ -53,54 +53,53 @@ export class SalidaAccesorioComponent {
   }
 
   getAccesorioByBarCode() {
-    // Verifica si el código de barras ya ha sido agregado
-    const isBarCodeAdded = this.articulos.some(item => item.codigoBarras === this.codigoBarras);
-  
+    const isBarCodeAdded = this.articulosIds.some(item => item.codigoBarras === this.codigoBarras);
+
+    console.log({isBarCodeAdded})
+
     if (isBarCodeAdded) {
       Swal.fire('Error', 'El código de barras ya ha sido agregado', 'error'); // Muestra un mensaje de error
-    } else {
+      }
+      else {
       this.http.get(`http://127.0.0.1:8000/api/auth/accesorios/getByBarCode/${this.codigoBarras}`).subscribe((data: any) => {
-        
-        this.articulos.push({
-          cantidad: data.cantidad,
-          articulo: data.articulo,
-          marca: data.marca,
-          codigoBarras: this.codigoBarras // Asegúrate de que estás agregando el código de barras al objeto
-        });
-  
+
         this.articulosIds.push({
           articulo_id: data.id,
           departamento: this.departamento,
           centro_costos: this.centroCostos,
           usuario: this.nombre,
           num_empleado: this.numEmpleado,
-          cantidad: 0
+          cantidad: 0,
+          codigoBarras: this.codigoBarras,
+          articulo: data.articulo,
+          marca: data.marca,
         })
-  
+
         this.isTableHidden = false;
         this.isDocHidden = false;
-  
-        
-  
       }, error => {
         Swal.fire('Error', error.error.message, 'error'); // Muestra un mensaje de error
       });
     }
   }
 
-      incrementarCantidad(articulo: any) {
-      // Incrementa la cantidad
-      this.articulosIds[articulo] = articulo.cantidad++;
-    }
-  decrementarCantidad(articulo: any) {
-    // Decrementa la cantidad si es mayor que 1
-    if (articulo.cantidad > 1) {
-      articulo.cantidad--;
-    }
+     
+
+  incrementarCantidad(codigo: any) {
+    // Incrementa la cantidad
+    const art = this.articulosIds.find(code => code.codigoBarras === codigo)
+
+    art.cantidad++
   }
 
-  
+  decrementarCantidad(codigo: any, cantidad: any) {
+    // Decrementa la cantidad si es mayor que 1
+    if (cantidad > 0) {
+      const art = this.articulosIds.find(code => code.codigoBarras === codigo)
 
+      art.cantidad--
+    }
+  }
 
   generatePdf() {
     const vale = document.getElementById('vale');
@@ -121,7 +120,7 @@ export class SalidaAccesorioComponent {
       const pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF
       const position = 0;
       pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
-      //pdf.save('vale.pdf'); // Generated PDF
+      pdf.save('vale.pdf'); // Generated PDF
     });
   }
 
@@ -132,23 +131,30 @@ export class SalidaAccesorioComponent {
   }
 
   saveToHistory(){
-    /*for(let history of this.articulosIds){
-      console.log(history);
-      this.http.post('http://127.0.0.1:8000/api/auth/historial/post', history).subscribe(data => {
-        console.log(data)
+    for(let history of this.articulosIds){
+      this.http.post('http://127.0.0.1:8000/api/auth/historial/post', {
+        num_empleado: history.num_empleado,
+        usuario: history.usuario,
+        articulo_id: history.articulo_id,
+        cantidad: history.cantidad,
+        departamento: history.departamento,
+        centro_costos: history.centro_costos
+      }).subscribe(data => {
         // Actualiza la cantidad del accesorio
         this.http.put(`http://127.0.0.1:8000/api/auth/accesorios/updateQuantityMinus/${history.articulo_id}`, { cantidad: history.cantidad }).subscribe(data => {
-          console.log(data)
+        }, (error: any) => {
+          Swal.fire('Error', error.error.message, 'error');
         })
       })
-    }*/
-
-
-      console.log(this.articulosIds);
+    }
   }
 
-  
 
-  
+  deleteArticulo(codigo: any){
+    const index = this.articulosIds.findIndex(articulo => articulo.codigoBarras === codigo)
 
+    if(index !== -1){
+      this.articulosIds.splice(index, 1)
+    }
+  }
 }
