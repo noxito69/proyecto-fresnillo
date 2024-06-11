@@ -88,11 +88,10 @@ export class SalidaAccesorioComponent {
     }
   }
 
-  incrementarCantidad(articulo: any) {
-    // Incrementa la cantidad
-    articulo.cantidad++;
-  }
-  
+      incrementarCantidad(articulo: any) {
+      // Incrementa la cantidad
+      this.articulosIds[articulo] = articulo.cantidad++;
+    }
   decrementarCantidad(articulo: any) {
     // Decrementa la cantidad si es mayor que 1
     if (articulo.cantidad > 1) {
