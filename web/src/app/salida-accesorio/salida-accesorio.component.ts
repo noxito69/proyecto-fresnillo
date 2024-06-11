@@ -84,10 +84,12 @@ export class SalidaAccesorioComponent {
         this.isTableHidden = false;
         this.isDocHidden = false;
       }, error => {
-        Swal.fire('Error', error.error.message, 'error');
-      });
-    }
-  }
+        Swal.fire('Error', error.error.message, 'error'); // Muestra un mensaje de error
+      });
+    }
+  }
+
+     
 
   incrementarCantidad(codigo: any) {
     // Incrementa la cantidad
