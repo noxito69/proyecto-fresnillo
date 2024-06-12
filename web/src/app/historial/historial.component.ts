@@ -15,8 +15,6 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 })
 export class HistorialComponent implements OnInit {
 
-
-  
   historial: any[] = [];
   filteredHistorial: any[] = [];
   centroCostoOptions: string[] = [];
@@ -31,13 +29,12 @@ export class HistorialComponent implements OnInit {
 
   centroCostoEnabled: boolean = true;
   departamentoEnabled: boolean = true;
-  
-  pageIndex: number = 0;
-  pageSize: number = 15;
 
-  
-
-  
+  page: number = 1;
+  pageSize: number = 5;
+  totalItems: number = 0;
+  totalPages: number = 0;
+  currentPage: number = 0;
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -46,24 +43,54 @@ export class HistorialComponent implements OnInit {
   }
 
   getHistorial() {
-    this.http.get<any[]>('http://127.0.0.1:8000/api/auth/historial/index').subscribe((data: any[]) => {
-      this.historial = data;
-      this.filteredHistorial = data;
-      this.centroCostoOptions = Array.from(new Set(data.map(item => item.centro_costos)));
-      this.departamentoOptions = Array.from(new Set(data.map(item => item.departamento)));
-      this.folioOptions = Array.from(new Set(data.map(item => item.id)));
+    const params = `?page=${this.page}&pageSize=${this.pageSize}`;
+    this.http.get<any>('http://127.0.0.1:8000/api/auth/historial/index' + params).subscribe((response: any) => {
+
+      this.historial = response.data;
+      this.filteredHistorial = response.data;
+      this.centroCostoOptions = Array.from(new Set(response.data.map((item: any) => item.centro_costos)));
+      this.departamentoOptions = Array.from(new Set(response.data.map((item: any) => item.departamento)));
+      this.folioOptions = Array.from(new Set(response.data.map((item: any) => item.id)));
+      this.totalItems = response.total;
+      this.totalPages = response.last_page;
+      this.currentPage = response.current_page;
     });
   }
 
-  onPageChange(page: number) {
-    this.pageIndex = page;
-    this.filterHistorial();
-}
+  previousPage() {
+    if (this.page > 1) {
+      this.page--;
+      this.getHistorial();
+    }
+  }
 
-getPageNumbers(): number[] {
-  const pageCount = Math.ceil(this.filteredHistorial.length / this.pageSize);
-  return Array(pageCount).fill(0).map((x, i) => i);
-}
+  nextPage() {
+    if (this.page < this.totalPages) {
+      this.page++;
+      this.getHistorial();
+    }
+  }
+
+  goToPage(page: number) {
+    this.page = page;
+    this.getHistorial();
+  }
+
+  get pages(): number[] {;
+    const half = Math.floor(this.pageSize / 2);
+    let start = Math.max(this.currentPage - half, 1);
+    let end = Math.min(start + this.pageSize - 1, this.totalPages);
+
+    if (end - start < this.pageSize - 1) {
+      start = Math.max(end - this.pageSize + 1, 1);
+    }
+
+    const pages = [];
+    for (let i = start; i <= end; i++) {
+      pages.push(i);
+    }
+    return pages;
+  }
 
   onFolioChange(event: any) {
     this.selectedFolio = event.target.value;
@@ -109,19 +136,17 @@ getPageNumbers(): number[] {
       (!this.selectedCentroCosto || item.centro_costos === this.selectedCentroCosto) &&
       (!this.selectedDepartamento || item.departamento === this.selectedDepartamento) &&
       (!this.selectedFolio || item.id.toString() === this.selectedFolio) &&
-      (!this.selectedFecha || this.formatDate(item.created_at) === this.selectedFecha) &&
+      (!this.selectedFecha || this.isoDateToFormattedWithTime(item.created_at) === this.selectedFecha) &&
       (!this.selectedClaveEmpleado || item.num_empleado.toString().includes(this.selectedClaveEmpleado))
     );
-
-
-        const startIndex = this.pageIndex * this.pageSize;
-        this.filteredHistorial = this.filteredHistorial.slice(startIndex, startIndex + this.pageSize);
   }
 
   formatDate(fechaISO: string): string {
     const fecha = new Date(fechaISO);
     return fecha.toISOString().split('T')[0];
   }
+
+
 
   isoDateToFormattedWithTime(fechaISO: string): string {
     const fecha = new Date(fechaISO);

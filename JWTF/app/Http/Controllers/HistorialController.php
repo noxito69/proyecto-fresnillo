@@ -7,12 +7,20 @@ use Illuminate\Support\Facades\Validator;
 
 class HistorialController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $query = $request->query();
+
+        // Obtener la página actual y la cantidad de elementos por página
+        $page = (int)$query['page'];
+        $perPage = (int)$query['pageSize'];
+
+        // Consultar y paginar resultados
         $historial = Historial::join('accesorios', 'historial.articulo_id', '=', 'accesorios.id')
-                              ->select('historial.*', 'accesorios.articulo', 'accesorios.marca') // Selecciona los campos necesarios
-                              ->get();
-                            return response()->json($historial);
+                              ->select('historial.*', 'accesorios.articulo', 'accesorios.marca')
+                              ->paginate($perPage, ['*'], 'page', $page);
+
+        return response()->json($historial);
     }
 
     public function store(Request $request)
@@ -84,7 +92,7 @@ class HistorialController extends Controller
         if ($historial) {
 
             $request->validate([
-                
+
                 'num_empleado' => 'required|numeric',
                 'usuario' => 'required|string',
                 'articulo_id' => 'required|numeric',
@@ -127,5 +135,5 @@ class HistorialController extends Controller
 
     }
 
-    
+
 }
