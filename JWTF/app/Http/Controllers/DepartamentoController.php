@@ -21,7 +21,7 @@ class DepartamentoController extends Controller
     {
         $messages = [
             'nombre.required' => 'El nombre es requerido.',
-            'nombre.unique' => 'Este nombre ya existe.',
+            'nombre.u' => 'Este nombre ya existe.',
             'nombre.max' => 'El nombre no debe exceder los 255 caracteres.',
             'centro_costos_id.required' => 'El ID del centro de costos es requerido.',
             'centro_costos_id.exists' => 'El ID del centro de costos no existe.',
