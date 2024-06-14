@@ -20,6 +20,7 @@ export class HistorialComponent implements OnInit {
   centroCostoOptions: string[] = [];
   departamentoOptions: string[] = [];
   folioOptions: string[] = [];
+  allFilteredHistorial: any[] = [];
 
   selectedFolio: string = '';
   selectedCentroCosto: string = '';
@@ -31,7 +32,7 @@ export class HistorialComponent implements OnInit {
   departamentoEnabled: boolean = true;
 
   page: number = 1;
-  pageSize: number = 20;
+  pageSize: number = 5;
   totalItems: number = 0;
   totalPages: number = 0;
   currentPage: number = 0;
@@ -45,15 +46,15 @@ export class HistorialComponent implements OnInit {
   getHistorial() {
     const params = `?page=${this.page}&pageSize=${this.pageSize}`;
     this.http.get<any>('http://127.0.0.1:8000/api/auth/historial/index' + params).subscribe((response: any) => {
-
       this.historial = response.data;
       this.filteredHistorial = response.data;
-      this.centroCostoOptions = Array.from(new Set(response.data.map((item: any) => item.centro_costos)));
-      this.departamentoOptions = Array.from(new Set(response.data.map((item: any) => item.departamento)));
-      this.folioOptions = Array.from(new Set(response.data.map((item: any) => item.id)));
       this.totalItems = response.total;
       this.totalPages = response.last_page;
       this.currentPage = response.current_page;
+      // Actualiza las opciones de filtro después de recibir los datos
+      this.centroCostoOptions = Array.from(new Set(response.data.map((item: any) => item.centro_costos)));
+      this.departamentoOptions = Array.from(new Set(response.data.map((item: any) => item.departamento)));
+      this.folioOptions = Array.from(new Set(response.data.map((item: any) => item.id)));
     });
   }
 
@@ -76,7 +77,7 @@ export class HistorialComponent implements OnInit {
     this.getHistorial();
   }
 
-  get pages(): number[] {;
+  get pages(): number[] {
     const half = Math.floor(this.pageSize / 2);
     let start = Math.max(this.currentPage - half, 1);
     let end = Math.min(start + this.pageSize - 1, this.totalPages);
@@ -95,9 +96,12 @@ export class HistorialComponent implements OnInit {
   onFolioChange(event: any) {
     this.selectedFolio = event.target.value;
     if (this.selectedFolio === 'none') {
-      this.selectedFolio = '';
+      this.filteredHistorial = this.historial
     }
-    this.filterHistorial();
+
+    const filter = this.filteredHistorial.filter(item => item.id === parseInt(this.selectedFolio))
+
+    this.filteredHistorial = filter
   }
 
   onCentroCostoChange(event: any) {
@@ -107,8 +111,14 @@ export class HistorialComponent implements OnInit {
       this.departamentoEnabled = true;
     } else {
       this.departamentoEnabled = false;
+      console.log(this.selectedCentroCosto)
+
+      console.log(this.filteredHistorial)
+
+      const filter = this.filteredHistorial.filter(item => item.centro_costos === this.selectedCentroCosto)
+
+      this.filteredHistorial = filter
     }
-    this.filterHistorial();
   }
 
   onDepartamentoChange(event: any) {
@@ -118,35 +128,42 @@ export class HistorialComponent implements OnInit {
       this.centroCostoEnabled = true;
     } else {
       this.centroCostoEnabled = false;
+
+      const filter = this.filteredHistorial.filter(item => item.departamento === this.selectedDepartamento)
+
+      this.filteredHistorial = filter
     }
-    this.filterHistorial();
   }
 
   onFechaChange(event: any) {
     this.selectedFecha = event.target.value;
-    this.filterHistorial();
+    console.log({selectedFecha: this.selectedFecha});
+
+    console.log({historial: this.historial})
+
+    const filter = this.filteredHistorial.filter(item => this.formatDate(item.created_at) === this.formatDate(this.selectedFecha))
+
+     this.filteredHistorial = filter
   }
 
   onClaveEmpleadoChange() {
-    this.filterHistorial();
+    console.log({selectedClaveEmpleado: this.selectedClaveEmpleado})
+
+    console.log(this.filteredHistorial)
+
+    const filter = this.filteredHistorial.filter(item => item.num_empleado === this.selectedClaveEmpleado)
+
+    console.log(filter)
+
+    this.filteredHistorial = filter
   }
 
-  filterHistorial() {
-    this.filteredHistorial = this.historial.filter(item =>
-      (!this.selectedCentroCosto || item.centro_costos === this.selectedCentroCosto) &&
-      (!this.selectedDepartamento || item.departamento === this.selectedDepartamento) &&
-      (!this.selectedFolio || item.id.toString() === this.selectedFolio) &&
-      (!this.selectedFecha || this.isoDateToFormattedWithTime(item.created_at) === this.selectedFecha) &&
-      (!this.selectedClaveEmpleado || item.num_empleado.toString().includes(this.selectedClaveEmpleado))
-    );
-  }
+
 
   formatDate(fechaISO: string): string {
     const fecha = new Date(fechaISO);
     return fecha.toISOString().split('T')[0];
   }
-
-
 
   isoDateToFormattedWithTime(fechaISO: string): string {
     const fecha = new Date(fechaISO);
