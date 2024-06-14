@@ -111,10 +111,6 @@ export class HistorialComponent implements OnInit {
       this.departamentoEnabled = true;
     } else {
       this.departamentoEnabled = false;
-      console.log(this.selectedCentroCosto)
-
-      console.log(this.filteredHistorial)
-
       const filter = this.filteredHistorial.filter(item => item.centro_costos === this.selectedCentroCosto)
 
       this.filteredHistorial = filter
@@ -137,23 +133,14 @@ export class HistorialComponent implements OnInit {
 
   onFechaChange(event: any) {
     this.selectedFecha = event.target.value;
-    console.log({selectedFecha: this.selectedFecha});
-
-    console.log({historial: this.historial})
 
     const filter = this.filteredHistorial.filter(item => this.formatDate(item.created_at) === this.formatDate(this.selectedFecha))
 
-     this.filteredHistorial = filter
+    this.filteredHistorial = filter
   }
 
   onClaveEmpleadoChange() {
-    console.log({selectedClaveEmpleado: this.selectedClaveEmpleado})
-
-    console.log(this.filteredHistorial)
-
     const filter = this.filteredHistorial.filter(item => item.num_empleado === this.selectedClaveEmpleado)
-
-    console.log(filter)
 
     this.filteredHistorial = filter
   }
