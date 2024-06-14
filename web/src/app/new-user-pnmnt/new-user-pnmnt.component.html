@@ -72,12 +72,29 @@
                 <div class="form-level form-horizontal">
 
                     <div class="mb-3">
-                        <label for="modelo" class="form-label">Departamento</label>
+                        <label for="modelo" class="form-label" [(ngModel)]="departamento">Departamento</label>
                         <select class="form-select" id="dpto">
                             <option selected disabled>Seleccione el Departamento</option>
-                            <option value="1">dpto 1</option>
-                            <option value="2">dpto 2</option>
+                            <option value="1" *ngFor="let departa of departamento" [value]="departa.id">{{departa.nombre}}</option>
+                        
                         </select>
+                    </div>
+
+                </div>
+
+                <div class="form-level form-horizontal">
+
+
+                    <div class="mb-3">
+
+                        <div class="form-level form-horizontal">
+                            <div class="mb-3">
+                                <label for="centroCostosId" class="form-label">Centro de Costos ID:</label>
+                                <input type="text" class="form-control" id="centroCostosId" [(ngModel)]="user.centro_costos_id" placeholder="">
+                            </div>
+                        </div>
+                        
+
                     </div>
 
                 </div>

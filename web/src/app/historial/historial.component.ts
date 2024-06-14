@@ -31,7 +31,7 @@ export class HistorialComponent implements OnInit {
   departamentoEnabled: boolean = true;
 
   page: number = 1;
-  pageSize: number = 5;
+  pageSize: number = 20;
   totalItems: number = 0;
   totalPages: number = 0;
   currentPage: number = 0;

@@ -25,7 +25,7 @@ export class NewUserPnmntComponent {
 
   }
 
-  centroCostos: any[] = [];
+ 
   departamento: any[] = [];
 
   constructor(private http: HttpClient, private router:Router) { }
@@ -55,17 +55,11 @@ export class NewUserPnmntComponent {
 
     
   ngOnInit() {
-    this.obtenerCentrosCostos();
+   
+    this.obtenerDepartamento();
   }
 
-  obtenerCentrosCostos() {
-    this.http.get<any[]>('http://127.0.0.1:8000/api/auth/centro_costos/index')
-      .subscribe(data => {
-        this.centroCostos = data;
-      }, error => {
-        console.error('Error al obtener centros de costos:', error);
-      });
-  }
+  
 
 
 
@@ -77,6 +71,11 @@ export class NewUserPnmntComponent {
         console.error('Error al obtener el departamento:', error);
       });
   }
+
+  
+
+  
+  
 
   navigateTo(route:string){
 
