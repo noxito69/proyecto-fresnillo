@@ -16,8 +16,8 @@ class EtiEmpleado extends Seeder
     public function run()
     {
         EtiquetaEmpleado::create([
-            'tipo_equipo_id' => 1,
-            'marca_id' => 1,
+            'tipo_equipo' => 'Computadora',
+            'marca' => 'DDell',
             'modelo' => 'modelo1', 
             'numero_serie' => 'SN223456',
             'usuario_id' => 1,
@@ -30,8 +30,8 @@ class EtiEmpleado extends Seeder
         ]);
 
         EtiquetaEmpleado::create([
-            'tipo_equipo_id' => 2,
-            'marca_id' => 2,
+            'tipo_equipo' => 'Computadora',
+            'marca' => 'HP',
             'modelo' => 'modelo2',
             'numero_serie' => 'SN223457',
             'usuario_id' => 2,
@@ -44,8 +44,8 @@ class EtiEmpleado extends Seeder
         ]);
 
         EtiquetaEmpleado::create([
-            'tipo_equipo_id' => 1,
-            'marca_id' => 2,
+            'tipo_equipo' => 'Computadora',
+            'marca' => 'Lenovo',
             'modelo' => 'modelo3',
             'numero_serie' => 'SN223458',
             'usuario_id' => 3,

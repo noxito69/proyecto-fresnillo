@@ -17,10 +17,11 @@ class EtiquetasEmpleadosController extends Controller
     public function store(Request $request)
     {
         $messages = [
-            'tipo_equipo_id.required' => 'El ID del tipo de equipo es requerido.',
-            'tipo_equipo_id.integer' => 'El ID del tipo de equipo debe ser un número entero.',
-            'marca_id.required' => 'El ID de la marca es requerido.',
-            'marca_id.integer' => 'El ID de la marca debe ser un número entero.',
+
+            'tipo_equipo.required' => 'El tipo de equipo es requerido.',
+            'tipo_equipo.string' => 'El tipo de equipo debe ser una cadena de texto.',
+            'marca.required' => 'La marca es requerida.',
+            'marca.string' => 'La marca debe ser una cadena de texto.',
             'modelo.required' => 'El modelo es requerido.',
             'numero_serie.required' => 'El número de serie es requerido.',
             'numero_serie.string' => 'El número de serie debe ser una cadena de texto.',
@@ -43,8 +44,8 @@ class EtiquetasEmpleadosController extends Controller
         $validated = Validator::make($request->all(), [
 
             'modelo' => 'required|string',
-            'tipo_equipo_id' => 'required|integer',
-            'marca_id' => 'required|integer',
+            'tipo_equipo' => 'required|string',
+            'marca' => 'required|string',
             'numero_serie' => 'required|string',
             'usuario_id' => 'required|integer|exists:usuarios_penmont,id',
             'host' => 'required|string',
@@ -86,11 +87,11 @@ class EtiquetasEmpleadosController extends Controller
         {
             $messages = [
 
+                'tipo_equipo.required' => 'El tipo de equipo es requerido.',
+                'tipo_equipo.string' => 'El tipo de equipo debe ser una cadena de texto.',
+                'marca.required' => 'La marca es requerida.',
+                'marca.string' => 'La marca debe ser una cadena de texto.',
                 'modelo.required' => 'El modelo es requerido.',
-                'tipo_equipo_id.required' => 'El ID del tipo de equipo es requerido.',
-                'tipo_equipo_id.integer' => 'El ID del tipo de equipo debe ser un número entero.',
-                'marca_id.required' => 'El ID de la marca es requerido.',
-                'marca_id.integer' => 'El ID de la marca debe ser un número entero.',
                 'numero_serie.required' => 'El número de serie es requerido.',
                 'numero_serie.string' => 'El número de serie debe ser una cadena de texto.',
                 'numero_serie.unique' => 'El número de serie ya existe.',
@@ -112,8 +113,8 @@ class EtiquetasEmpleadosController extends Controller
             ];
 
             $validated = Validator::make($request->all(), [
-                'tipo_equipo_id' => 'required|integer',
-                'marca_id' => 'required|integer',
+                'tipo_equipo' => 'required|string',
+                'marca' => 'required|string',
                 'modelo' => 'required|string', // Agregado
                 'numero_serie' => 'required|string|unique:etiquetas_empleados,numero_serie,'.$etiquetaEmpleado->id,
                 'usuario_id' => 'required|integer|exists:usuarios_penmont,id',

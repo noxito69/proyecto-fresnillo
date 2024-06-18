@@ -18,11 +18,11 @@ class EtiquetaContratistaController extends Controller
         $request->validate([
            
             'modelo' => 'required|max:255',
-            'tipo_equipo_id' => 'required|integer',
-            'marca_id' => 'required|integer',
+            'tipo_equipo' => 'required|max:255',
+            'marca' => 'required|max:255',
             'numero_serie' => 'required|max:255',
             'usuario' => 'required|max:255',
-            'empresa_id' => 'required|integer',
+            'empresa' => 'required|max:255',
             'fecha_vigencia' => 'required|date',
             'fecha_actual' => 'required|date'
             

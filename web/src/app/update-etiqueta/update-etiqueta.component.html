@@ -45,9 +45,12 @@
     <app-layout>
 
 
+        <section>
+
+            
         <div class="container mt-5 container-centered">
             <div class="container-form">
-                <h1 class="text-center mb-4">Actualizar etiqueta</h1>
+                <h1 class="text-center mb-4">Etiquetas Contratistas</h1>
                 
                 <!-- Primer Nivel -->
                 <div class="form-level form-horizontal">
@@ -57,27 +60,27 @@
                     </div>
                     <div class="mb-3">
                         <label for="tipoEquipo" class="form-label">Tipo de Equipo</label>
-                        <select class="form-select" id="tipoEquipo">
+                        <select class="form-select" id="tipoEquipo" [(ngModel)]="tipo_equipo">
                             <option selected disabled>Seleccione el Tipo de Equipo</option>
-                            <option value="1">Opción 1</option>
-                            <option value="2">Opción 2</option>
+                            <option  *ngFor="let tipoequipo of tipo_equipo_a">{{tipoequipo.nombre}}</option>
+                         
                         </select>
                     </div>
                 </div>
             
-                <!-- Segundo Nivel -->
+                
                 <div class="form-level form-horizontal">
                     <div class="mb-3">
                         <label for="marca" class="form-label">Marca</label>
-                        <select class="form-select" id="marca">
+                        <select class="form-select" id="marca" [(ngModel)]="marca">
                             <option selected disabled>Seleccione la Marca</option>
-                            <option value="1">Marca 1</option>
-                            <option value="2">Marca 2</option>
+                            <option  *ngFor="let marca of marcas">{{marca.nombre}}</option>
+                            
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="modelo" class="form-label">Modelo</label>
-                        <input type="text" class="form-control" id="modelo" placeholder="Modelo">
+                        <input type="text" class="form-control" id="modelo" placeholder="Modelo" [(ngModel)]="modelo">
                     </div>
                 </div>
             
@@ -85,7 +88,7 @@
                 <div class="form-level form-horizontal">
                     <div class="mb-3">
                         <label for="numeroSerie" class="form-label">Número de Serie</label>
-                        <input type="text" class="form-control" id="numeroSerie" placeholder="Número de Serie">
+                        <input type="text" class="form-control" id="numeroSerie" placeholder="Número de Serie" [(ngModel)]="numero_serie">
                     </div>
                 </div>
             
@@ -93,7 +96,7 @@
                 <div class="form-level form-horizontal">
                     <div class="mb-3">
                         <label for="usuario" class="form-label">Usuario</label>
-                        <input type="text" class="form-control" id="usuario" placeholder="Usuario">
+                        <input type="text" class="form-control" id="usuario" placeholder="Usuario" [(ngModel)]="usuario">
                     </div>
                 </div>
             
@@ -101,30 +104,42 @@
                 <div class="form-level form-horizontal">
                     <div class="mb-3">
                         <label for="empresa" class="form-label">Empresa</label>
-                        <input type="text" class="form-control" id="empresa" placeholder="Empresa">
+                        <select class="form-select" id="marca" [(ngModel)]="empresa" >
+                            <option selected disabled>Seleccione la Empresa</option>
+                            <option  *ngFor="let empresa of empresas">{{empresa.nombre}}</option>
+                            
+                        </select>
                     </div>
                 </div>
+            
+       
             
             
                 <!-- Séptimo Nivel -->
                 <div class="form-level form-horizontal">
                     <div class="mb-3">
                         <label for="fechaVigencia" class="form-label">Fecha de vigencia</label>
-                        <input type="date" class="form-control" id="fechaVigencia" disabled>
-                    </div>
+                        <input type="date" class="form-control" id="fechaVigencia" [value]="fecha_vigencia" disabled [(ngModel)]="fecha_vigencia">
+                      </div>
+
                     <div class="mb-3">
                         <label for="fechaActual" class="form-label">Fecha actual</label>
-                        <input type="date" class="form-control" id="fechaActual">
+                        <input type="date" class="form-control" id="fechaActual" [(ngModel)]="fecha_actual">
                     </div>
                 </div>
             
                 <!-- Octavo Nivel -->
                 <div class="form-level form-level-buttons">
-                    <button type="button" class="btn btn-primary">Actualizar</button>
+                    
+                    <button type="button" class="btn btn-warning" (click)="ActualizarEtiqueta()">Actualizar Etiqueta</button>
                     
                 </div>
             </div>
         </div>
+
+        </section>
+
+
     </app-layout>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

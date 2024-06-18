@@ -14,7 +14,7 @@ class EtiquetaEmpleado extends Model
     
     use HasFactory;
 
-    protected $fillable = ['numero_serie', 'modelo', 'usuario_id', 'host', 'tipo_equipo_id','marca_id', 'mac', 'departamento_id', 'anexo_id', 'fecha_vigencia','fecha_actual'];
+    protected $fillable = ['numero_serie', 'modelo', 'usuario_id', 'host', 'tipo_equipo','marca', 'mac', 'departamento', 'anexo_id', 'fecha_vigencia','fecha_actual'];
 
     public function usuarioPenmont()
     {
@@ -32,16 +32,8 @@ class EtiquetaEmpleado extends Model
         return $this->belongsTo(Anexo::class);
     }
 
-    public function tipoEquipo()
-    {
-        return $this->belongsTo(TipoEquipo::class, 'tipo_equipo_id');
-    }
-
-    public function marca()
-    {
-        return $this->belongsTo(Marca::class, 'marca_id');
-    }
-
+   
+ 
 
     
 }

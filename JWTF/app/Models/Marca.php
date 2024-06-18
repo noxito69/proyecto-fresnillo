@@ -13,9 +13,6 @@ class Marca extends Model
 
     protected $fillable = ['nombre'];
 
-    public function etiquetasContratistas()
-    {
-        return $this->hasMany(EtiquetaContratista::class, 'marca_id');
-    }
+
 }
  

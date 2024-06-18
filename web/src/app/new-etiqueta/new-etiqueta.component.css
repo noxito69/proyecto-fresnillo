@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
 .form-level {
   margin-bottom: 20px;
 }
@@ -33,4 +35,60 @@ th, td {
   height: 100%;
   width: 100%;
   object-fit: cover; /* Asegura que las imágenes se escalen correctamente */
+}
+
+
+#etiqueta {
+  position: relative;
+}
+
+.nombre, .empresa, .marca, .modelo, .numero_serie, .vigencia, .tipo_equipo {
+  position: absolute;
+  font-family: 'Roboto Mono', monospace;
+}
+
+.nombre {
+  top: 116px;
+  left: 294px;
+  font-size: 48px;
+}
+
+.empresa {
+  top: 186px;
+  left: 294px;
+  font-size: 48px;
+}
+
+.marca {
+  top: 256px;
+  left: 294px;
+  font-size: 48px;
+}
+
+.modelo {
+  top: 323px;
+  left: 294px;
+  font-size: 48px;
+
+}
+
+.numero_serie {
+  top: 385px;
+  left: 294px;
+  font-size: 48px;
+}
+
+.vigencia {
+
+  top: 455px;
+  left: 294px;
+  font-size: 48px;
+
+}
+
+.tipo_equipo{
+
+  top: 35px;
+  left: 480px;
+  font-size: 48px;
 }

@@ -11,8 +11,5 @@ class EmpresaContratista extends Model
 
     protected $fillable = ['nombre'];
 
-    public function etiquetasContratistas()
-    {
-        return $this->hasMany(EtiquetaContratista::class);
-    }
+    
 }

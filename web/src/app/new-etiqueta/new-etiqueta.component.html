@@ -76,14 +76,14 @@
                 <div class="form-level form-horizontal">
                     <div class="mb-3">
                         <label for="numeroEtiqueta" class="form-label">Número de Etiqueta</label>
-                        <input type="number" class="form-control" id="numeroEtiqueta" placeholder="Número de Etiqueta" [(ngModel)]="tipo_equipo_id">
+                        <input type="number" class="form-control" id="numeroEtiqueta" placeholder="Número de Etiqueta">
                     </div>
                     <div class="mb-3">
                         <label for="tipoEquipo" class="form-label">Tipo de Equipo</label>
-                        <select class="form-select" id="tipoEquipo" [(ngModel)]="tipo_equipo_id">
+                        <select class="form-select" id="tipoEquipo" [(ngModel)]="tipo_equipo">
                             <option selected disabled>Seleccione el Tipo de Equipo</option>
-                            <option value="1" *ngFor="let tipoequipo of tipo_equipo" [value]="tipoequipo.id">{{tipoequipo.nombre}}</option>
-                            <option value="2">Opción 2</option>
+                            <option  *ngFor="let tipoequipo of tipo_equipo_a">{{tipoequipo.nombre}}</option>
+                         
                         </select>
                     </div>
                 </div>
@@ -92,10 +92,10 @@
                 <div class="form-level form-horizontal">
                     <div class="mb-3">
                         <label for="marca" class="form-label">Marca</label>
-                        <select class="form-select" id="marca" [(ngModel)]="marca_id">
+                        <select class="form-select" id="marca" [(ngModel)]="marca">
                             <option selected disabled>Seleccione la Marca</option>
-                            <option value="1" *ngFor="let marca of marcas" [value]="marca.id">{{marca.nombre}}</option>
-                            <option value="2">Marca 2</option>
+                            <option  *ngFor="let marca of marcas">{{marca.nombre}}</option>
+                            
                         </select>
                     </div>
                     <div class="mb-3">
@@ -124,19 +124,16 @@
                 <div class="form-level form-horizontal">
                     <div class="mb-3">
                         <label for="empresa" class="form-label">Empresa</label>
-                        <select class="form-select" id="marca">
+                        <select class="form-select" id="marca" [(ngModel)]="empresa" >
                             <option selected disabled>Seleccione la Empresa</option>
-                            <option  *ngFor="let empresa of empresas" [value]="empresa.id">{{empresa.nombre}}</option>
+                            <option  *ngFor="let empresa of empresas">{{empresa.nombre}}</option>
                             
                         </select>
                     </div>
                 </div>
             
-                <!-- Sexto Nivel -->
-                <div class="form-level form-level-buttons">
-                    <button type="button" id="openModalBtn" data-bs-toggle="modal" data-bs-target="#myModal" class="btn btn-secondary">Registrar Nueva Marca</button>
-                    <button type="button" id="openModalBtn" data-bs-toggle="modal" data-bs-target="#myModal2" class="btn btn-secondary">Registrar Nueva Empresa</button>
-                </div>
+       
+            
             
                 <!-- Séptimo Nivel -->
                 <div class="form-level form-horizontal">
@@ -154,26 +151,24 @@
                 <!-- Octavo Nivel -->
                 <div class="form-level form-level-buttons">
                     <button type="button" class="btn btn-primary" (click)="CrearEtiqueta()">Generar Etiqueta</button>
-                    <button type="button" class="btn btn-warning">Actualizar Etiqueta</button>
+                    <button type="button" class="btn btn-warning" (click)="navigateTo('/update-etiqueta')">Actualizar Etiqueta</button>
                     <button type="button" class="btn btn-success" id="openModalBtn" data-bs-toggle="modal" data-bs-target="#myModal3">Exportar BD a Excel</button>
                 </div>
             </div>
         </div>
-
         <br><br>
 
-        <section class="form-level form-horizontal" >
-            <div id="vale" #vale>
-                <img src="../../assets/Saved Pictures/Roboto Mono (1).svg" alt="Imagen de fondo" style="width: 100%; height: 100%;">
-                <div>
-                    <div class="nombre"></div>
-                    <div class="x"></div>
-                    <div class="departamento"></div>
-                    <div class="centroCostos"></div>
-
-                  
-                </div>
-
+        <section class="form-level form-horizontal">
+            <div id="etiqueta" #etiqueta>
+                <img src="../../assets/Saved Pictures/etiquetaContratista.png" alt="Etiqueta" id="etiquetaImage">
+                <div class="nombre">{{usuario}}</div>
+                <div class="empresa">{{empresa}}</div>
+                <div class="marca">{{marca}}</div>
+                <div class="modelo">{{modelo}}</div>
+                <div class="numero_serie">{{numero_serie}}</div>
+                <div class="vigencia">{{fecha_vigencia}}</div>
+                <div class="tipo_equipo">{{tipo_equipo}}</div>
+              
             </div>
         </section>
 
@@ -182,4 +177,4 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
-</html>
+</html> 
