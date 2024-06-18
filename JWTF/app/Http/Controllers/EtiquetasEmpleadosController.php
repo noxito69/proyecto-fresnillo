@@ -17,6 +17,11 @@ class EtiquetasEmpleadosController extends Controller
     public function store(Request $request)
     {
         $messages = [
+            'tipo_equipo_id.required' => 'El ID del tipo de equipo es requerido.',
+            'tipo_equipo_id.integer' => 'El ID del tipo de equipo debe ser un número entero.',
+            'marca_id.required' => 'El ID de la marca es requerido.',
+            'marca_id.integer' => 'El ID de la marca debe ser un número entero.',
+            'modelo.required' => 'El modelo es requerido.',
             'numero_serie.required' => 'El número de serie es requerido.',
             'numero_serie.string' => 'El número de serie debe ser una cadena de texto.',
             // 'numero_serie.unique' => 'El número de serie ya existe.', // Comentado
@@ -36,14 +41,18 @@ class EtiquetasEmpleadosController extends Controller
         ];
         
         $validated = Validator::make($request->all(), [
+
+            'modelo' => 'required|string',
+            'tipo_equipo_id' => 'required|integer',
+            'marca_id' => 'required|integer',
             'numero_serie' => 'required|string',
             'usuario_id' => 'required|integer|exists:usuarios_penmont,id',
             'host' => 'required|string',
-            'equipo_id' => 'required|integer|exists:equipos,id',
             'mac' => 'required|string',
             'departamento_id' => 'required|integer|exists:departamentos,id',
             'anexo_id' => 'required|integer|exists:anexos,id',
             'fecha_vigencia' => 'required|date',
+            'fecha_actual' => 'required|date'
         ], $messages);
 
         if($validated->fails()){
@@ -76,6 +85,12 @@ class EtiquetasEmpleadosController extends Controller
         if($etiquetaEmpleado)
         {
             $messages = [
+
+                'modelo.required' => 'El modelo es requerido.',
+                'tipo_equipo_id.required' => 'El ID del tipo de equipo es requerido.',
+                'tipo_equipo_id.integer' => 'El ID del tipo de equipo debe ser un número entero.',
+                'marca_id.required' => 'El ID de la marca es requerido.',
+                'marca_id.integer' => 'El ID de la marca debe ser un número entero.',
                 'numero_serie.required' => 'El número de serie es requerido.',
                 'numero_serie.string' => 'El número de serie debe ser una cadena de texto.',
                 'numero_serie.unique' => 'El número de serie ya existe.',
@@ -84,9 +99,6 @@ class EtiquetasEmpleadosController extends Controller
                 'usuario_id.exists' => 'El ID del usuario no existe.',
                 'host.required' => 'El host es requerido.',
                 'host.string' => 'El host debe ser una cadena de texto.',
-                'equipo_id.required' => 'El ID del equipo es requerido.',
-                'equipo_id.integer' => 'El ID del equipo debe ser un número entero.',
-                'equipo_id.exists' => 'El ID del equipo no existe.',
                 'mac.required' => 'La MAC es requerida.',
                 'mac.string' => 'La MAC debe ser una cadena de texto.',
                 'departamento_id.required' => 'El ID del departamento es requerido.',
@@ -100,14 +112,18 @@ class EtiquetasEmpleadosController extends Controller
             ];
 
             $validated = Validator::make($request->all(), [
+                'tipo_equipo_id' => 'required|integer',
+                'marca_id' => 'required|integer',
+                'modelo' => 'required|string', // Agregado
                 'numero_serie' => 'required|string|unique:etiquetas_empleados,numero_serie,'.$etiquetaEmpleado->id,
                 'usuario_id' => 'required|integer|exists:usuarios_penmont,id',
                 'host' => 'required|string',
-                'equipo_id' => 'required|integer|exists:equipos,id',
                 'mac' => 'required|string',
                 'departamento_id' => 'required|integer|exists:departamentos,id',
                 'anexo_id' => 'required|integer|exists:anexos,id',
                 'fecha_vigencia' => 'required|date',
+                'fecha_actual' => 'required|date'
+                
             ], $messages);
 
             if($validated->fails()){

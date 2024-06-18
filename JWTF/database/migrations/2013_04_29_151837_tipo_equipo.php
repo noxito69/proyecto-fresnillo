@@ -13,15 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('equipos', function (Blueprint $table) {
+        Schema::create('tipo_equipo', function (Blueprint $table) {
             $table->id();
-            $table->string('tipo');
-            $table->string('modelo');
-            $table->string('marca')->nullable();
+            $table->string('nombre', 255);
             $table->timestamps();
         });
     }
 
+    
     /**
      * Reverse the migrations.
      *
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('tipoEquipo');
     }
 };

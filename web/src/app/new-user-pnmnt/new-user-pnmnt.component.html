@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,11 +41,7 @@
     </style>
 </head>
 <body>
-    
     <app-layout>
-
-
-
         <div class="container mt-5 container-centered">
             <div class="container-form">
                 <h1 class="text-center mb-4">Registrar Usuario Penmont</h1>
@@ -54,62 +49,50 @@
                 <!-- Primer Nivel -->
                 <div class="form-level form-horizontal">
                     <div class="mb-3">
-                        <label for="numeroempleado" class="form-label">Numero empleado:</label>
-                        <input type="text" class="form-control" id="numeroEmpleado" placeholder="">
+                        <label for="numeroEmpleado" class="form-label">Número empleado:</label>
+                        <input type="text" class="form-control" id="numeroEmpleado" [(ngModel)]="user.num_empleado" name="numeroEmpleado" placeholder="">
                     </div>
-                
                 </div>
             
                 <!-- Segundo Nivel -->
                 <div class="form-level form-horizontal">
-
                     <div class="mb-3">
                         <label for="nombreEmpleado" class="form-label">Nombre empleado:</label>
-                        <input type="text" class="form-control" id="nombreEmpleados" placeholder="">
+                        <input type="text" class="form-control" id="nombreEmpleado" [(ngModel)]="user.nombre" name="nombreEmpleado" placeholder="">
                     </div>
                 </div>
 
                 <div class="form-level form-horizontal">
-
                     <div class="mb-3">
-                        <label for="modelo" class="form-label" [(ngModel)]="departamento">Departamento</label>
-                        <select class="form-select" id="dpto">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="mail" class="form-control" id="email" [(ngModel)]="user.email" name="Email" placeholder="">
+                    </div>
+                </div>
+
+
+
+                
+                <div class="form-level form-horizontal">
+                    <div class="mb-3">
+                        <label for="departamento" class="form-label">Departamento</label>
+                        <select class="form-select" id="departamento" (change)="onDepartamentoChange($event)" [(ngModel)]="user.departamento_id" name="departamento">
                             <option selected disabled>Seleccione el Departamento</option>
-                            <option value="1" *ngFor="let departa of departamento" [value]="departa.id">{{departa.nombre}}</option>
-                        
+                            <option *ngFor="let departa of departamento" [value]="departa.id">{{departa.nombre}}</option>
                         </select>
                     </div>
-
                 </div>
 
                 <div class="form-level form-horizontal">
-
-
                     <div class="mb-3">
-
-                        <div class="form-level form-horizontal">
-                            <div class="mb-3">
-                                <label for="centroCostosId" class="form-label">Centro de Costos ID:</label>
-                                <input type="text" class="form-control" id="centroCostosId" [(ngModel)]="user.centro_costos_id" placeholder="">
-                            </div>
-                        </div>
-                        
-
+                       
+                        <input type="number" class="form-control" id="centroCostosId" [(ngModel)]="user.centro_costos_id" name="centroCostosId" placeholder="" disabled style="display: none;">
                     </div>
-
                 </div>
-            
-
-            
-            
-            
-               
             
                 <!-- Octavo Nivel -->
                 <div class="form-level form-level-buttons">
-                    <button type="button" class="btn btn-primary">Crear registro</button>
+                    <button type="button" class="btn btn-primary" (click)="CrearUsuario()">Crear registro</button>
                     <button type="button" class="btn btn-danger">Salir</button>
-                    
                 </div>
             </div>
         </div>

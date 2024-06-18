@@ -154,37 +154,37 @@
         <br><br><br>
 
 
-        <section class="form-level form-horizontal" [hidden]="isDocHidden">
-            <div id="vale" #vale>
-                <img src="../../assets/Saved Pictures/hola.jpg" alt="Imagen de fondo" style="width: 100%; height: 100%;">
-                <div>
-                    <div class="nombre">{{nombre}}</div>
-                    <div class="x">{{x}}</div>
-                    <div class="departamento">{{departamento}}</div>
-                    <div class="centroCostos">{{centroCostos}}</div>
+            <section class="form-level form-horizontal" [hidden]="isDocHidden">
+                <div id="vale" #vale>
+                    <img src="../../assets/Saved Pictures/hola.jpg" alt="Imagen de fondo" style="width: 100%; height: 100%;">
+                    <div>
+                        <div class="nombre">{{nombre}}</div>
+                        <div class="x">{{x}}</div>
+                        <div class="departamento">{{departamento}}</div>
+                        <div class="centroCostos">{{centroCostos}}</div>
 
-                    <div class="tabla">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Cantidad</th>
-                                    <th scope="col">Articulo</th>
-                                    <th scope="col">Marca</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let articulo of articulosIds">
-                                    <td>{{articulo.cantidad}}</td>
-                                    <td>{{articulo.articulo}}</td>
-                                    <td>{{articulo.marca}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="tabla">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Cantidad</th>
+                                        <th scope="col">Articulo</th>
+                                        <th scope="col">Marca</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let articulo of articulosIds">
+                                        <td>{{articulo.cantidad}}</td>
+                                        <td>{{articulo.articulo}}</td>
+                                        <td>{{articulo.marca}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
 
-            </div>
-        </section>
+                </div>
+            </section>
     </app-layout>
 
 </body>

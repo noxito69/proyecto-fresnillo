@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
 })
 export class NewAccesoriosComponent {
 
+  
   cantidad: number = 0;
   articulo: string = '';
   marca: string = '';

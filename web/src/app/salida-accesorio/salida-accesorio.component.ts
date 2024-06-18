@@ -126,7 +126,7 @@ export class SalidaAccesorioComponent {
         const imgWidth = 208;
         const pageHeight = 295;
         const imgHeight = canvas.height * imgWidth / canvas.width;
-
+        
         const contentDataURL = canvas.toDataURL('image/png');
         const pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF
         const position = 0;

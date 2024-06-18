@@ -14,17 +14,13 @@ class EtiquetaEmpleado extends Model
     
     use HasFactory;
 
-    protected $fillable = ['numero_serie', 'usuario_id', 'host', 'equipo_id', 'mac', 'departamento_id', 'anexo_id', 'fecha_vigencia'];
+    protected $fillable = ['numero_serie', 'modelo', 'usuario_id', 'host', 'tipo_equipo_id','marca_id', 'mac', 'departamento_id', 'anexo_id', 'fecha_vigencia','fecha_actual'];
 
     public function usuarioPenmont()
     {
         return $this->belongsTo(UsuarioPenmont::class, 'usuario_id');
     }
 
-    public function equipo()
-    {
-        return $this->belongsTo(Equipo::class);
-    }
 
     public function departamento()
     {
@@ -35,4 +31,17 @@ class EtiquetaEmpleado extends Model
     {
         return $this->belongsTo(Anexo::class);
     }
+
+    public function tipoEquipo()
+    {
+        return $this->belongsTo(TipoEquipo::class, 'tipo_equipo_id');
+    }
+
+    public function marca()
+    {
+        return $this->belongsTo(Marca::class, 'marca_id');
+    }
+
+
+    
 }

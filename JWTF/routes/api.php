@@ -37,6 +37,8 @@ use App\Http\Controllers\EtiquetaContratistaController;
 use App\Http\Controllers\UsuariosPenmontController;
 use GuzzleHttp\Middleware;
 use App\Http\Controllers\HistorialImpresorasController;
+use App\Http\Controllers\MarcaController;
+use App\Http\Controllers\TipoEquipoController;
 
 Route::group([
 
@@ -101,23 +103,31 @@ Route::group([
 
 
 
+    //tipo de equipo
+    Route::get('tipo_equipo/index',[TipoEquipoController::class,'index']);
+    Route::post('tipo_equipo/post',[TipoEquipoController::class,'store']);
+    Route::get('tipo_equipo/get/{id}',[TipoEquipoController::class,'show']);
+    Route::put('tipo_equipo/put/{id}',[TipoEquipoController::class,'update']);
+    Route::delete('tipo_equipo/delete/{id}',[TipoEquipoController::class,'destroy']);
+
+
+    //Marca
+
+    Route::get('marca/index',[MarcaController::class,'index']);
+    Route::post('marca/post',[MarcaController::class,'store']);
+    Route::get('marca/get/{id}',[MarcaController::class,'show']);
+    Route::put('marca/put/{id}',[MarcaController::class,'update']);
+    Route::delete('marca/delete/{id}',[MarcaController::class,'destroy']);
+
+
+
+
     //EmpresaContratista
     Route::get('empresa_contratista/index',[EmpresaContratistaController::class,'index']);
     Route::post('empresa_contratista/post',[EmpresaContratistaController::class,'store']);
     Route::get('empresa_contratista/get/{id}',[EmpresaContratistaController::class,'show']);
     Route::put('empresa_contratista/put/{id}',[EmpresaContratistaController::class,'update']);
     Route::delete('empresa_contratista/delete/{id}',[EmpresaContratistaController::class,'destroy']);
-
-
-
-    //Equipos
-    Route::get('equipos/index',[EquipoController::class,'index']);
-    Route::post('equipos/post',[EquipoController::class,'store']);
-    Route::get('equipos/get/{id}',[EquipoController::class,'show']);
-    Route::put('equipos/put/{id}',[EquipoController::class,'update']);
-    Route::delete('equipos/delete/{id}',[EquipoController::class,'destroy']);
-    
-
 
 
 

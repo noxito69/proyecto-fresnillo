@@ -9,59 +9,47 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-new-user-pnmnt',
   standalone: true,
-  imports: [LayoutComponent,FormsModule,NgFor,HttpClientModule,RouterLink],
+  imports: [LayoutComponent, FormsModule, NgFor, HttpClientModule, RouterLink],
   templateUrl: './new-user-pnmnt.component.html',
   styleUrl: './new-user-pnmnt.component.css'
 })
 export class NewUserPnmntComponent {
 
-  user ={
+  user = {
+    nombre: '',
+    num_empleado: '',
+    email: '',
+    departamento_id: null,
+    centro_costos_id: null
+  };
 
-    nombre:'',
-    num_empleado:'',
-    email:'',
-    departamento_id:null,
-    centro_costos_id:null
-
-  }
-
- 
   departamento: any[] = [];
 
-  constructor(private http: HttpClient, private router:Router) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   CrearUsuario() {
-    this.http.post('http://127.0.0.1:8000/api/auth/departamentos/post', this.user)
-        .subscribe(response => {
-            Swal.fire({
-                icon: 'success',
-                title: 'Usuario creado con éxito'
-            });
-        }, error => {
-            let errorMessage = '';
-            for (let key in error.error.message) {
-                errorMessage += error.error.message[key] + ' ';
-            }
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: errorMessage,
-            });
-        })
-        
+    this.http.post('http://127.0.0.1:8000/api/auth/usuarios_penmont/post', this.user)
+      .subscribe(response => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Usuario creado con éxito'
+        });
+      }, error => {
+        let errorMessage = '';
+        for (let key in error.error.message) {
+          errorMessage += error.error.message[key] + ' ';
+        }
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: errorMessage,
+        });
+      });
   }
 
-
-
-    
   ngOnInit() {
-   
     this.obtenerDepartamento();
   }
-
-  
-
-
 
   obtenerDepartamento() {
     this.http.get<any[]>('http://127.0.0.1:8000/api/auth/departamentos/index')
@@ -72,16 +60,15 @@ export class NewUserPnmntComponent {
       });
   }
 
-  
-
-  
-  
-
-  navigateTo(route:string){
-
-
-    this.router.navigate([route]);
-
+  onDepartamentoChange(event: any) {
+    const selectedDeptId = event.target.value;
+    const selectedDept = this.departamento.find(dep => dep.id === +selectedDeptId);
+    if (selectedDept) {
+      this.user.centro_costos_id = selectedDept.centro_costos_id;
+    }
   }
 
+  navigateTo(route: string) {
+    this.router.navigate([route]);
+  }
 }

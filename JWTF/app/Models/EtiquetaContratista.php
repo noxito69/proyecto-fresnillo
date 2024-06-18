@@ -14,16 +14,24 @@ class EtiquetaContratista extends Model
 
     use HasFactory;
 
-    protected $fillable = ['equipo_id', 'numero_serie', 'usuario', 'empresa_id', 'fecha_vigencia'];
+    protected $fillable = ['tipo_equipo_id','marca_id', 'numero_serie', 'usuario', 'empresa_id', 'fecha_vigencia', 'fecha_actual' , 'modelo'];
 
-    public function equipo()
-    {
-        return $this->belongsTo(Equipo::class);
-    }
 
     public function empresaContratista()
     {
         return $this->belongsTo(EmpresaContratista::class, 'empresa_id');
     }
+
+    public function tipoEquipo()
+    {
+        return $this->belongsTo(TipoEquipo::class, 'tipo_equipo_id');
+    }
+
+    public function marca()
+    {
+        return $this->belongsTo(Marca::class, 'marca_id');
+    }
+
+
 }
 

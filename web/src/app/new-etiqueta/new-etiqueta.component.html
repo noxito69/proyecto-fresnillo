@@ -47,42 +47,6 @@
 
         <section>
 
-            <!-- Modal Marcas -->
-            <div class="modal fade right justify-content-center" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="exampleModalLabel">Nueva Marca</h4>
-                            
-                        </div>
-                        <div class="modal-body d-flex justify-content-center align-items-center">
-                             FORM nueva marca
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Modal Empresa-->
-            <div class="modal fade right justify-content-center" id="myModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="exampleModalLabel">Nueva Empresa</h4>
-                            
-                        </div>
-                        <div class="modal-body d-flex justify-content-center align-items-center">
-                             FORM nueva Empresa
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <!-- Modal DBexcel -->
             <div class="modal fade right justify-content-center" id="myModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -112,31 +76,31 @@
                 <div class="form-level form-horizontal">
                     <div class="mb-3">
                         <label for="numeroEtiqueta" class="form-label">Número de Etiqueta</label>
-                        <input type="number" class="form-control" id="numeroEtiqueta" placeholder="Número de Etiqueta">
+                        <input type="number" class="form-control" id="numeroEtiqueta" placeholder="Número de Etiqueta" [(ngModel)]="tipo_equipo_id">
                     </div>
                     <div class="mb-3">
                         <label for="tipoEquipo" class="form-label">Tipo de Equipo</label>
-                        <select class="form-select" id="tipoEquipo">
+                        <select class="form-select" id="tipoEquipo" [(ngModel)]="tipo_equipo_id">
                             <option selected disabled>Seleccione el Tipo de Equipo</option>
-                            <option value="1">Opción 1</option>
+                            <option value="1" *ngFor="let tipoequipo of tipo_equipo" [value]="tipoequipo.id">{{tipoequipo.nombre}}</option>
                             <option value="2">Opción 2</option>
                         </select>
                     </div>
                 </div>
             
-                <!-- Segundo Nivel -->
+                
                 <div class="form-level form-horizontal">
                     <div class="mb-3">
                         <label for="marca" class="form-label">Marca</label>
-                        <select class="form-select" id="marca">
+                        <select class="form-select" id="marca" [(ngModel)]="marca_id">
                             <option selected disabled>Seleccione la Marca</option>
-                            <option value="1">Marca 1</option>
+                            <option value="1" *ngFor="let marca of marcas" [value]="marca.id">{{marca.nombre}}</option>
                             <option value="2">Marca 2</option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="modelo" class="form-label">Modelo</label>
-                        <input type="text" class="form-control" id="modelo" placeholder="Modelo">
+                        <input type="text" class="form-control" id="modelo" placeholder="Modelo" [(ngModel)]="modelo">
                     </div>
                 </div>
             
@@ -144,7 +108,7 @@
                 <div class="form-level form-horizontal">
                     <div class="mb-3">
                         <label for="numeroSerie" class="form-label">Número de Serie</label>
-                        <input type="text" class="form-control" id="numeroSerie" placeholder="Número de Serie">
+                        <input type="text" class="form-control" id="numeroSerie" placeholder="Número de Serie" [(ngModel)]="numero_serie">
                     </div>
                 </div>
             
@@ -152,7 +116,7 @@
                 <div class="form-level form-horizontal">
                     <div class="mb-3">
                         <label for="usuario" class="form-label">Usuario</label>
-                        <input type="text" class="form-control" id="usuario" placeholder="Usuario">
+                        <input type="text" class="form-control" id="usuario" placeholder="Usuario" [(ngModel)]="usuario">
                     </div>
                 </div>
             
@@ -160,7 +124,11 @@
                 <div class="form-level form-horizontal">
                     <div class="mb-3">
                         <label for="empresa" class="form-label">Empresa</label>
-                        <input type="text" class="form-control" id="empresa" placeholder="Empresa">
+                        <select class="form-select" id="marca">
+                            <option selected disabled>Seleccione la Empresa</option>
+                            <option  *ngFor="let empresa of empresas" [value]="empresa.id">{{empresa.nombre}}</option>
+                            
+                        </select>
                     </div>
                 </div>
             
@@ -174,22 +142,42 @@
                 <div class="form-level form-horizontal">
                     <div class="mb-3">
                         <label for="fechaVigencia" class="form-label">Fecha de vigencia</label>
-                        <input type="date" class="form-control" id="fechaVigencia" disabled>
-                    </div>
+                        <input type="date" class="form-control" id="fechaVigencia" [value]="fecha_vigencia" disabled [(ngModel)]="fecha_vigencia">
+                      </div>
+
                     <div class="mb-3">
                         <label for="fechaActual" class="form-label">Fecha actual</label>
-                        <input type="date" class="form-control" id="fechaActual">
+                        <input type="date" class="form-control" id="fechaActual" [(ngModel)]="fecha_actual">
                     </div>
                 </div>
             
                 <!-- Octavo Nivel -->
                 <div class="form-level form-level-buttons">
-                    <button type="button" class="btn btn-primary">Generar Etiqueta</button>
+                    <button type="button" class="btn btn-primary" (click)="CrearEtiqueta()">Generar Etiqueta</button>
                     <button type="button" class="btn btn-warning">Actualizar Etiqueta</button>
                     <button type="button" class="btn btn-success" id="openModalBtn" data-bs-toggle="modal" data-bs-target="#myModal3">Exportar BD a Excel</button>
                 </div>
             </div>
         </div>
+
+        <br><br>
+
+        <section class="form-level form-horizontal" >
+            <div id="vale" #vale>
+                <img src="../../assets/Saved Pictures/Roboto Mono (1).svg" alt="Imagen de fondo" style="width: 100%; height: 100%;">
+                <div>
+                    <div class="nombre"></div>
+                    <div class="x"></div>
+                    <div class="departamento"></div>
+                    <div class="centroCostos"></div>
+
+                  
+                </div>
+
+            </div>
+        </section>
+
+        
     </app-layout>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

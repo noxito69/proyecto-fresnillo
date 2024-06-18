@@ -18,11 +18,14 @@ return new class extends Migration
             $table->string('numero_serie');
             $table->foreignId('usuario_id')->constrained('usuarios_penmont')->onDelete('cascade');
             $table->string('host');
-            $table->foreignId('equipo_id')->constrained('equipos')->onDelete('cascade');
+            $table->string('modelo');
+            $table->foreignId('tipo_equipo_id')->constrained('tipo_equipo')->onDelete('cascade');
+            $table->foreignId('marca_id')->constrained('marca')->onDelete('cascade');
             $table->string('mac')->nullable();
             $table->foreignId('departamento_id')->constrained('departamentos')->onDelete('cascade');
             $table->foreignId('anexo_id')->constrained('anexos')->onDelete('cascade');
             $table->date('fecha_vigencia');
+            $table->date('fecha_actual');
             $table->timestamps();
         });
     }
