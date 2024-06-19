@@ -38,6 +38,7 @@ use App\Http\Controllers\UsuariosPenmontController;
 use GuzzleHttp\Middleware;
 use App\Http\Controllers\HistorialImpresorasController;
 use App\Http\Controllers\MarcaController;
+use App\Http\Controllers\ModeloController;
 use App\Http\Controllers\TipoEquipoController;
 
 Route::group([
@@ -119,6 +120,14 @@ Route::group([
     Route::put('marca/put/{id}',[MarcaController::class,'update']);
     Route::delete('marca/delete/{id}',[MarcaController::class,'destroy']);
 
+    //Modelos
+
+    Route::get('modelo/index',[ModeloController::class,'index']);
+    Route::post('modelo/post',[ModeloController::class,'store']);
+    Route::get('modelo/get/{id}',[ModeloController::class,'show']);
+    Route::put('modelo/put/{id}',[ModeloController::class,'update']);
+    Route::delete('modelo/delete/{id}',[ModeloController::class,'destroy']);
+
 
 
 
@@ -151,6 +160,7 @@ Route::group([
 
     //etiquetas empleados
     Route::get('etiquetas_empleados/index',[EtiquetasEmpleadosController::class,'index']);
+    Route::get('etiquetas_empleados/last',[EtiquetasEmpleadosController::class,'getLastEtiqueta']);
     Route::post('etiquetas_empleados/post',[EtiquetasEmpleadosController::class,'store']);
     Route::get('etiquetas_empleados/get/{id}',[EtiquetasEmpleadosController::class,'show']);
     Route::put('etiquetas_empleados/put/{id}',[EtiquetasEmpleadosController::class,'update']);

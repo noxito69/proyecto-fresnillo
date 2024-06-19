@@ -52,6 +52,7 @@ export class SalidaAccesorioComponent {
     });
   }
 
+  
   getAccesorioByBarCode() {
 
     if(this.codigoBarras == ''){

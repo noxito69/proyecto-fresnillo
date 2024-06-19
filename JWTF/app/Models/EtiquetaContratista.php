@@ -14,10 +14,8 @@ class EtiquetaContratista extends Model
 
     use HasFactory;
 
-    protected $fillable = ['tipo_equipo','marca', 'numero_serie', 'usuario', 'empresa', 'fecha_vigencia', 'fecha_actual' , 'modelo'];
+    protected $fillable = ['tipo_equipo', 'numero_serie', 'usuario', 'empresa', 'fecha_vigencia', 'fecha_actual' , 'modelo'];
 
-
-    
 
 
 }

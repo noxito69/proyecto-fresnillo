@@ -18,40 +18,31 @@ class EtiquetasEmpleadosController extends Controller
     {
         $messages = [
 
-            'tipo_equipo.required' => 'El tipo de equipo es requerido.',
-            'tipo_equipo.string' => 'El tipo de equipo debe ser una cadena de texto.',
-            'marca.required' => 'La marca es requerida.',
-            'marca.string' => 'La marca debe ser una cadena de texto.',
+
             'modelo.required' => 'El modelo es requerido.',
             'numero_serie.required' => 'El número de serie es requerido.',
             'numero_serie.string' => 'El número de serie debe ser una cadena de texto.',
+            'numero_serie.unique' => 'El número de serie ya existe.',
+            'anexo.required' => 'El anexo es requerido.',
+            'departamento.required' => 'El departamento es requerido.',
+            'usuario.required' => 'El ID del usuario es requerido.',
             // 'numero_serie.unique' => 'El número de serie ya existe.', // Comentado
-            'usuario_id.required' => 'El ID del usuario es requerido.',
-            'usuario_id.integer' => 'El ID del usuario debe ser un número entero.',
-            'usuario_id.exists' => 'El ID del usuario no existe.',
+            'usuario.required' => 'El usuario es requerido.',
             'host.required' => 'El host es requerido.',
             'host.string' => 'El host debe ser una cadena de texto.',
-            'equipo_id.required' => 'El ID del equipo es requerido.',
-            'equipo_id.integer' => 'El ID del equipo debe ser un número entero.',
-            'equipo_id.exists' => 'El ID del equipo no existe.',
             'mac.required' => 'La MAC es requerida.',
             'mac.string' => 'La MAC debe ser una cadena de texto.',
-            'departamento_id.required' => 'El ID del departamento es requerido.',
-            'departamento_id.integer' => 'El ID del departamento debe ser un número entero.',
-            'departamento_id.exists' => 'El ID del departamento no existe.',
         ];
         
         $validated = Validator::make($request->all(), [
 
             'modelo' => 'required|string',
-            'tipo_equipo' => 'required|string',
-            'marca' => 'required|string',
             'numero_serie' => 'required|string',
-            'usuario_id' => 'required|integer|exists:usuarios_penmont,id',
+            'usuario' => 'required|string',
             'host' => 'required|string',
             'mac' => 'required|string',
-            'departamento_id' => 'required|integer|exists:departamentos,id',
-            'anexo_id' => 'required|integer|exists:anexos,id',
+            'departamento' => 'required|string',
+            'anexo' => 'required|string',
             'fecha_vigencia' => 'required|date',
             'fecha_actual' => 'required|date'
         ], $messages);
@@ -87,41 +78,32 @@ class EtiquetasEmpleadosController extends Controller
         {
             $messages = [
 
-                'tipo_equipo.required' => 'El tipo de equipo es requerido.',
-                'tipo_equipo.string' => 'El tipo de equipo debe ser una cadena de texto.',
-                'marca.required' => 'La marca es requerida.',
-                'marca.string' => 'La marca debe ser una cadena de texto.',
+           
+              
                 'modelo.required' => 'El modelo es requerido.',
                 'numero_serie.required' => 'El número de serie es requerido.',
                 'numero_serie.string' => 'El número de serie debe ser una cadena de texto.',
                 'numero_serie.unique' => 'El número de serie ya existe.',
-                'usuario_id.required' => 'El ID del usuario es requerido.',
-                'usuario_id.integer' => 'El ID del usuario debe ser un número entero.',
-                'usuario_id.exists' => 'El ID del usuario no existe.',
+                'usuario.required' => 'El ID del usuario es requerido.',
                 'host.required' => 'El host es requerido.',
                 'host.string' => 'El host debe ser una cadena de texto.',
                 'mac.required' => 'La MAC es requerida.',
                 'mac.string' => 'La MAC debe ser una cadena de texto.',
-                'departamento_id.required' => 'El ID del departamento es requerido.',
-                'departamento_id.integer' => 'El ID del departamento debe ser un número entero.',
-                'departamento_id.exists' => 'El ID del departamento no existe.',
-                'anexo_id.required' => 'El ID del anexo es requerido.',
-                'anexo_id.integer' => 'El ID del anexo debe ser un número entero.',
-                'anexo_id.exists' => 'El ID del anexo no existe.',
+                'departamento.required' => 'El departamento es requerido.',
+                'anexo.required' => 'El anexo es requerido.',
                 'fecha_vigencia.required' => 'La fecha de vigencia es requerida.',
                 'fecha_vigencia.date' => 'La fecha de vigencia debe ser una fecha válida.',
             ];
 
             $validated = Validator::make($request->all(), [
-                'tipo_equipo' => 'required|string',
-                'marca' => 'required|string',
+            
                 'modelo' => 'required|string', // Agregado
                 'numero_serie' => 'required|string|unique:etiquetas_empleados,numero_serie,'.$etiquetaEmpleado->id,
-                'usuario_id' => 'required|integer|exists:usuarios_penmont,id',
+                'usuario' => 'required|string',
                 'host' => 'required|string',
                 'mac' => 'required|string',
-                'departamento_id' => 'required|integer|exists:departamentos,id',
-                'anexo_id' => 'required|integer|exists:anexos,id',
+                'departamento' => 'required|string',
+                'anexo' => 'required|string',
                 'fecha_vigencia' => 'required|date',
                 'fecha_actual' => 'required|date'
                 
@@ -157,6 +139,13 @@ class EtiquetasEmpleadosController extends Controller
         return response()->json([
             'message' => 'EtiquetaEmpleado deleted successfully',
             'data' => $etiquetaEmpleado], 200);
+    }
+
+
+
+    public function getLastEtiqueta(){
+        $lastTag = EtiquetaEmpleado::all()->last();
+        return response()->json(["data" => $lastTag], 200);
     }
 
     

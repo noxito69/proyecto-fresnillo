@@ -8,6 +8,10 @@ import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { Router, RouterLink } from '@angular/router';
 
+
+import autoTable from 'jspdf-autotable';
+import * as XLSX from 'xlsx';
+
 @Component({
   selector: 'app-new-etiqueta',
   standalone: true,
@@ -66,6 +70,29 @@ export class NewEtiquetaComponent implements AfterViewInit {
         );
       });
     }
+  }
+
+  exportToExcel() {
+    const url = "http://127.0.0.1:8000/api/auth/etiquetas_contratistas/index";
+    this.http.get<any[]>(url).subscribe(
+      (data: any[]) => {
+        // Verificar si los datos se recibieron correctamente
+        console.log(data);
+
+        // Convertir los datos a un formato que XLSX pueda manejar
+        const worksheet = XLSX.utils.json_to_sheet(data);
+
+        // Crear un nuevo libro de trabajo y agregar la hoja de trabajo a él
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'EtiquetasContratistas');
+
+        // Crear el archivo de Excel
+        XLSX.writeFile(workbook, 'EtiquetasContratistas.xlsx');
+      },
+      error => {
+        console.error('Error al obtener las etiquetas:', error);
+      }
+    );
   }
 
   getLastTag() {

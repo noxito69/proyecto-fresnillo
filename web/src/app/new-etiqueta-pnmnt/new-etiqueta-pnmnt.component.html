@@ -47,64 +47,61 @@
 
         <section>
 
-            <!-- Modal Modelo -->
-            <div class="modal fade right justify-content-center" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="exampleModalLabel">Registrar nuevo modelo</h4>
-                        </div>
-                        <div class="modal-body d-flex justify-content-center align-items-center">
-                            <div class="container-form">
-                                <div class="form-level">
-                                    <div class="mb-3">
-                                        <label for="nuevomodelo" class="form-label">Nuevo modelo</label>
-                                        <input type="text" class="form-control" id="newmodel" placeholder="">
-                                    </div>
-                                    <div class="form-level-buttons">
-                                        <button type="button" class="btn btn-primary">Registrar</button>
-                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
+           
 
-            <!-- Modal Empresa-->
-            <div class="modal fade right justify-content-center" id="myModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="exampleModalLabel">Registrar nuevo Anexo</h4>
-                            
-                        </div>
-                        <div class="modal-body d-flex justify-content-center align-items-center">
-                            <div class="container-form">
-                                <div class="form-level">
-                                    <div class="mb-3">
-                                        <label for="nuevoanexo" class="form-label">Nuevo Anexo</label>
-                                        <input type="text" class="form-control" id="newmodel" placeholder="">
-                                    </div>
-                                    <div class="form-level-buttons">
-                                        <button type="button" class="btn btn-primary">Registrar</button>
-                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
+          
 
             <!-- Modal DBexcel -->
+
+
+            <div class="modal fade right justify-content-center" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="exampleModalLabel">Seleccionar etiqueta a editar</h4>
+                      <input type="text" name="" id="search-tag" #searchInput class="form-control ms-auto" style="width: 200px;" [(ngModel)]="search" placeholder="Buscar etiqueta...">
+                    </div>
+                    <div class="modal-body d-flex justify-content-center align-items-center">
+                      <div class="row g-3">
+                        <div class="col-md-12">
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Numero etiqueta</th>
+                                <th>Fecha de vigencia</th>
+                                <th>Fecha de creación</th>
+                                <th>Editar</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let etiqueta of filteredEtiquetas">
+                                <td>{{ etiqueta.id }}</td>
+                                <td>{{ etiqueta.fecha_vigencia }}</td>
+                                <td>{{ etiqueta.created_at }}</td>
+                                <td>
+                                  <button data-bs-dismiss="modal" class="btn btn-success" [routerLink]="['/update-etiqueta-pnmnt', etiqueta.id]">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                      <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
+                                      <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
+                                      <path d="M16 5l3 3" />
+                                    </svg>
+                                  </button>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
             <div class="modal fade right justify-content-center" id="myModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content">
@@ -113,7 +110,7 @@
                             
                         </div>
                         <div class="modal-body d-flex justify-content-center align-items-center">
-                            <button type="button" class="btn btn-success me-4">Si</button>
+                            <button type="button" class="btn btn-success me-4" (click)="exportToExcel()">Si</button>
                             <button type="button" class="btn btn-danger"  data-bs-dismiss="modal">No</button>
                         </div>
                         <div class="modal-footer">
@@ -133,12 +130,15 @@
                 <div class="form-level form-horizontal">
                     <div class="mb-3">
                         <label for="numeroEtiqueta" class="form-label">Número de Etiqueta</label>
-                        <input type="number" class="form-control" id="numeroEtiqueta" placeholder="Número de Etiqueta">
+                        <input type="number" class="form-control" id="numeroEtiqueta" placeholder="Número de Etiqueta" disabled="true" [(ngModel)]="index">
                     </div>
+
                     <div class="mb-3">
-                        <label for="tipoEquipo" class="form-label">Numero de Serie</label>
-                        <input type="text" class="form-control" id="NodeSerie" placeholder="Numero de serie">
+                        <label for="empleadoclave" class="form-label">Numero Empleado</label>
+                        <input type="text" class="form-control" [(ngModel)]="numEmpleado" id="Empleadoclave" placeholder="Coloca la clave del empleado">
+                        <button type="button" class="btn btn-info" (click)="buscarEmpleado()">Buscar</button>
                     </div>
+                    
                 </div>
             
                 <!-- Segundo Nivel -->
@@ -146,12 +146,12 @@
 
                     <div class="mb-3">
                         <label for="usuario" class="form-label">Usuario</label>
-                        <input type="text" class="form-control" id="usuario" placeholder="Usuario">
+                        <input type="text" class="form-control" id="usuario" placeholder="Usuario" [(ngModel)]="usuario">
                     </div>
                     
                     <div class="mb-3">
                         <label for="modelo" class="form-label">Host</label>
-                        <input type="text" class="form-control" id="host" placeholder="Host">
+                        <input type="text" class="form-control" id="host" placeholder="Host" [(ngModel)]="host">
                     </div>
                 </div>
             
@@ -160,17 +160,19 @@
 
                     <div class="mb-3">
                         <label for="modelo" class="form-label">Modelo</label>
-                        <select class="form-select" id="modelo">
-                            <option selected disabled>Seleccione el modelo</option>
-                            <option value="1">Modelo 1</option>
-                            <option value="2">Modelo 2</option>
+                        <select class="form-select" id="modelo" [(ngModel)]="modelo">
+                            <option selected disabled>Seleccione el Modelo</option>
+                            <option *ngFor="let mod of modelos">{{mod.nombre}}</option>
+                            
                         </select>
                     </div>
+
+                   
 
 
                     <div class="mb-3">
                         <label for="mac" class="form-label">Mac Adress</label>
-                        <input type="text" class="form-control" id="mac" placeholder="Mac Adress">
+                        <input type="text" class="form-control" id="mac" placeholder="Mac Adress" [(ngModel)]="mac">
                     </div>
                     
                 </div>
@@ -180,18 +182,15 @@
 
                     <div class="mb-3">
                         <label for="correo" class="form-label">Correo</label>
-                        <input type="email" class="form-control" id="mail" placeholder="Correo electrónico">
+                        <input type="email" class="form-control" id="mail" placeholder="Correo electrónico"[(ngModel)]="email">
                     </div>
                     
-
                     <div class="mb-3">
-                        <label for="departamento" class="form-label">Departamento</label>
-                        <select class="form-select" id="departamento">
-                            <option selected disabled>Seleccione el departamento</option>
-                            <option value="1">departamento 1</option>
-                            <option value="2">departamento 2</option>
-                        </select>
+                        <label for="tipoEquipo" class="form-label">Numero de Serie</label>
+                        <input type="text" class="form-control" id="NodeSerie" [(ngModel)]="numero_serie" placeholder="Numero de serie">
                     </div>
+
+                   
                 </div>
             
                 <!-- Quinto Nivel -->
@@ -199,41 +198,63 @@
                    
                     <div class="mb-3">
                         <label for="anexo" class="form-label">Anexo</label>
-                        <select class="form-select" id="anexo">
+                        <select class="form-select" id="anexo" [(ngModel)]="anexo">
                             <option selected disabled>Seleccione el Anexo</option>
-                            <option value="1">Anexo 1</option>
-                            <option value="2">Anexo 2</option>
+                            <option *ngFor="let anex of anexos">{{anex.nombre}}</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="departamento" class="form-label">Departamento</label>
+                        <select class="form-select" id="departamento" [(ngModel)]="departamento">
+                            <option selected disabled>Seleccione el departamento</option>
+                            <option *ngFor="let departa of departamentos">{{departa.nombre}}</option>
+                 
                         </select>
                     </div>
                     
                 </div>
             
-                <!-- Sexto Nivel -->
-                <div class="form-level form-level-buttons">
-                    <button type="button" id="openModalBtn" data-bs-toggle="modal" data-bs-target="#myModal" class="btn btn-info">Registrar modelo</button>
-                    <button type="button" id="openModalBtn" data-bs-toggle="modal" data-bs-target="#myModal2" class="btn btn-info">Registrar anexo</button>
-                </div>
+             
             
                 <!-- Séptimo Nivel -->
                 <div class="form-level form-horizontal">
                     <div class="mb-3">
                         <label for="fechaVigencia" class="form-label">Fecha de vigencia</label>
-                        <input type="date" class="form-control" id="fechaVigencia" disabled>
+                        <input type="date" class="form-control" id="fechaVigencia" disabled [(ngModel)]="fecha_vigencia" >
                     </div>
                     <div class="mb-3">
                         <label for="fechaActual" class="form-label">Fecha actual</label>
-                        <input type="date" class="form-control" id="fechaActual">
+                        <input type="date" class="form-control" id="fechaActual" [(ngModel)]="fecha_actual">
                     </div>
                 </div>
             
                 <!-- Octavo Nivel -->
                 <div class="form-level form-level-buttons">
-                    <button type="button" class="btn btn-primary">Generar Etiqueta</button>
-                    <button type="button" class="btn btn-warning">Actualizar Etiqueta</button>
+                    <button type="button" class="btn btn-primary" (click)="CrearEtiqueta()">Generar Etiqueta</button>
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updateModal" >Actualizar Etiqueta</button>
                     <button type="button" class="btn btn-success" id="openModalBtn" data-bs-toggle="modal" data-bs-target="#myModal3">Exportar BD a Excel</button>
                 </div>
             </div>
         </div>
+
+        <br><br>
+
+        <section class="form-level form-horizontal">
+            <div id="etiquetaEmpleado" #etiquetaEmpleado>
+                <img src="../../assets/Saved Pictures/Etiempleado.png" alt="Etiqueta" id="etiquetaImage">
+                <div class="index">#{{index}}</div>
+                <div class="nombre">{{usuario}}</div>
+                <div class="departamento">{{departamento}}</div>
+                <div class="host">{{host}}</div>
+                <div class="modelo">{{modelo}}</div>
+                <div class="numero_serie">{{numero_serie}}</div>
+                <div class="vigencia">{{fecha_vigencia}}</div>
+                <div class="anexo">{{anexo}}</div>
+                
+
+            </div>
+        </section>
     </app-layout>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

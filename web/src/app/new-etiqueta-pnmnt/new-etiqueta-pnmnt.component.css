@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
 .form-level {
     margin-bottom: 20px;
   }
@@ -33,5 +35,74 @@
     height: 100%;
     width: 100%;
     object-fit: cover; /* Asegura que las imágenes se escalen correctamente */
+  }
+  
+  #etiquetaEmpleado {
+    position: relative;
+  }
+  
+  .nombre, .departamento, .host, .modelo, .numero_serie, .vigencia, .tipo_equipo, .index, .anexo {
+    position: absolute;
+    font-family: 'Roboto Mono', monospace;
+  }
+  
+  .nombre {
+    top: 75px;
+    left: 294px;
+    font-size: 48px;
+  }
+
+  .host {
+    top: 150px;
+    left: 294px;
+    font-size: 48px;
+  }
+  
+  .index {
+    top: 15px;
+    left: 31px;
+    font-size: 48px;
+  }
+
+  .anexo {
+    top: 15px;
+    left: 480px;
+    font-size: 38px;
+  }
+  
+  .departamento {
+    top: 226px;
+    left: 294px;
+    font-size: 48px;
+  }
+  
+
+  
+  .modelo {
+    top: 295px;
+    left: 294px;
+    font-size: 48px;
+  
+  }
+  
+  .numero_serie {
+    top: 370px;
+    left: 294px;
+    font-size: 48px;
+  }
+  
+  .vigencia {
+  
+    top: 445px;
+    left: 294px;
+    font-size: 48px;
+  
+  }
+  
+  .tipo_equipo{
+  
+    top: 35px;
+    left: 480px;
+    font-size: 48px;
   }
   

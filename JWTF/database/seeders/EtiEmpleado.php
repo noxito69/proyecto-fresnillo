@@ -16,43 +16,43 @@ class EtiEmpleado extends Seeder
     public function run()
     {
         EtiquetaEmpleado::create([
-            'tipo_equipo' => 'Computadora',
-            'marca' => 'DDell',
+  
+         
             'modelo' => 'modelo1', 
             'numero_serie' => 'SN223456',
-            'usuario_id' => 1,
+            'usuario' => 'Usuario1',
             'host' => 'Host1',
             'mac' => '00:14:22:01:23:45',
-            'departamento_id' => 1,
-            'anexo_id' => 1,
+            'departamento' => 'Departamento1',
+            'anexo' => 'Anexo1',
             'fecha_vigencia' => '2024-12-31',
             'fecha_actual' => '2024-11-20'
         ]);
 
         EtiquetaEmpleado::create([
-            'tipo_equipo' => 'Computadora',
-            'marca' => 'HP',
+       
+          
             'modelo' => 'modelo2',
             'numero_serie' => 'SN223457',
-            'usuario_id' => 2,
+            'usuario' => '2',
             'host' => 'Host2',
             'mac' => '00:14:22:01:23:46',
-            'departamento_id' => 2,
-            'anexo_id' => 2,
+            'departamento' => '2',
+            'anexo' => '2',
             'fecha_vigencia' => '2024-11-30',
             'fecha_actual' => '2024-11-20'
         ]);
 
         EtiquetaEmpleado::create([
-            'tipo_equipo' => 'Computadora',
-            'marca' => 'Lenovo',
+           
+      
             'modelo' => 'modelo3',
             'numero_serie' => 'SN223458',
-            'usuario_id' => 3,
+            'usuario' => '3',
             'host' => 'Host3',
             'mac' => '00:14:22:01:23:47',
-            'departamento_id' => 3,
-            'anexo_id' => 3,
+            'departamento' => '3',
+            'anexo' => '3',
             'fecha_vigencia' => '2024-10-31',
             'fecha_actual' => '2024-11-20'
         ]);

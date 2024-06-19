@@ -101,7 +101,7 @@
                           <h4 class="modal-title" id="exampleModalLabel">¿Deseas exportar la base de datos a excel?</h4>
                         </div>
                         <div class="modal-body d-flex justify-content-center align-items-center">
-                            <button type="button" class="btn btn-success me-4">Si</button>
+                            <button type="button" class="btn btn-success me-4" (click)="exportToExcel()">Si</button>
                             <button type="button" class="btn btn-danger"  data-bs-dismiss="modal">No</button>
                         </div>
                         <div class="modal-footer">
@@ -121,7 +121,7 @@
                 <div class="form-level form-horizontal">
                     <div class="mb-3">
                         <label for="numeroEtiqueta" class="form-label">Número de Etiqueta</label>
-                        <input type="number" class="form-control" id="numeroEtiqueta" [(ngModel)]="index" placeholder="Número de Etiqueta">
+                        <input type="number" class="form-control" id="numeroEtiqueta" [(ngModel)]="index" placeholder="Número de Etiqueta" disabled="true">
                     </div>
                     <div class="mb-3">
                         <label for="tipoEquipo" class="form-label">Tipo de Equipo</label>
@@ -155,15 +155,15 @@
                         <label for="numeroSerie" class="form-label">Número de Serie</label>
                         <input type="text" class="form-control" id="numeroSerie" placeholder="Número de Serie" [(ngModel)]="numero_serie">
                     </div>
-                </div>
 
-                <!-- Cuarto Nivel -->
-                <div class="form-level form-horizontal">
+
                     <div class="mb-3">
                         <label for="usuario" class="form-label">Usuario</label>
                         <input type="text" class="form-control" id="usuario" placeholder="Usuario" [(ngModel)]="usuario">
                     </div>
                 </div>
+
+          
 
                 <!-- Quinto Nivel -->
                 <div class="form-level form-horizontal">
@@ -202,7 +202,7 @@
         <section class="form-level form-horizontal">
             <div id="etiqueta" #etiqueta>
                 <img src="../../assets/Saved Pictures/etiquetaContratista.png" alt="Etiqueta" id="etiquetaImage">
-                <div class="index">{{index}}</div>
+                <div class="index">#{{index}}</div>
                 <div class="nombre">{{usuario}}</div>
                 <div class="empresa">{{empresa}}</div>
                 <div class="marca">{{marca}}</div>

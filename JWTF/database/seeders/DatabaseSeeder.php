@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
             AccesorioSeeder::class,
             AnexoSeeder::class,
             tipo_equipo_seeder::class,
+            ModeloSeeder::class,
             marca_seeder::class,
             EmpresaC::class,
             UserPnmntSeeder::class,
