@@ -9,7 +9,7 @@ export const routes: Routes = [
 {path: 'stock', loadComponent: () => import('./stock/stock.component').then(s => s.StockComponent)},
 {path:'historial', loadComponent: () => import('./historial/historial.component').then(h => h.HistorialComponent)},
 {path:'new-etiqueta', loadComponent: () => import('./new-etiqueta/new-etiqueta.component').then(n => n.NewEtiquetaComponent)},
-{path:'update-etiqueta', loadComponent: () => import('./update-etiqueta/update-etiqueta.component').then(u => u.UpdateEtiquetaComponent)},
+{path:'update-etiqueta/:id', loadComponent: () => import('./update-etiqueta/update-etiqueta.component').then(u => u.UpdateEtiquetaComponent)},
 {path:'new-etiqueta-pnmnt', loadComponent: () => import('./new-etiqueta-pnmnt/new-etiqueta-pnmnt.component').then(ne => ne.NewEtiquetaPNMNTComponent)},
 {path:'update-etiqueta-pnmnt', loadComponent: () => import('./update-etiqueta-pnmnt/update-etiqueta-pnmnt.component').then(ue => ue.UpdateEtiquetaPNMNTComponent)},
 {path:'new-departamento', loadComponent: () => import('./new-departamento/new-departamento.component').then(nd => nd.NewDepartamentoComponent)},

@@ -42,13 +42,19 @@ th, td {
   position: relative;
 }
 
-.nombre, .empresa, .marca, .modelo, .numero_serie, .vigencia, .tipo_equipo {
+.nombre, .empresa, .marca, .modelo, .numero_serie, .vigencia, .tipo_equipo, .index {
   position: absolute;
   font-family: 'Roboto Mono', monospace;
 }
 
 .nombre {
   top: 116px;
+  left: 294px;
+  font-size: 48px;
+}
+
+.index {
+  top: 85px;
   left: 294px;
   font-size: 48px;
 }

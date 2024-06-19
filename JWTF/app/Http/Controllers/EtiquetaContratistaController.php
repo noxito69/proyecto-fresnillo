@@ -16,7 +16,7 @@ class EtiquetaContratistaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-           
+
             'modelo' => 'required|max:255',
             'tipo_equipo' => 'required|max:255',
             'marca' => 'required|max:255',
@@ -25,8 +25,8 @@ class EtiquetaContratistaController extends Controller
             'empresa' => 'required|max:255',
             'fecha_vigencia' => 'required|date',
             'fecha_actual' => 'required|date'
-            
-            
+
+
         ]);
 
         $etiquetaContratista = EtiquetaContratista::create($request->all());
@@ -90,4 +90,10 @@ class EtiquetaContratistaController extends Controller
             ], 404);
         }
     }
+
+    public function getLastEtiqueta(){
+        $lastTag = EtiquetaContratista::all()->last();
+        return response()->json(["data" => $lastTag], 200);
+    }
 }
+
