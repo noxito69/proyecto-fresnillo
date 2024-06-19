@@ -41,7 +41,7 @@
     </style>
 </head>
 <body>
-    
+
     <app-layout>
 
 
@@ -53,7 +53,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title" id="exampleModalLabel">¿Deseas exportar la base de datos a excel?</h4>
-                            
+
                         </div>
                         <div class="modal-body d-flex justify-content-center align-items-center">
                             <button type="button" class="btn btn-success me-4">Si</button>
@@ -71,7 +71,7 @@
         <div class="container mt-5 container-centered">
             <div class="container-form">
                 <h1 class="text-center mb-4">Etiquetas Contratistas</h1>
-                
+
                 <!-- Primer Nivel -->
                 <div class="form-level form-horizontal">
                     <div class="mb-3">
@@ -83,19 +83,19 @@
                         <select class="form-select" id="tipoEquipo" [(ngModel)]="tipo_equipo">
                             <option selected disabled>Seleccione el Tipo de Equipo</option>
                             <option  *ngFor="let tipoequipo of tipo_equipo_a">{{tipoequipo.nombre}}</option>
-                         
+
                         </select>
                     </div>
                 </div>
-            
-                
+
+
                 <div class="form-level form-horizontal">
                     <div class="mb-3">
                         <label for="marca" class="form-label">Marca</label>
                         <select class="form-select" id="marca" [(ngModel)]="marca">
                             <option selected disabled>Seleccione la Marca</option>
                             <option  *ngFor="let marca of marcas">{{marca.nombre}}</option>
-                            
+
                         </select>
                     </div>
                     <div class="mb-3">
@@ -103,7 +103,7 @@
                         <input type="text" class="form-control" id="modelo" placeholder="Modelo" [(ngModel)]="modelo">
                     </div>
                 </div>
-            
+
                 <!-- Tercer Nivel -->
                 <div class="form-level form-horizontal">
                     <div class="mb-3">
@@ -111,7 +111,7 @@
                         <input type="text" class="form-control" id="numeroSerie" placeholder="Número de Serie" [(ngModel)]="numero_serie">
                     </div>
                 </div>
-            
+
                 <!-- Cuarto Nivel -->
                 <div class="form-level form-horizontal">
                     <div class="mb-3">
@@ -119,7 +119,7 @@
                         <input type="text" class="form-control" id="usuario" placeholder="Usuario" [(ngModel)]="usuario">
                     </div>
                 </div>
-            
+
                 <!-- Quinto Nivel -->
                 <div class="form-level form-horizontal">
                     <div class="mb-3">
@@ -127,14 +127,10 @@
                         <select class="form-select" id="marca" [(ngModel)]="empresa" >
                             <option selected disabled>Seleccione la Empresa</option>
                             <option  *ngFor="let empresa of empresas">{{empresa.nombre}}</option>
-                            
+
                         </select>
                     </div>
                 </div>
-            
-       
-            
-            
                 <!-- Séptimo Nivel -->
                 <div class="form-level form-horizontal">
                     <div class="mb-3">
@@ -147,7 +143,7 @@
                         <input type="date" class="form-control" id="fechaActual" [(ngModel)]="fecha_actual">
                     </div>
                 </div>
-            
+
                 <!-- Octavo Nivel -->
                 <div class="form-level form-level-buttons">
                     <button type="button" class="btn btn-primary" (click)="CrearEtiqueta()">Generar Etiqueta</button>
@@ -168,13 +164,13 @@
                 <div class="numero_serie">{{numero_serie}}</div>
                 <div class="vigencia">{{fecha_vigencia}}</div>
                 <div class="tipo_equipo">{{tipo_equipo}}</div>
-              
+
             </div>
         </section>
 
-        
+
     </app-layout>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
-</html> 
+</html>
