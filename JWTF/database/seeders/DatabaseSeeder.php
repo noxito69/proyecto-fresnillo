@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
             marca_seeder::class,
             EmpresaC::class,
             UserPnmntSeeder::class,
-            ECseeder::class,
+            #ECseeder::class,
             EtiEmpleado::class,
             Hseeder::class,
             ImpresoraSeeder::class,

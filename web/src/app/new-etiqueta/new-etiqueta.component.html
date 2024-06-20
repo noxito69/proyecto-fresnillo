@@ -121,7 +121,7 @@
                 <div class="form-level form-horizontal">
                     <div class="mb-3">
                         <label for="numeroEtiqueta" class="form-label">Número de Etiqueta</label>
-                        <input type="number" class="form-control" id="numeroEtiqueta" [(ngModel)]="index" placeholder="Número de Etiqueta" disabled="true">
+                        <input type="number" class="form-control" id="numeroEtiqueta" [(ngModel)]="numero_etiqueta" placeholder="Número de Etiqueta" disabled="true">
                     </div>
                     <div class="mb-3">
                         <label for="tipoEquipo" class="form-label">Tipo de Equipo</label>
@@ -185,7 +185,7 @@
 
                     <div class="mb-3">
                         <label for="fechaActual" class="form-label">Fecha actual</label>
-                        <input type="date" class="form-control" id="fechaActual" [(ngModel)]="fecha_actual">
+                        <input type="date" class="form-control" id="fechaActual" [value]="fecha_actual" [(ngModel)]="fecha_actual" disabled="true" >
                     </div>
                 </div>
 
@@ -201,8 +201,8 @@
 
         <section class="form-level form-horizontal">
             <div id="etiqueta" #etiqueta>
-                <img src="../../assets/Saved Pictures/etiquetaContratista.png" alt="Etiqueta" id="etiquetaImage">
-                <div class="index">#{{index}}</div>
+                <img src="../../assets/Saved Pictures/EtiquetaEmpleado (2).png" alt="Etiqueta" id="etiquetaImage">
+                <div class="index">#{{numero_etiqueta}}</div>
                 <div class="nombre">{{usuario}}</div>
                 <div class="empresa">{{empresa}}</div>
                 <div class="marca">{{marca}}</div>

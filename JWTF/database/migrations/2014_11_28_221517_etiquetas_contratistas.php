@@ -15,14 +15,14 @@ return new class extends Migration
     {
         Schema::create('etiquetas_contratistas', function (Blueprint $table) {
             $table->id();
+            $table->integer('numero_etiqueta')->unique();
             $table->string('tipo_equipo');
             $table->string('marca');
             $table->string('modelo');
             $table->string('numero_serie')->unique();
             $table->string('usuario');
             $table->string('empresa');
-            $table->date('fecha_vigencia');
-            $table->date('fecha_actual');
+            $table->date('fecha_vigencia') ;
             $table->timestamps();
         });
     }

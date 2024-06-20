@@ -35,7 +35,7 @@ export class NewEtiquetaComponent implements AfterViewInit {
   empresas: any[] = [];
   etiquetas: any[] = [];
   filteredEtiquetas: any[] = [];
-  index: number = 0;
+  numero_etiqueta: number = 0;
 
   search: string = "";
 
@@ -49,6 +49,11 @@ export class NewEtiquetaComponent implements AfterViewInit {
     const date = new Date();
     date.setFullYear(date.getFullYear() + 1);
     this.fecha_vigencia = date.toISOString().split('T')[0];
+
+
+    const date2 = new Date();
+    date.setFullYear(date.getFullYear());
+    this.fecha_actual = date2.toISOString().split('T')[0];
   }
 
   ngAfterViewInit() {
@@ -98,7 +103,7 @@ export class NewEtiquetaComponent implements AfterViewInit {
   getLastTag() {
     this.http.get("http://127.0.0.1:8000/api/auth/etiquetas_contratistas/last").subscribe(
       (data: any) => {
-        this.index = data.data.id + 1;
+        this.numero_etiqueta = data.data.numero_etiqueta + 1;
       }
     );
   }
@@ -161,6 +166,7 @@ export class NewEtiquetaComponent implements AfterViewInit {
 
     const url = 'http://127.0.0.1:8000/api/auth/etiquetas_contratistas/post';
     const body = {
+      numero_etiqueta: this.numero_etiqueta,
       tipo_equipo: this.tipo_equipo,
       marca: this.marca,
       modelo: this.modelo,
@@ -168,7 +174,7 @@ export class NewEtiquetaComponent implements AfterViewInit {
       usuario: this.usuario,
       empresa: this.empresa,
       fecha_vigencia: this.fecha_vigencia,
-      fecha_actual: this.fecha_actual
+     
     };
 
     this.http.post(url, body).subscribe(
