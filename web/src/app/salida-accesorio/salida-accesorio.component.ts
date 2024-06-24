@@ -76,7 +76,7 @@ export class SalidaAccesorioComponent {
           centro_costos: this.centroCostos,
           usuario: this.nombre,
           num_empleado: this.numEmpleado,
-          cantidad: 0,
+          cantidad: 1,
           codigoBarras: this.codigoBarras,
           articulo: data.articulo,
           marca: data.marca,
@@ -156,20 +156,17 @@ export class SalidaAccesorioComponent {
         departamento: history.departamento,
         centro_costos: history.centro_costos
       }).subscribe(data => {
-
-        
         // Actualiza la cantidad del accesorio
         this.http.put(`http://127.0.0.1:8000/api/auth/accesorios/updateQuantityMinus/${history.articulo_id}`, { cantidad: history.cantidad }).subscribe(data => {
           location.reload();
         }, (error: any) => {
           Swal.fire('Error', error.error.message, 'error');
         })
+      }, (error: any) => {
+        Swal.fire('Error', error.error.message, 'error');
       })
     }
-
-    
-  }
-
+}
 
   deleteArticulo(codigo: any){
     const index = this.articulosIds.findIndex(articulo => articulo.codigoBarras === codigo)

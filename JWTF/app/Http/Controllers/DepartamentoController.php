@@ -40,7 +40,7 @@ class DepartamentoController extends Controller
             return response()->json($departamento, 201);
         }
     }
-
+ 
 
     
     public function show($id)

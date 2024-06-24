@@ -41,6 +41,8 @@ export class NewEtiquetaPNMNTComponent {
   departamentos: any[] = [];
   etiquetas: any[] = [];
   filteredEtiquetas: any[] = [];
+ 
+
   index: number = 0;
 
   nombre: string = '';
@@ -148,6 +150,8 @@ export class NewEtiquetaPNMNTComponent {
   }
 
   ngOnInit(): void {
+
+    
     this.getLastTag();
     this.getTags();
     
@@ -208,6 +212,9 @@ export class NewEtiquetaPNMNTComponent {
       }
     );
   }
+
+
+
 
 
   

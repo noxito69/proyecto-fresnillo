@@ -137,7 +137,7 @@ Route::group([
     Route::get('empresa_contratista/get/{id}',[EmpresaContratistaController::class,'show']);
     Route::put('empresa_contratista/put/{id}',[EmpresaContratistaController::class,'update']);
     Route::delete('empresa_contratista/delete/{id}',[EmpresaContratistaController::class,'destroy']);
-  
+    Route::get('empresa_contratista/indexAlfabetic',[EmpresaContratistaController::class,'indexAlphabetically']);
 
 
 
@@ -149,7 +149,7 @@ Route::group([
     Route::put('etiquetas_contratistas/put/{id}',[EtiquetaContratistaController::class,'update']);
     Route::delete('etiquetas_contratistas/delete/{id}',[EtiquetaContratistaController::class,'destroy']);
     Route::get('etiquetas_contratistas/equipos',[EtiquetaContratistaController::class,'empresa_equipos']);
-    Route::post('etiquetas_contratistas/import',[EtiquetaContratistaController::class,'importar']);
+    Route::get('etiquetas_contratistas/equipos_general', [EtiquetaContratistaController::class, 'grafica_grande']);
 
 
     //Usuarios Penmont

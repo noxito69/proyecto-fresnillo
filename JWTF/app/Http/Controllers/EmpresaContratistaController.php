@@ -94,4 +94,14 @@ class EmpresaContratistaController extends Controller
 
         return response()->json(['message' => 'Empresa contratista deleted successfully'], 200);
     }
+
+    public function indexAlphabetically()
+{
+    $empresasContratistas = EmpresaContratista::orderBy('nombre', 'asc')->get();
+
+    return response()->json([
+        'message' => 'Empresas contratistas retrieved successfully',
+        'data' => $empresasContratistas
+    ], 200);
+}
 }

@@ -69,6 +69,7 @@
                           <tbody>
                             <tr *ngFor="let etiqueta of filteredEtiquetas">
                               <td>{{ etiqueta.id }}</td>
+                              <td>{{etiqueta.usuario}}</td>
                               <td>{{ etiqueta.fecha_vigencia }}</td>
                               <td>{{ etiqueta.created_at }}</td>
                               <td>
@@ -138,7 +139,7 @@
                     <div class="mb-3">
                         <label for="marca" class="form-label">Marca</label>
                         <select class="form-select" id="marca" [(ngModel)]="marca">
-                            <option selected disabled>Seleccione la Marca</option>
+                            <option selected value="0" disabled>Seleccione la Marca</option>
                             <option  *ngFor="let marca of marcas">{{marca.nombre}}</option>
 
                         </select>
@@ -170,7 +171,7 @@
                     <div class="mb-3">
                         <label for="empresa" class="form-label">Empresa</label>
                         <select class="form-select" id="marca" [(ngModel)]="empresa" >
-                            <option selected disabled>Seleccione la Empresa</option>
+                            <option selected value="0" disabled>Seleccione la Empresa</option>
                             <option  *ngFor="let empresa of empresas">{{empresa.nombre}}</option>
 
                         </select>
@@ -201,7 +202,7 @@
 
         <section class="form-level form-horizontal">
             <div id="etiqueta" #etiqueta>
-                <img src="../../assets/Saved Pictures/EtiquetaEmpleado (2).png" alt="Etiqueta" id="etiquetaImage">
+                <img src="../../assets/Saved Pictures/etiqueta.png" alt="Etiqueta" id="etiquetaImage">
                 <div class="index">#{{numero_etiqueta}}</div>
                 <div class="nombre">{{usuario}}</div>
                 <div class="empresa">{{empresa}}</div>

@@ -164,6 +164,29 @@ export class NewEtiquetaComponent implements AfterViewInit {
       return;
     }
 
+    if (this.marca === 0) {
+      Swal.fire("Error", 'Verifica la marca', 'error');
+      return;
+    }
+
+    if (this.modelo === '') {
+      Swal.fire("Error", 'Verifica el modelo', 'error');
+      return;
+    }
+
+    if (this.numero_serie === '') {
+      Swal.fire("Error", 'Verifica el número de serie', 'error');
+      return;
+    }
+
+    if(this.empresa === 0) {
+
+      Swal.fire("Error", 'Verifica la empresa', 'error');
+      return;
+
+    }
+    
+
     const url = 'http://127.0.0.1:8000/api/auth/etiquetas_contratistas/post';
     const body = {
       numero_etiqueta: this.numero_etiqueta,
@@ -188,12 +211,19 @@ export class NewEtiquetaComponent implements AfterViewInit {
 
       },
       error => {
-        const errorMessage = error.error && error.error.message
-          ? Object.values(error.error.message).join(' ')
-          : 'Ocurrió un error al crear la etiqueta.';
-        Swal.fire('Error', errorMessage, 'error');
-      }
-    );
+        let errorMessage = '';
+        for (let key in error.error.message) {
+            errorMessage += error.error.message[key] + ' ';
+        }
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: errorMessage,
+        });
+    }
+  
+  );
+    
   }
 
   generatePdf() {

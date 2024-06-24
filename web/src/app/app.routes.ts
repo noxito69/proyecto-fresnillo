@@ -20,4 +20,7 @@ export const routes: Routes = [
 {path:'new-accesorios', loadComponent: () => import('./new-accesorios/new-accesorios.component').then(na => na.NewAccesoriosComponent)},
 {path:'llegada-accesorios', loadComponent: () => import('./llegada-accesorios/llegada-accesorios.component').then(la => la.LlegadaAccesoriosComponent)},
 {path:'salida-accesorio', loadComponent: () => import('./salida-accesorio/salida-accesorio.component').then(sa => sa.SalidaAccesorioComponent)},
+{path:'grafica-contratistas', loadComponent: () => import('./grafica-contratistas/grafica-contratistas.component').then(gc => gc.GraficaContratistasComponent)},
+{path:'chart-js', loadComponent: () => import('./chart-js/chart-js.component').then(cj => cj.ChartJsComponent)},
+
 ];
