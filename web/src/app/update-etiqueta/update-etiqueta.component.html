@@ -56,8 +56,10 @@
                 <div class="form-level form-horizontal">
                     <div class="mb-3">
                         <label for="numeroEtiqueta" class="form-label">Número de Etiqueta</label>
-                        <input type="number" class="form-control" id="numeroEtiqueta" placeholder="Número de Etiqueta">
-                    </div>
+                        <input disabled  type="number" class="form-control" [(ngModel)]="numero_etiqueta" id="numeroEtiqueta" placeholder="Número de Etiqueta">
+                        <!-- Botón para buscar la etiqueta -->
+                      
+                      </div>
                     <div class="mb-3">
                         <label for="tipoEquipo" class="form-label">Tipo de Equipo</label>
                         <select class="form-select" id="tipoEquipo" [(ngModel)]="tipo_equipo">
@@ -88,7 +90,7 @@
                 <div class="form-level form-horizontal">
                     <div class="mb-3">
                         <label for="numeroSerie" class="form-label">Número de Serie</label>
-                        <input type="text" class="form-control" id="numeroSerie" placeholder="Número de Serie" [(ngModel)]="numero_serie">
+                        <input type="text" class="form-control" id="numeroSerie" placeholder="Número de Serie" [(ngModel)]="numero_serie" disabled>
                     </div>
                 </div>
             
@@ -96,7 +98,7 @@
                 <div class="form-level form-horizontal">
                     <div class="mb-3">
                         <label for="usuario" class="form-label">Usuario</label>
-                        <input type="text" class="form-control" id="usuario" placeholder="Usuario" [(ngModel)]="usuario">
+                        <input type="text" class="form-control" id="usuario" placeholder="Usuario" [(ngModel)]="usuario" maxlength="32">
                     </div>
                 </div>
             
@@ -109,7 +111,7 @@
                             <option  *ngFor="let empresa of empresas">{{empresa.nombre}}</option>
                             
                         </select>
-                    </div>
+                    </div> 
                 </div>
             
        
@@ -124,20 +126,54 @@
 
                     <div class="mb-3">
                         <label for="fechaActual" class="form-label">Fecha actual</label>
-                        <input type="date" class="form-control" id="fechaActual" [(ngModel)]="fecha_actual">
+                        <input disabled type="date" class="form-control" id="fechaActual" [(ngModel)]="fecha_actual">
                     </div>
                 </div>
             
                 <!-- Octavo Nivel -->
                 <div class="form-level form-level-buttons">
                     
-                    <button type="button" class="btn btn-warning" (click)="ActualizarEtiqueta()">Actualizar Etiqueta</button>
+                 
+                    <button type="button" class="btn btn-danger" (click)="navigateTo('/new-etiqueta')">Volver</button>
+
                     
                 </div>
             </div>
         </div>
 
         </section>
+
+        <br><br>
+
+       
+
+
+            <section class="form-level form-horizontal">
+                <div id="etiqueta" #etiqueta>
+                    <img src="../../assets/Saved Pictures/etiqueta.png" alt="Etiqueta" id="etiquetaImage">
+                    <div class="index">#{{numero_etiqueta}}</div>
+                    <div class="nombre">{{usuario}}</div>
+                    <div class="empresa">{{empresa}}</div>
+                    <div class="marca">{{marca}}</div>
+                    <div class="modelo">{{modelo}}</div>
+                    <div class="numero_serie">{{numero_serie}}</div>
+                    <div class="vigencia">{{fecha_vigencia}}</div>
+                    <div class="tipo_equipo">{{tipo_equipo}}</div>
+    
+                </div>
+
+                
+            </section>
+
+            <section class="form-level form-horizontal"> 
+                
+                <button type="button" class="btn btn-warning" (click)="actualizarEtiqueta()" >Actualizar Etiqueta</button> 
+            
+            
+            </section>
+
+
+        
 
 
     </app-layout>

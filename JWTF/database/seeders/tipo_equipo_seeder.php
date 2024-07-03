@@ -17,17 +17,47 @@ class tipo_equipo_seeder extends Seeder
     {
         TipoEquipo::create([
 
-            'nombre'=>'Laptop',
+            'nombre'=>'LAPTOP',
         ]);
 
         TipoEquipo::create([
 
-            'nombre'=>'Ipad',
+            'nombre'=>'DISCO DURO',
         ]);
 
         TipoEquipo::create([
 
-            'nombre'=>'Celular',
+            'nombre'=>'TABLETA',
+        ]);
+
+        TipoEquipo::create([
+
+            'nombre'=>'BLASTING',
+        ]);
+
+        TipoEquipo::create([
+
+            'nombre'=>'DIGITAL LOG',
+        ]);
+
+        TipoEquipo::create([
+
+            'nombre'=>'GPS',
+        ]);
+
+        TipoEquipo::create([
+
+            'nombre'=>'DRONE',
+        ]);
+
+        TipoEquipo::create([
+
+            'nombre'=>'CAMARA',
+        ]);
+
+        TipoEquipo::create([
+
+            'nombre'=>'HAND HELD',
         ]);
 
         

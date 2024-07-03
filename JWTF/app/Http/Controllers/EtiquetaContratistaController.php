@@ -75,24 +75,48 @@ class EtiquetaContratistaController extends Controller
 
     public function update(Request $request, $id)
     {
+        $messages = [
+            'numero_etiqueta.required' => 'El número de etiqueta es requerido.',
+            'modelo.required' => 'El modelo es requerido.',
+            'tipo_equipo.required' => 'El tipo de equipo es requerido.',
+            'marca.required' => 'La marca es requerida.',
+            'numero_serie.required' => 'El número de serie es requerido.',
+            'usuario.required' => 'El usuario es requerido.',
+            'empresa.required' => 'La empresa es requerida.',
+            'fecha_vigencia.required' => 'La fecha de vigencia es requerida.',
+            'fecha_vigencia.date' => 'La fecha de vigencia debe ser una fecha válida.',
+            'numero_serie.unique' => 'El número de serie ya existe en otro registro.',
+            'numero_etiqueta.unique' => 'El número de etiqueta ya existe en otro registro.',
+        ];
+
+        $request->validate([
+            'numero_etiqueta' => 'required|unique:etiquetas_contratistas,numero_etiqueta,' . $id . '|max:255',
+            'modelo' => 'required|max:255',
+            'tipo_equipo' => 'required|max:255',
+            'marca' => 'required|max:255',
+            'numero_serie' => 'required|unique:etiquetas_contratistas,numero_serie,' . $id . '|max:255',
+            'usuario' => 'required|max:255',
+            'empresa' => 'required|max:255',
+            'fecha_vigencia' => 'required|date',
+        ], $messages);
+
         $etiquetaContratista = EtiquetaContratista::find($id);
 
-        if($etiquetaContratista)
-        {
-            $etiquetaContratista->update($request->all());
-            return response()->json([
-                'message' => 'EtiquetaContratista updated successfully',
-                'data' => $etiquetaContratista
-            ]);
+        if (!$etiquetaContratista) {
+            return response()->json(['message' => 'EtiquetaContratista not found'], 404);
         }
-        else
-        {
-            return response()->json([
-                'message' => 'EtiquetaContratista not found'
-            ], 404);
-        }
+
+        $etiquetaContratista->update($request->all());
+
+        return response()->json([
+            'message' => 'EtiquetaContratista updated successfully',
+            'data' => $etiquetaContratista
+        ]);
     }
 
+
+
+    
     public function destroy($id)
     {
         $etiquetaContratista = EtiquetaContratista::find($id);
@@ -164,6 +188,27 @@ class EtiquetaContratistaController extends Controller
 
         return $companies;
 }
+
+
+
+public function getbynumer($numero_etiqueta)
+{
+    $etiquetaContratista = EtiquetaContratista::where('numero_etiqueta', $numero_etiqueta)->first();
+
+    if($etiquetaContratista)
+    {
+        return response()->json($etiquetaContratista);
+    }
+    else
+    {
+        return response()->json([
+            'message' => 'EtiquetaContratista not found'
+        ], 404);
+    }
+}
+
+
+
    
 
 

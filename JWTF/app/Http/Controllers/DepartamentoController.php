@@ -62,13 +62,13 @@ class DepartamentoController extends Controller
             'nombre.required' => 'El nombre es requerido.',
             'nombre.unique' => 'Este nombre ya existe.',
             'nombre.max' => 'El nombre no debe exceder los 255 caracteres.',
-            'centro_costos_id.required' => 'El ID del centro de costos es requerido.',
-            'centro_costos_id.exists' => 'El ID del centro de costos no existe.',
+            'centro_costos.required' => 'El ID del centro de costos es requerido.',
+            
         ];
 
         $validated = Validator::make($request->all(), [
             'nombre' => 'required|unique:departamentos,nombre,' . $id . '|max:255',
-            'centro_costos_id' => 'required|exists:centro_costos,id',
+            'centro_costos' => 'required',
         ], $messages);
 
         if($validated->fails()){

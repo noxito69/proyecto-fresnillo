@@ -21,7 +21,7 @@ class HistorialImpresoraSeeder extends Seeder
             'cantidad' => 10,
             'departamento_id' => 1,
             'impresora_id' => 1,
-            'centro_costos_id' => 1
+            'centro_costos' => 1
         ]);
 
         HistorialImpresora::create([
@@ -29,7 +29,7 @@ class HistorialImpresoraSeeder extends Seeder
             'cantidad' => 5,
             'departamento_id' => 2,
             'impresora_id' => 2,
-            'centro_costos_id' => 2
+            'centro_costos' => 2
         ]);
     }
 }

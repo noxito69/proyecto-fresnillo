@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { NgFor } from '@angular/common';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 
 
@@ -63,7 +63,7 @@ export class NewEtiquetaPNMNTComponent {
 
   @ViewChild('search-tag') searchInput!: ElementRef;
 
-  constructor(private http:HttpClient, private router: Router) {
+  constructor(private http:HttpClient, private router: Router,private route: ActivatedRoute) {
 
     const date = new Date();
     date.setFullYear(date.getFullYear() + 1);

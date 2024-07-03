@@ -19,6 +19,8 @@ class EtiquetasEmpleadosController extends Controller
         $messages = [
 
 
+
+            'numero_etiqueta' => 'El número de etiqueta es requerido.',
             'modelo.required' => 'El modelo es requerido.',
             'numero_serie.required' => 'El número de serie es requerido.',
             'numero_serie.string' => 'El número de serie debe ser una cadena de texto.',
@@ -36,6 +38,8 @@ class EtiquetasEmpleadosController extends Controller
         
         $validated = Validator::make($request->all(), [
 
+            'numero_etiqueta' => 'required|integer',
+            'ip' => 'nullable|string', 
             'modelo' => 'required|string',
             'numero_serie' => 'required|string',
             'usuario' => 'required|string',
@@ -45,6 +49,7 @@ class EtiquetasEmpleadosController extends Controller
             'anexo' => 'required|string',
             'fecha_vigencia' => 'required|date',
             'fecha_actual' => 'required|date'
+
         ], $messages);
 
         if($validated->fails()){
@@ -79,7 +84,7 @@ class EtiquetasEmpleadosController extends Controller
             $messages = [
 
            
-              
+                'numero_etiqueta' => 'El número de etiqueta es requerido.',
                 'modelo.required' => 'El modelo es requerido.',
                 'numero_serie.required' => 'El número de serie es requerido.',
                 'numero_serie.string' => 'El número de serie debe ser una cadena de texto.',
@@ -96,7 +101,10 @@ class EtiquetasEmpleadosController extends Controller
             ];
 
             $validated = Validator::make($request->all(), [
-            
+
+
+                'numero_etiqueta' => 'required|integer',
+                'ip' => 'nullable|string',
                 'modelo' => 'required|string', // Agregado
                 'numero_serie' => 'required|string|unique:etiquetas_empleados,numero_serie,'.$etiquetaEmpleado->id,
                 'usuario' => 'required|string',

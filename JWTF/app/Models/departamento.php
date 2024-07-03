@@ -9,12 +9,8 @@ class departamento extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nombre', 'centro_costos_id'];
+    protected $fillable = ['nombre', 'centro_costos'];
 
-    public function centroCosto()
-    {
-        return $this->belongsTo(CentroCosto::class);
-    }
 
     public function usuariosPenmont()
     {

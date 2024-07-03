@@ -27,7 +27,7 @@ class HistorialController extends Controller
     {
         $messages = [
             'num_empleado.required' => 'El número de empleado es requerido.',
-            'num_empleado.numeric' => 'El número de empleado debe ser un número.',
+         
             'usuario.required' => 'El usuario es requerido.',
             'articulo_id.required' => 'El ID del artículo es requerido.',
             'articulo_id.numeric' => 'El ID del artículo debe ser un número.',
@@ -38,7 +38,7 @@ class HistorialController extends Controller
         ];
 
         $validate = Validator::make($request->all(), [
-            'num_empleado' => 'required|numeric',
+            'num_empleado' => 'required|string',
             'usuario' => 'required',
             'articulo_id' => 'required|numeric',
             'cantidad' => 'required|numeric',
@@ -98,7 +98,7 @@ class HistorialController extends Controller
                 'articulo_id' => 'required|numeric',
                 'cantidad' => 'required|numeric',
                 'departamento_id' => 'required|numeric',
-                'centro_costos_id' => 'required|numeric'
+                'centro_costos' => 'required|string'
             ]);
 
             $historial->update($request->all());

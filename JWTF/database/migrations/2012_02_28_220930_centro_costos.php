@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('centro_costos', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre',6)->unique()->nullable(false);
+            $table->string('nombre',7)->unique()->nullable(false);
             $table->timestamps();
         });
     }

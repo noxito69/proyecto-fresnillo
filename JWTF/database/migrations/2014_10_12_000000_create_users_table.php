@@ -18,8 +18,7 @@ return new class extends Migration
             $table->string('num_empleado');
             $table->string('email')->unique();
             $table->string('name',30);
-            $table->foreignId('departamento_id')->constrained('departamentos')->onDelete('cascade');
-
+            
             $table->timestamp('email_verified_at')->nullable();
             $table->unsignedBigInteger('rol_id')->default(3);
             $table->foreign('rol_id')->references('id')->on('roles');

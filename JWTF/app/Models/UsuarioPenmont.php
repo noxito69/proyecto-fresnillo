@@ -11,16 +11,11 @@ class UsuarioPenmont extends Model
     protected $table = 'usuarios_penmont';
     use HasFactory;
 
-    protected $fillable = ['num_empleado', 'email', 'nombre', 'departamento_id', 'centro_costos_id'];
+    protected $fillable = ['num_empleado', 'email', 'nombre', 'departamento_id', 'centro_costos'];
 
     public function departamento()
     {
         return $this->belongsTo(Departamento::class);
-    }
-
-    public function centroCosto()
-    {
-        return $this->belongsTo(CentroCosto::class, 'centro_costos_id');
     }
 
     public function etiquetasEmpleados()

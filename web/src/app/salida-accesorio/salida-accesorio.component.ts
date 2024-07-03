@@ -41,18 +41,61 @@ export class SalidaAccesorioComponent {
 
 
 
+  ResetInputs() {    
+
+
+    this.numEmpleado = '';
+    this.nombre = '';
+    this.centroCostos = '';
+    this.departamento = '';
+    this.codigoBarras = '';
+    this.cantidad = 0;
+    this.marca = '';
+    this.x = '';
+    this.articulo = '';
+    this.isBarcodeHidden = true;
+    this.isTableHidden = true;
+    this.isDocHidden = true;
+    this.articulosIds = [];
+
+
+
+    }
+
 
   buscarEmpleado() {
-    this.http.get(`http://127.0.0.1:8000/api/auth/usuarios_penmont/getByEmployeeNumber/${this.numEmpleado}`).subscribe((data: any) => {
-      this.nombre = data[0].nombre;
-      this.centroCostos = data[0].centro_costo.nombre;
-      this.departamento = data[0].departamento.nombre;
-      this.isBarcodeHidden = false;
-      this.x = data[0].nombre;
+    if (!this.numEmpleado) {
+      Swal.fire('Error', 'Favor de escribir un número de empleado', 'warning');
+      return;
+    }
+    this.http.get(`http://127.0.0.1:8000/api/auth/usuarios_penmont/getByEmployeeNumber/${this.numEmpleado}`).subscribe({
+
+      
+
+      
+      next: (data: any) => {
+        // Si se encuentra el empleado, continúa con la asignación de datos
+        this.nombre = data.nombre;
+        this.centroCostos = data.centro_costos;
+        this.departamento = data.departamento;
+        this.isBarcodeHidden = false;
+        this.x = data.nombre;
+      },
+      error: (error) => {
+        let errorMessage = 'Ocurrió un error inesperado'; // Mensaje por defecto
+        if (error.status === 404) {
+          // Error específico cuando el empleado no se encuentra
+          errorMessage = error.error.message;
+        } else if (error.status === 400) {
+          // Error de validación, muestra el primer mensaje de error disponible
+          const errors = error.error;
+          errorMessage = errors[Object.keys(errors)[0]][0]; // Obtiene el primer mensaje de error de la respuesta
+        }
+        Swal.fire('Error', errorMessage, 'error');
+        this.isBarcodeHidden = true;
+      }
     });
   }
-
-  
   getAccesorioByBarCode() {
 
     if(this.codigoBarras == ''){
@@ -65,7 +108,7 @@ export class SalidaAccesorioComponent {
     console.log({isBarCodeAdded})
 
     if (isBarCodeAdded) {
-      Swal.fire('Error', 'El código de barras ya ha sido agregado', 'error'); // Muestra un mensaje de error
+      Swal.fire('Error', 'El código de barras ya ha sido agregado', 'error'); 
       }
       else {
       this.http.get(`http://127.0.0.1:8000/api/auth/accesorios/getByBarCode/${this.codigoBarras}`).subscribe((data: any) => {

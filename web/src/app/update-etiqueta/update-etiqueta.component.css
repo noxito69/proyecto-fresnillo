@@ -35,3 +35,72 @@
     object-fit: cover; /* Asegura que las imágenes se escalen correctamente */
   }
   
+
+  
+.carousel .carousel-item img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover; /* Asegura que las imágenes se escalen correctamente */
+}
+
+
+#etiqueta {
+  position: relative;
+}
+
+.nombre, .empresa, .marca, .modelo, .numero_serie, .vigencia, .tipo_equipo, .index {
+  position: absolute;
+  font-family: 'Roboto Mono', monospace;
+}
+
+.nombre {
+  top: 121px;
+  left: 294px;
+  font-size: 41px;
+}
+
+.index {
+  top: 35px;
+  left: 31px;
+  font-size: 48px;
+}
+
+.empresa {
+  top: 186px;
+  left: 294px;
+  font-size: 48px;
+}
+
+.marca {
+  top: 256px;
+  left: 294px;
+  font-size: 48px;
+}
+
+.modelo {
+  top: 323px;
+  left: 294px;
+  font-size: 48px;
+
+}
+
+.numero_serie {
+  top: 385px;
+  left: 294px;
+  font-size: 48px;
+}
+
+.vigencia {
+
+  top: 455px;
+  left: 294px;
+  font-size: 48px;
+
+}
+
+.tipo_equipo{
+
+  top: 35px;
+  left: 480px;
+  font-size: 48px;
+}

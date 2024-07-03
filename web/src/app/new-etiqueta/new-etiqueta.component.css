@@ -31,6 +31,7 @@ th, td {
   width: 100%;
 }
 
+
 .carousel .carousel-item img {
   height: 100%;
   width: 100%;
@@ -48,9 +49,9 @@ th, td {
 }
 
 .nombre {
-  top: 116px;
+  top: 121px;
   left: 294px;
-  font-size: 48px;
+  font-size: 41px;
 }
 
 .index {

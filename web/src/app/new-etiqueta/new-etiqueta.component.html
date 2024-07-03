@@ -37,6 +37,11 @@
             gap: 20px;
             justify-content: center;
         }
+
+        .table-container {
+            max-height: 900px; /* Ajusta según tus necesidades */
+            overflow-y: auto;
+          }
     </style>
 </head>
 <body>
@@ -46,34 +51,33 @@
 
         <section>
 
-            <!-- Modal DBexcel -->
-            <div class="modal fade right justify-content-center" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <!-- Modal -->
+            <div class="modal fade right justify-content-center; modal-dialog-scrollable" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
                 <div class="modal-content">
                   <div class="modal-header">
                     <h4 class="modal-title" id="exampleModalLabel">Seleccionar etiqueta a editar</h4>
-                    <input type="text" name="" id="search-tag" #searchInput class="form-control ms-auto" style="width: 200px;" [(ngModel)]="search" placeholder="Buscar etiqueta...">
+                    <input type="text" name="" id="search-tag" #searchInput class="form-control ms-auto" style="width: 300px;"  placeholder="Buscar etiqueta...">
                   </div>
-                  <div class="modal-body d-flex justify-content-center align-items-center">
+                  <div class="modal-body justify-content-center align-items-center">
                     <div class="row g-3">
                       <div class="col-md-12">
-                        <table class="table">
+                        <table class="table; table-container">
                           <thead>
                             <tr>
                               <th>Numero etiqueta</th>
-                              <th>Fecha de vigencia</th>
-                              <th>Fecha de creación</th>
+                              <th>Nombre</th>
                               <th>Editar</th>
                             </tr>
                           </thead>
                           <tbody>
-                            <tr *ngFor="let etiqueta of filteredEtiquetas">
-                              <td>{{ etiqueta.id }}</td>
+                            <tr *ngFor="let etiqueta of etiquetas">
+                              <td>{{etiqueta.numero_etiqueta}}</td>
                               <td>{{etiqueta.usuario}}</td>
-                              <td>{{ etiqueta.fecha_vigencia }}</td>
-                              <td>{{ etiqueta.created_at }}</td>
+                           
+                            
                               <td>
-                                <button data-bs-dismiss="modal" class="btn btn-success" [routerLink]="['/update-etiqueta', etiqueta.id]">
+                                <button data-bs-dismiss="modal" class="btn btn-success" [routerLink]="['/update-etiqueta', etiqueta.numero_etiqueta]">
                                   <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                     <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
@@ -160,7 +164,7 @@
 
                     <div class="mb-3">
                         <label for="usuario" class="form-label">Usuario</label>
-                        <input type="text" class="form-control" id="usuario" placeholder="Usuario" [(ngModel)]="usuario">
+                        <input type="text" class="form-control" id="usuario" placeholder="Usuario" [(ngModel)]="usuario" maxlength="34">
                     </div>
                 </div>
 

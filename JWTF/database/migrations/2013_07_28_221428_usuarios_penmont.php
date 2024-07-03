@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('num_empleado')->unique();
             $table->string('email')->unique();
             $table->string('nombre');
-            $table->foreignId('centro_costos_id')->constrained('centro_costos')->onDelete('cascade');
-            $table->foreignId('departamento_id')->constrained('departamentos')->onDelete('cascade');
+            $table->string('centro_costos');
+            $table->string('departamento');
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('usuarios_penmont');
     }
 };

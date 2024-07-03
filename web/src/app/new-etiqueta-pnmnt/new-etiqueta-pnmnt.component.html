@@ -47,13 +47,7 @@
 
         <section>
 
-           
-
-          
-
             <!-- Modal DBexcel -->
-
-
             <div class="modal fade right justify-content-center" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
                   <div class="modal-content">
@@ -68,16 +62,15 @@
                             <thead>
                               <tr>
                                 <th>Numero etiqueta</th>
-                                <th>Fecha de vigencia</th>
-                                <th>Fecha de creación</th>
+                                <th>Nombre</th>
                                 <th>Editar</th>
                               </tr>
                             </thead>
                             <tbody>
                               <tr *ngFor="let etiqueta of filteredEtiquetas">
                                 <td>{{ etiqueta.id }}</td>
-                                <td>{{ etiqueta.fecha_vigencia }}</td>
-                                <td>{{ etiqueta.created_at }}</td>
+                                <td>{{ etiqueta.nombre }}</td>
+                              
                                 <td>
                                   <button data-bs-dismiss="modal" class="btn btn-success" [routerLink]="['/update-etiqueta-pnmnt', etiqueta.id]">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -167,6 +160,8 @@
                         </select>
                     </div>
 
+
+             
                    
 
 

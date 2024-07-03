@@ -206,5 +206,7 @@ class CentroCostoSeeder extends Seeder
             'nombre' => '201501'
            
         ]);
+
+       
     }
 }

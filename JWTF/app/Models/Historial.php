@@ -14,9 +14,11 @@ class Historial extends Model
 
     protected $fillable = ['num_empleado', 'usuario', 'articulo_id', 'cantidad', 'departamento', 'centro_costos'];
 
-    public function usuarioPenmont()
+
+
+    public function usuario()
     {
-        return $this->belongsTo(UsuarioPenmont::class, 'num_empleado', 'num_empleado');
+        return $this->belongsTo(UsuarioPenmont::class, 'num_empleado');
     }
 
     public function accesorio()

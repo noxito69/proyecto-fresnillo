@@ -40,7 +40,7 @@ export class ChartJsComponent {
             ...this.chartOptions, // Copia las propiedades existentes
             data: [{ // Asegúrate de mantener la estructura esperada por CanvasJS
             
-              type: "doughnut",
+              type: "pie",
               showInLegend: true,
               innerRadius: "65%",
               yValueFormatString: "#,###",
@@ -92,7 +92,7 @@ export class ChartJsComponent {
     },
     data: [{
       showInLegend: true,
-      type: "pie",
+      type: "doughnut",
       
       innerRadius: "65%",
       yValueFormatString: "#,##'",

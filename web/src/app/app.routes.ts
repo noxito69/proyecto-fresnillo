@@ -11,7 +11,7 @@ export const routes: Routes = [
 {path:'new-etiqueta', loadComponent: () => import('./new-etiqueta/new-etiqueta.component').then(n => n.NewEtiquetaComponent)},
 {path:'update-etiqueta/:id', loadComponent: () => import('./update-etiqueta/update-etiqueta.component').then(u => u.UpdateEtiquetaComponent)},
 {path:'new-etiqueta-pnmnt', loadComponent: () => import('./new-etiqueta-pnmnt/new-etiqueta-pnmnt.component').then(ne => ne.NewEtiquetaPNMNTComponent)},
-{path:'update-etiqueta-pnmnt', loadComponent: () => import('./update-etiqueta-pnmnt/update-etiqueta-pnmnt.component').then(ue => ue.UpdateEtiquetaPNMNTComponent)},
+{path:'update-etiqueta-pnmnt/:id', loadComponent: () => import('./update-etiqueta-pnmnt/update-etiqueta-pnmnt.component').then(ue => ue.UpdateEtiquetaPNMNTComponent)},
 {path:'new-departamento', loadComponent: () => import('./new-departamento/new-departamento.component').then(nd => nd.NewDepartamentoComponent)},
 {path:'new-user-pnmnt', loadComponent: () => import('./new-user-pnmnt/new-user-pnmnt.component').then(nu => nu.NewUserPnmntComponent)},
 {path:'register', loadComponent: () => import('./register/register.component').then(r => r.RegisterComponent)},

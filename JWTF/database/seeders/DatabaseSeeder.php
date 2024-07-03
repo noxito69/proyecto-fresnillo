@@ -31,19 +31,19 @@ class DatabaseSeeder extends Seeder
             CentroCostoSeeder::class,
             DepartamentoSeeder::class,
             AccesorioSeeder::class,
-            AnexoSeeder::class,
+            #AnexoSeeder::class,
             tipo_equipo_seeder::class,
             ModeloSeeder::class,
-            marca_seeder::class,
+            #marca_seeder::class,
             #EmpresaC::class,
-            UserPnmntSeeder::class,
+            #UserPnmntSeeder::class,sasssss
             #ECseeder::class,
-            EtiEmpleado::class,
-            Hseeder::class,
-            ImpresoraSeeder::class,
-            TonnerSeeder::class,
-            HistorialImpresoraSeeder::class,
-            HistorialTonnerSeeder::class
+            #EtiEmpleado::class,
+            #Hseeder::class,
+            #ImpresoraSeeder::class,
+            #TonnerSeeder::class,
+            #HistorialImpresoraSeeder::class,
+            #HistorialTonnerSeeder::class
 
 
         ]);

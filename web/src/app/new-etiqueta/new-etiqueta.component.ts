@@ -65,7 +65,7 @@ export class NewEtiquetaComponent implements AfterViewInit {
       };
     }
 
-    if (this.searchInput) {
+    /*if (this.searchInput) {
       const searchElement = this.searchInput.nativeElement as HTMLInputElement;
       searchElement.addEventListener('keyup', () => {
         const value = searchElement.value.toLowerCase();
@@ -74,7 +74,7 @@ export class NewEtiquetaComponent implements AfterViewInit {
           etiqueta.id.toLowerCase().includes(value)
         );
       });
-    }
+    }*/
   }
 
   exportToExcel() {
@@ -107,6 +107,8 @@ export class NewEtiquetaComponent implements AfterViewInit {
       }
     );
   }
+
+  
 
   getTags() {
     this.http.get("http://127.0.0.1:8000/api/auth/etiquetas_contratistas/index").subscribe(
@@ -201,7 +203,7 @@ export class NewEtiquetaComponent implements AfterViewInit {
     };
 
     this.http.post(url, body).subscribe(
-      response => {
+      response => { 
         this.generatePdf();
         Swal.fire('¡Éxito!', 'Etiqueta creada con éxito.', 'success');
 

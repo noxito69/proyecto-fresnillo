@@ -81,7 +81,6 @@ Route::group([
 
 
 
-
     //accesorios
     Route::get('accesorios/index', [AccesorioController::class, 'index']);
     Route::post('accesorios/post', [AccesorioController::class, 'store']);
@@ -150,6 +149,7 @@ Route::group([
     Route::delete('etiquetas_contratistas/delete/{id}',[EtiquetaContratistaController::class,'destroy']);
     Route::get('etiquetas_contratistas/equipos',[EtiquetaContratistaController::class,'empresa_equipos']);
     Route::get('etiquetas_contratistas/equipos_general', [EtiquetaContratistaController::class, 'grafica_grande']);
+    Route::get('etiquetas_contratistas/getByNumber/{num_etiqueta}', [EtiquetaContratistaController::class, 'getbynumer']);
 
 
     //Usuarios Penmont
