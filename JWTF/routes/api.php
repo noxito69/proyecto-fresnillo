@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RoleController;
 use App\Mail\ValidatorEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -58,11 +59,9 @@ Route::group([
     Route::get('activate/{user}', 'App\Http\Controllers\AuthController@activate')->name('activate')->middleware('signed');
 
     Route::get('get',[UserController::class,'index']);
-    Route::post('post',[UserController::class,'store'])->middleware('authrole2');
+    Route::post('post',[UserController::class,'store']);
     Route::delete('delete/{id}',[UserController::class,'destroy'])->middleware('authrole')->where('id','[0-9]+');
     Route::put('put/{id}',[UserController::class,'update'])->middleware('authrole2')->where('id','[0-9]+');
-
-
 
     //centro de costos
     Route::get('centro_costos/index', [CentroCostoController::class, 'index']);
@@ -211,9 +210,8 @@ Route::group([
     Route::put('historial_impresoras/put/{id}',[HistorialImpresorasController::class,'update']);
     Route::delete('historial_impresoras/delete/{id}',[HistorialImpresorasController::class,'destroy']);
 
-
-
-
+    //Roles
+    Route::get('roles/index',[RoleController::class, 'index']);
 
 });
 

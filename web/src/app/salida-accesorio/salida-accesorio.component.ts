@@ -41,7 +41,7 @@ export class SalidaAccesorioComponent {
 
 
 
-  ResetInputs() {    
+  ResetInputs() {
 
 
     this.numEmpleado = '';
@@ -70,9 +70,9 @@ export class SalidaAccesorioComponent {
     }
     this.http.get(`http://127.0.0.1:8000/api/auth/usuarios_penmont/getByEmployeeNumber/${this.numEmpleado}`).subscribe({
 
-      
 
-      
+
+
       next: (data: any) => {
         // Si se encuentra el empleado, continúa con la asignación de datos
         this.nombre = data.nombre;
@@ -108,7 +108,7 @@ export class SalidaAccesorioComponent {
     console.log({isBarCodeAdded})
 
     if (isBarCodeAdded) {
-      Swal.fire('Error', 'El código de barras ya ha sido agregado', 'error'); 
+      Swal.fire('Error', 'El código de barras ya ha sido agregado', 'error');
       }
       else {
       this.http.get(`http://127.0.0.1:8000/api/auth/accesorios/getByBarCode/${this.codigoBarras}`).subscribe((data: any) => {
@@ -134,7 +134,7 @@ export class SalidaAccesorioComponent {
     }
   }
 
-     
+
 
   incrementarCantidad(codigo: any) {
     // Incrementa la cantidad
@@ -170,7 +170,7 @@ export class SalidaAccesorioComponent {
         const imgWidth = 208;
         const pageHeight = 295;
         const imgHeight = canvas.height * imgWidth / canvas.width;
-        
+
         const contentDataURL = canvas.toDataURL('image/png');
         const pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF
         const position = 0;

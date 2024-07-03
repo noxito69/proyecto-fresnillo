@@ -51,28 +51,35 @@
                 <h1 class="text-center mb-4">Nuevo Usuario TI</h1>
 
                 <!-- Primer Nivel -->
-                <div class="form-level form-horizontal">
+                <div class="form-level form-horizontal d-flex flex-column">
                     <div class="mb-3">
                         <label for="numeroempleado" class="form-label">Numero empleado:</label>
-                        <input type="text" class="form-control" id="numeroEmpleado" placeholder="">
+                        <input type="text" class="form-control" id="numeroEmpleado" [(ngModel)]="numEmpleado" placeholder="">
                     </div>
-
-                </div>
+                  </div>
+                  <button class="btn btn-primary" (click)="buscarEmpleado()">Buscar usuario</button>
 
                 <!-- Segundo Nivel -->
                 <div class="form-level form-horizontal">
 
                     <div class="mb-3">
                         <label for="nombreEmpleado" class="form-label">Nombre empleado:</label>
-                        <input type="text" class="form-control" id="nombreEmpleados" placeholder="">
+                        <input type="text" class="form-control" id="nombreEmpleados" disabled [(ngModel)]="nombre" placeholder="">
                     </div>
+                </div>
+
+                <div class="form-level form-horizontal">
+                  <div class="mb-3">
+                    <label for="" class="form-label">Correo</label>
+                    <input type="email" class="form-control" [(ngModel)]="email" id="email" placeholder="example@gmail.com">
+                  </div>
                 </div>
 
                 <div class="form-level form-horizontal">
 
                     <div class="mb-3">
                         <label for="contraseña" class="form-label">Contraseña:</label>
-                        <input type="password" class="form-control" id="contraseña" placeholder="">
+                        <input type="password" class="form-control" id="contraseña" [(ngModel)]="contrasena" placeholder="">
                     </div>
                 </div>
 
@@ -80,32 +87,25 @@
 
                     <div class="mb-3">
                         <label for="confirmar contraseña" class="form-label">Confirmar Contraseña:</label>
-                        <input type="password" class="form-control" id="confcontraseña" placeholder="">
+                        <input type="password" class="form-control" id="confcontraseña" [(ngModel)]="confirmar_contrasena" placeholder="">
                     </div>
                 </div>
 
                 <div class="form-level form-horizontal">
 
                     <div class="mb-3">
-                        <label for="rol" class="form-label">Rol</label>
-                        <select class="form-select" id="rol">
-                            <option selected disabled>Seleccione un rol</option>
-                            <option value="1">dpto 1</option>
-                            <option value="2">dpto 2</option>
+                        <label for="rol" class="form-label" >Rol</label>
+                        <select class="form-select" id="rol" [(ngModel)]="rol">
+                            <option selected [value]="0" >Seleccione un rol</option>
+                            <option *ngFor="let rol of roles" [value]="rol.id" >{{ rol.rol }}</option>
                         </select>
                     </div>
 
                 </div>
 
-
-
-
-
-
-
                 <!-- Octavo Nivel -->
                 <div class="form-level form-level-buttons">
-                    <button type="button" class="btn btn-primary">Registrar</button>
+                    <button type="button" class="btn btn-primary" (click)="register()" >Registrar</button>
                     <button type="button" class="btn btn-danger">Salir</button>
 
                 </div>

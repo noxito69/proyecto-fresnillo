@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 
-class Rol extends Model
+class Role extends Model
 {
     use HasFactory;
     protected $table='roles';

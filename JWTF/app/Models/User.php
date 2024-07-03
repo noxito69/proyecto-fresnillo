@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use App\Models\Rol;
+use App\Models\Role;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
 
@@ -26,8 +26,8 @@ class User extends Authenticatable implements JWTSubject
         'password',
         'verificacion',
         'num_empleado',
-        'departamento_id'
-        
+        'departamento_id',
+        'num_empleado'
     ];
 
     public function departamento()
@@ -74,12 +74,12 @@ class User extends Authenticatable implements JWTSubject
     }
 
     public function Rol(){
-        return $this->belongsTo(Rol::class,'rol_id');
+        return $this->belongsTo(Role::class,'rol_id');
     }
 
 
 
-   
 
-    
+
+
 }

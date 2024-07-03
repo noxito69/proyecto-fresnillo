@@ -11,21 +11,22 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
-  
+
     public function index()
-    { 
+    {
        return response()->json(["msg"=>"Users finded",
         "data: "=>User::all(),],200);
     }
     public function store(Request $request)
     {
-       
+
         $validate = Validator::make(
             $request->all(),[
                 "name"=>"required|max:30",
                 "email"=>"required|unique:users|email",
-                "role_id"=>"numeric|between:1,3",
-                "password"=>"required|min:8|string"
+                "rol_id"=>"numeric|between:1,4",
+                "password"=>"required|min:8|string",
+                "num_empleado"=> "required"
             ]
         );
 
@@ -39,14 +40,11 @@ class UserController extends Controller
         $user->name=$request->name;
         $user->email=$request->email;
         $user->password=Hash::make($request->password);
-        $user->role_id=$request->get('role_id',3);
+        $user->rol_id=$request->rol_id;
+        $user->num_empleado = $request->num_empleado;
+        $user->is_active = true;
         $user->save();
-        $signedroute = URL::temporarySignedRoute(
-            'activate',
-            now()->addMinutes(10),
-            ['user' => $user->id]
-        );
-        Mail::to($request->email)->send(new ValidatorEmail($signedroute));
+
         return response()->json(["msg"=>"User created, check your email","data"=>$user,],201);
     }
 
@@ -79,7 +77,7 @@ class UserController extends Controller
         return response()->json([
             "msg"   =>"Userd not found"
         ],404);
-        
+
     }
 
     public function destroy(int $id)
@@ -99,7 +97,7 @@ class UserController extends Controller
     {
         $user->is_active=true;
         $user->save();
-        
-      
+
+
     }
 }
