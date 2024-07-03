@@ -40,7 +40,9 @@ use GuzzleHttp\Middleware;
 use App\Http\Controllers\HistorialImpresorasController;
 use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\ModeloController;
+use App\Http\Controllers\ModeloEmpleadoController;
 use App\Http\Controllers\TipoEquipoController;
+use App\Models\ModeloEmpleado;
 
 Route::group([
 
@@ -127,6 +129,15 @@ Route::group([
     Route::delete('modelo/delete/{id}',[ModeloController::class,'destroy']);
 
 
+    //ModeloEmpleado
+
+    Route::get('modelo_empleado/index',[ModeloEmpleadoController::class,'index']);
+    Route::post('modelo_empleado/post',[ModeloEmpleadoController::class,'store']);
+    Route::get('modelo_empleado/get/{id}',[ModeloEmpleadoController::class,'show']);
+    Route::put('modelo_empleado/put/{id}',[ModeloEmpleadoController::class,'update']);
+    Route::delete('modelo_empleado/delete/{id}',[ModeloEmpleadoController::class,'destroy']);
+
+
 
 
     //EmpresaContratista
@@ -167,6 +178,7 @@ Route::group([
     Route::get('etiquetas_empleados/get/{id}',[EtiquetasEmpleadosController::class,'show']);
     Route::put('etiquetas_empleados/put/{id}',[EtiquetasEmpleadosController::class,'update']);
     Route::delete('etiquetas_empleados/delete/{id}',[EtiquetasEmpleadosController::class,'destroy']);
+    Route::get('etiquetas_empleados/getByNumeroEtiqueta/{numero_etiqueta}',[EtiquetasEmpleadosController::class,'getByNumeroEtiqueta']);
 
 
 

@@ -14,7 +14,7 @@ class EtiquetaEmpleado extends Model
     
     use HasFactory;
 
-    protected $fillable = ['numero_serie', 'numero_etiqueta', 'modelo', 'ip','usuario', 'host','marca', 'mac', 'departamento', 'anexo', 'fecha_vigencia','fecha_actual'];
+    protected $fillable = ['numero_serie', 'numero_etiqueta', 'modelo', 'ip','usuario', 'host','marca', 'mac', 'departamento', 'anexo', 'fecha_vigencia','fecha_actual','correo'];
 
 
 }

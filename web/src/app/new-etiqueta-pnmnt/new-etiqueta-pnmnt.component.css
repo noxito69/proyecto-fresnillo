@@ -47,13 +47,13 @@
   }
   
   .nombre {
-    top: 75px;
+    top: 92px;
     left: 294px;
-    font-size: 48px;
+    font-size: 41px;
   }
 
   .host {
-    top: 150px;
+    top: 159px;
     left: 294px;
     font-size: 48px;
   }
@@ -71,7 +71,7 @@
   }
   
   .departamento {
-    top: 226px;
+    top: 235px;
     left: 294px;
     font-size: 48px;
   }
@@ -79,21 +79,21 @@
 
   
   .modelo {
-    top: 295px;
+    top: 310px;
     left: 294px;
     font-size: 48px;
   
   }
   
   .numero_serie {
-    top: 370px;
+    top: 385px;
     left: 294px;
     font-size: 48px;
   }
   
   .vigencia {
   
-    top: 445px;
+    top: 455px;
     left: 294px;
     font-size: 48px;
   

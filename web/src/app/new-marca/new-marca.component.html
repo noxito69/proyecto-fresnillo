@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .form-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .modal.right .modal-dialog {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            margin: 0;
+            transition: transform 0.3s ease-out;
+        }
+        .modal.right .modal-content {
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .modal.right .modal-body {
+            padding: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <app-layout>
+
+      <section>
+
+
+        <div class="modal fade right justify-content-center; modal-dialog-scrollable" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-lg ">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">Seleccionar etiqueta a editar</h4>
+              
+              </div>
+              <div class="modal-body  justify-content-center align-items-center">
+                <div class="row g-3">
+                  <div class="col-md-12">
+
+                    <div class="container mt-5 container-centered">
+                      <div class="container-form">
+                          <h1 class="text-center mb-4">Actualizar </h1>
+                          
+                          <!-- Primer Nivel -->
+                          <div class="form-level form-horizontal">
+                              <div class="mb-3">
+                         
+                                  <input type="text" class="form-control" id="nombre_marca" [(ngModel)]="id" name="nombre_marca" placeholder="" [value]="selectedMarcaId" disabled [hidden]="true">
+                              </div>
+                          </div>
+                      
+                          <!-- Segundo Nivel -->
+                          <div class="form-level form-horizontal">
+                              <div class="mb-3">
+                                  <label for="nombreEmpleado" class="form-label">Nombre Marca</label>
+                                  <input type="text" class="form-control" [(ngModel)]="nombre"   placeholder="" (ngModelChange)="nombre=$event.toUpperCase()">
+                              </div>
+                          </div>
+          
+                          <div class="form-level form-level-buttons">
+                            <button type="button" class="btn btn-warning"(click)="UpdateMarca()">Actualizar Marca</button>
+                        
+
+                        </div>
+          
+                      </div>
+                  </div>
+
+                                      
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+        <div class="modal fade right justify-content-center; modal-dialog-scrollable" id="AddModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-lg ">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">Seleccionar etiqueta a editar</h4>
+              
+              </div>
+              <div class="modal-body  justify-content-center align-items-center">
+                <div class="row g-3">
+                  <div class="col-md-12">
+
+                    <div class="container mt-5 container-centered">
+                      <div class="container-form">
+                          <h1 class="text-center mb-4">Crear Marca Nueva </h1>
+                          
+                        
+                          <!-- Segundo Nivel -->
+                          <div class="form-level form-horizontal">
+                              <div class="mb-3">
+                                  <label for="Nombre marca" class="form-label">Nombre Marca</label>
+                                  <input type="text" class="form-control" id="nombreMarca"  name="nombreMarca" placeholder="" >
+                              </div>
+                          </div>
+          
+                          <div class="form-level form-level-buttons">
+                            <button type="button" class="btn btn-success" >Crear</button>
+                        
+
+                        </div>
+          
+                      </div>
+                  </div>
+
+                                      
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </section>
+
+     
+
+        <br>
+        <section>
+
+          <div class="row g-3">
+
+            <div class="col-md-12">
+
+
+              <table class="table table-bordered" id="data-table">
+                <thead class="table-dark">
+                  <tr>
+                    
+                    <th style="text-align: center;">ID</th>
+                    <th>Nombre</th>
+                    <th>Opciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let marca of marcas">
+                    <td>{{marca.id}}</td>
+                    <td style="text-align: center;">{{marca.nombre}}</td>
+                    <td>
+                      <button type="button" class="btn btn-success"data-bs-toggle="modal" data-bs-target="#AddModal">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="54" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                          <path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z" />
+                          <path d="M15 12h-6" />
+                          <path d="M12 9v6" />
+                        </svg>
+                      </button>
+
+                      <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updateModal" (click)="openEditModal(marca.id)" >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="54" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                          <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
+                          <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
+                          <path d="M16 5l3 3" />
+                        </svg>
+                      </button>
+
+                      <button type="button" class="btn btn-danger">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="54" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                          <path d="M10 10l4 4m0 -4l-4 4" />
+                          <path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z" />
+                        </svg>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+            
+
+
+          </div>
+         
+      </section>
+    </app-layout>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+AY1dYbF2y1Upp6CTF0k6yH66f26X" crossorigin="anonymous"></script>
+</body>
+</html>

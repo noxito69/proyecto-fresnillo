@@ -22,5 +22,6 @@ export const routes: Routes = [
 {path:'salida-accesorio', loadComponent: () => import('./salida-accesorio/salida-accesorio.component').then(sa => sa.SalidaAccesorioComponent)},
 {path:'grafica-contratistas', loadComponent: () => import('./grafica-contratistas/grafica-contratistas.component').then(gc => gc.GraficaContratistasComponent)},
 {path:'chart-js', loadComponent: () => import('./chart-js/chart-js.component').then(cj => cj.ChartJsComponent)},
+{path:'new-marca', loadComponent: () => import('./new-marca/new-marca.component').then(nm => nm.NewMarcaComponent)},
 
 ];

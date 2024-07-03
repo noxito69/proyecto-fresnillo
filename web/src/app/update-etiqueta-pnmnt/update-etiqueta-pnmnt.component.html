@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario por Niveles</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QH6Dwa4PpoZhxTm8nQ+9FdFG9yoQwhh07sCDJ3sPrx0vGQ/5zpyb7ug6NKLe1k/5" crossorigin="anonymous">
+    
     <style>
         .form-level {
             margin-bottom: 20px;
@@ -51,16 +51,26 @@
             <div class="container-form">
                 <h1 class="text-center mb-4">Etiquetas Empleados</h1>
                 
-                <!-- Primer Nivel -->
+               <!-- Primer Nivel -->
                 <div class="form-level form-horizontal">
                     <div class="mb-3">
                         <label for="numeroEtiqueta" class="form-label">Número de Etiqueta</label>
-                        <input type="number" class="form-control" id="numeroEtiqueta" placeholder="Número de Etiqueta">
+                        <input type="number" class="form-control" id="numeroEtiqueta" placeholder="Número de Etiqueta" disabled="true" [(ngModel)]="numero_etiqueta">
                     </div>
-                    <div class="mb-3">
-                        <label for="tipoEquipo" class="form-label">Numero de Serie</label>
-                        <input type="text" class="form-control" id="NodeSerie" placeholder="Numero de serie">
+
+                    <div class="form-level form-horizontal">
+
+                    
+                        <div class="mb-3">
+                            <label for="Ip" class="form-label">Direccion IP</label>
+                            <input type="text" class="form-control" id="Ip" placeholder="Ip" [(ngModel)]="ip">
+                        </div>
+
+
+
                     </div>
+
+                    
                 </div>
             
                 <!-- Segundo Nivel -->
@@ -68,12 +78,12 @@
 
                     <div class="mb-3">
                         <label for="usuario" class="form-label">Usuario</label>
-                        <input type="text" class="form-control" id="usuario" placeholder="Usuario">
+                        <input type="text" class="form-control" id="usuario" placeholder="Usuario" [(ngModel)]="nombre">
                     </div>
                     
                     <div class="mb-3">
                         <label for="modelo" class="form-label">Host</label>
-                        <input type="text" class="form-control" id="host" placeholder="Host">
+                        <input type="text" class="form-control" id="host" placeholder="Host" [(ngModel)]="host">
                     </div>
                 </div>
             
@@ -82,18 +92,22 @@
 
                     <div class="mb-3">
                         <label for="modelo" class="form-label">Modelo</label>
-                        <select class="form-select" id="modelo">
-                            <option selected disabled>Seleccione el modelo</option>
-                            <option value="1">Modelo 1</option>
-                            <option value="2">Modelo 2</option>
+                        <select class="form-select" id="modelo" [(ngModel)]="modelo">
+                            <option selected value="0" >Seleccione el Modelo</option>
+                            <option *ngFor="let mod of modelos">{{mod.nombre}}</option>
+                            
                         </select>
                     </div>
 
 
+             
+                   
+
+
                     <div class="mb-3">
-                        <label for="mac" class="form-label">Mac Adress</label>
-                        <input type="text" class="form-control" id="mac" placeholder="Mac Adress">
-                    </div>
+                        <label for="mac" class="form-label">Mac Address</label>
+                        <input type="text" class="form-control" id="mac" placeholder="Mac Address" [(ngModel)]="mac" (ngModelChange)="mac=$event.toUpperCase()" (keyup)="formatMacAddress()">
+                      </div>
                     
                 </div>
             
@@ -102,18 +116,15 @@
 
                     <div class="mb-3">
                         <label for="correo" class="form-label">Correo</label>
-                        <input type="email" class="form-control" id="mail" placeholder="Correo electrónico">
+                        <input type="email" class="form-control" id="mail" placeholder="Correo electrónico"[(ngModel)]="email">
                     </div>
                     
-
                     <div class="mb-3">
-                        <label for="departamento" class="form-label">Departamento</label>
-                        <select class="form-select" id="departamento">
-                            <option selected disabled>Seleccione el departamento</option>
-                            <option value="1">departamento 1</option>
-                            <option value="2">departamento 2</option>
-                        </select>
+                        <label for="tipoEquipo" class="form-label">Numero de Serie</label>
+                        <input type="text" class="form-control" id="NodeSerie" [(ngModel)]="numero_serie" placeholder="Numero de serie" (ngModelChange)="numero_serie=$event.toUpperCase()">
                     </div>
+
+                   
                 </div>
             
                 <!-- Quinto Nivel -->
@@ -121,37 +132,66 @@
                    
                     <div class="mb-3">
                         <label for="anexo" class="form-label">Anexo</label>
-                        <select class="form-select" id="anexo">
-                            <option selected disabled>Seleccione el Anexo</option>
-                            <option value="1">Anexo 1</option>
-                            <option value="2">Anexo 2</option>
+                        <select class="form-select" id="anexo" [(ngModel)]="anexo">
+                            <option selected value="0">Seleccione el Anexo</option>
+                            <option *ngFor="let anex of anexos">{{anex.nombre}}</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="departamento" class="form-label">Departamento</label>
+                        <select class="form-select" id="departamento" [(ngModel)]="departamento">
+                            <option selected value="0">Seleccione el departamento</option>
+                            <option *ngFor="let departa of departamentos">{{departa.nombre}}</option>
+                 
                         </select>
                     </div>
                     
                 </div>
             
-               
+             
             
                 <!-- Séptimo Nivel -->
                 <div class="form-level form-horizontal">
                     <div class="mb-3">
                         <label for="fechaVigencia" class="form-label">Fecha de vigencia</label>
-                        <input type="date" class="form-control" id="fechaVigencia" disabled>
+                        <input type="date" class="form-control" id="fechaVigencia" disabled [(ngModel)]="fecha_vigencia" >
                     </div>
                     <div class="mb-3">
                         <label for="fechaActual" class="form-label">Fecha actual</label>
-                        <input type="date" class="form-control" id="fechaActual" disabled>
+                        <input type="date" class="form-control" id="fechaActual" disabled [(ngModel)]="fecha_actual" >
                     </div>
                 </div>
             
+           
+        
+            
                 <!-- Octavo Nivel -->
                 <div class="form-level form-level-buttons">
-                    <button type="button" class="btn btn-primary">Actualizar Etiqueta</button>
-                    <button type="button" class="btn btn-danger">Volver ⏎</button>
+                    <button type="button" class="btn btn-primary" (click)="actualizarEtiqueta()">Actualizar Etiqueta</button>
+                    <button type="button" class="btn btn-danger" (click)="navigateTo('/new-etiqueta-pnmnt')"  >Volver ⏎</button>
                     
                 </div>
             </div>
         </div>
+
+        <br><br>
+
+        <section class="form-level form-horizontal">
+            <div id="etiquetaEmpleado" #etiquetaEmpleado>
+                <img src="../../assets/Saved Pictures/etiempleado.png" alt="Etiqueta" id="etiquetaImage">
+                <div class="index">#{{numero_etiqueta}}</div>
+                <div class="nombre">{{nombre}}</div>
+                <div class="departamento">{{departamento}}</div>
+                <div class="host">{{host}}</div>
+                <div class="modelo">{{modelo}}</div>
+                <div class="numero_serie">{{numero_serie}}</div>
+                <div class="vigencia">{{fecha_vigencia}}</div>
+                <div class="anexo">{{anexo}}</div>
+                
+
+            </div>
+        </section>
     </app-layout>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

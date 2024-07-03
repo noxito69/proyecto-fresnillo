@@ -28,7 +28,8 @@ export class NewEtiquetaPNMNTComponent {
   usuario: string = '';
   host: string = '';
   modelo: string = '';
-
+  email: string = '';
+  ip: string = '';
   mac: string = '';
   departamento: string = '';
   anexo: string = '';
@@ -37,18 +38,17 @@ export class NewEtiquetaPNMNTComponent {
 
   modelos: any[] = [];
   anexos: any[] = []; 
-  
   departamentos: any[] = [];
   etiquetas: any[] = [];
   filteredEtiquetas: any[] = [];
  
 
-  index: number = 0;
+  numero_etiqueta: number = 0;
 
   nombre: string = '';
   centroCostos: string = '';
   numEmpleado: string = '';
-  email: string = '';
+
 
 
 
@@ -59,7 +59,17 @@ export class NewEtiquetaPNMNTComponent {
   imgHeight: number = 0;
 
   
-  
+  ngOnInit(): void {
+
+    
+    this.getLastTag();
+    this.getTags();
+    
+    this.ObtenerDepartamento();
+    this.ObtenerAnexo();
+    this.ObtenerModelo();
+
+  }
 
   @ViewChild('search-tag') searchInput!: ElementRef;
 
@@ -69,18 +79,51 @@ export class NewEtiquetaPNMNTComponent {
     date.setFullYear(date.getFullYear() + 1);
     this.fecha_vigencia = date.toISOString().split('T')[0];
 
+    const date2 = new Date();
+    date.setFullYear(date.getFullYear());
+    this.fecha_actual = date2.toISOString().split('T')[0];
 
   }
+
+  
 
   buscarEmpleado() {
-    this.http.get(`http://127.0.0.1:8000/api/auth/usuarios_penmont/getByEmployeeNumber/${this.numEmpleado}`).subscribe((data: any) => {
-      this.usuario = data[0].nombre;
-      this.centroCostos = data[0].centro_costo.nombre;
-      this.departamento = data[0].departamento.nombre;
-      this.email = data[0].email;
+    if (!this.numEmpleado) {
+      Swal.fire('Error', 'Favor de escribir un número de empleado', 'warning');
+      return;
+    }
+    this.http.get(`http://127.0.0.1:8000/api/auth/usuarios_penmont/getByEmployeeNumber/${this.numEmpleado}`).subscribe({
 
+
+
+
+      next: (data: any) => {
+        // Si se encuentra el empleado, continúa con la asignación de datos
+        this.nombre = data.nombre;
+        this.centroCostos = data.centro_costos;
+        this.departamento = data.departamento;
+        this.email = data.email;
+    
+
+     
+      },
+      error: (error) => {
+        let errorMessage = 'Ocurrió un error inesperado'; // Mensaje por defecto
+        if (error.status === 404) {
+          // Error específico cuando el empleado no se encuentra
+          errorMessage = error.error.message;
+        } else if (error.status === 400) {
+          // Error de validación, muestra el primer mensaje de error disponible
+          const errors = error.error;
+          errorMessage = errors[Object.keys(errors)[0]][0]; // Obtiene el primer mensaje de error de la respuesta
+        }
+        Swal.fire('Error', errorMessage, 'error');
+   
+      }
     });
   }
+
+
 
   ngAfterViewInit() {
     this.etiquetaImage = document.getElementById('etiquetaImage') as HTMLImageElement;
@@ -134,7 +177,7 @@ export class NewEtiquetaPNMNTComponent {
     this.http.get("http://127.0.0.1:8000/api/auth/etiquetas_empleados/last").subscribe(
 
       (data: any) => {
-        this.index = data.data.id + 1;
+        this.numero_etiqueta = data.data.numero_etiqueta + 1;
       }
     );
 
@@ -149,16 +192,18 @@ export class NewEtiquetaPNMNTComponent {
   );
   }
 
-  ngOnInit(): void {
+ 
 
-    
-    this.getLastTag();
-    this.getTags();
-    
-    this.ObtenerDepartamento();
-    this.ObtenerAnexo();
-    this.ObtenerModelo();
-
+  formatMacAddress() {
+    if (!this.mac) return;
+  
+    // Elimina caracteres no hexadecimales y los dos puntos anteriores para empezar de cero
+    let cleanInput = this.mac.replace(/[^0-9A-F]/gi, '');
+  
+    // Añade los dos puntos después de cada par de caracteres
+    let formattedMac = cleanInput.match(/.{1,2}/g)?.join(':').slice(0, 17) || '';
+  
+    this.mac = formattedMac;
   }
 
 
@@ -168,26 +213,20 @@ export class NewEtiquetaPNMNTComponent {
  
   ObtenerModelo(){
 
-    this.http.get<any[]>("http://127.0.0.1:8000/api/auth/modelo/index").subscribe(
+    this.http.get<any[]>("http://127.0.0.1:8000/api/auth/modelo_empleado/index").subscribe(
 
       data =>{
 
         this.modelos = data;
-
-      
 
       },
       error => {
         console.error('Error al obtener el modelo:', error);
       }
 
-
     );
 
   }
-
-
-
 
   ObtenerDepartamento(){
     this.http.get<any[]>("http://127.0.0.1:8000/api/auth/departamentos/index").subscribe(
@@ -201,8 +240,8 @@ export class NewEtiquetaPNMNTComponent {
     );
   }
 
-  ObtenerAnexo(){
 
+  ObtenerAnexo(){
     this.http.get<any[]>("http://127.0.0.1:8000/api/auth/anexos/index").subscribe(
       data =>{
         this.anexos = data;
@@ -213,25 +252,36 @@ export class NewEtiquetaPNMNTComponent {
     );
   }
 
-
-
-
-
-  
-  
-
   CrearEtiqueta(){
+
+    if (this.modelo === "") {
+      Swal.fire("Error", 'Selecciona el tipo de equipo', 'error');
+      return;
+    }
+
+    if (this.anexo === "") {
+      Swal.fire("Error", 'Selecciona un Anexo', 'error');
+      return;
+    }
+
+    if (this.departamento === "") {
+      Swal.fire("Error", 'Selecciona un Departamento', 'error');
+      return;
+    }
+
     const url = "http://127.0.0.1:8000/api/auth/etiquetas_empleados/post";
     const body ={
+      numero_etiqueta: this.numero_etiqueta,
       numero_serie: this.numero_serie,
-      usuario: this.usuario,
+      usuario: this.nombre,
       host: this.host,
       modelo: this.modelo,
       mac: this.mac,
+      correo: this.email,
       departamento: this.departamento,
       anexo: this.anexo,
       fecha_vigencia: this.fecha_vigencia,
-      fecha_actual: this.fecha_actual
+
     }; 
 
     this.http.post(url,body).subscribe(
@@ -243,6 +293,8 @@ export class NewEtiquetaPNMNTComponent {
         }, 4000);
         },
         error => {
+          console.log("Correo a enviar:", this.email); // Agrega esto para depurar
+
           const errorMessage = error.error && error.error.message
                     ? Object.values(error.error.message).join(' ')
                     : 'Error al crear la etiqueta';
@@ -250,6 +302,8 @@ export class NewEtiquetaPNMNTComponent {
         }
       );     
   }
+
+
 
   generatePdf() {
     const vale = document.getElementById('etiquetaEmpleado');
@@ -261,15 +315,19 @@ export class NewEtiquetaPNMNTComponent {
       const contentDataURL = canvas.toDataURL('image/png');
       const pdf = new jsPDF('landscape', 'mm', [this.imgWidth, this.imgHeight]);
       pdf.addImage(contentDataURL, 'PNG', 0, 0, this.imgWidth, this.imgHeight);
-
+  
       const pdfBlob = pdf.output('blob');
       const pdfUrl = URL.createObjectURL(pdfBlob);
-      window.open(pdfUrl);
+  
+      // Abrir el PDF en una nueva pestaña
+      window.open(pdfUrl, '_blank');
     }).catch(error => {
       console.error("Error generating PDF:", error);
       Swal.fire('Error', 'Ocurrió un error al generar el PDF.', 'error');
     });
   }
+
+
 
   navigateTo(route: string) {
     this.router.navigate([route]);

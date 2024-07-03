@@ -34,11 +34,13 @@ class EtiquetasEmpleadosController extends Controller
             'host.string' => 'El host debe ser una cadena de texto.',
             'mac.required' => 'La MAC es requerida.',
             'mac.string' => 'La MAC debe ser una cadena de texto.',
+            'correo.required' => 'El correo es requerido.',
         ];
         
         $validated = Validator::make($request->all(), [
 
             'numero_etiqueta' => 'required|integer',
+            'correo' => 'required|string',
             'ip' => 'nullable|string', 
             'modelo' => 'required|string',
             'numero_serie' => 'required|string',
@@ -48,7 +50,7 @@ class EtiquetasEmpleadosController extends Controller
             'departamento' => 'required|string',
             'anexo' => 'required|string',
             'fecha_vigencia' => 'required|date',
-            'fecha_actual' => 'required|date'
+
 
         ], $messages);
 
@@ -98,11 +100,13 @@ class EtiquetasEmpleadosController extends Controller
                 'anexo.required' => 'El anexo es requerido.',
                 'fecha_vigencia.required' => 'La fecha de vigencia es requerida.',
                 'fecha_vigencia.date' => 'La fecha de vigencia debe ser una fecha válida.',
+                'correo.required' => 'El correo es requerido.',
             ];
 
             $validated = Validator::make($request->all(), [
 
 
+                'correo' => 'required|string', 
                 'numero_etiqueta' => 'required|integer',
                 'ip' => 'nullable|string',
                 'modelo' => 'required|string', // Agregado
@@ -113,7 +117,7 @@ class EtiquetasEmpleadosController extends Controller
                 'departamento' => 'required|string',
                 'anexo' => 'required|string',
                 'fecha_vigencia' => 'required|date',
-                'fecha_actual' => 'required|date'
+       
                 
             ], $messages);
 
@@ -155,6 +159,26 @@ class EtiquetasEmpleadosController extends Controller
         $lastTag = EtiquetaEmpleado::all()->last();
         return response()->json(["data" => $lastTag], 200);
     }
+
+
+
+
+    public function getByNumeroEtiqueta($numero_etiqueta)
+    {
+        $etiquetaEmpleado = EtiquetaEmpleado::where('numero_etiqueta', $numero_etiqueta)->first();
+
+        if ($etiquetaEmpleado) {
+            return response()->json([
+                'message' => 'EtiquetaEmpleado found',
+                'data' => $etiquetaEmpleado
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'EtiquetaEmpleado not found'
+            ], 404);
+        }
+    }
+
 
     
 }
