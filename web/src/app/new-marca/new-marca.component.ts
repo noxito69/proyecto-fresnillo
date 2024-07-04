@@ -112,7 +112,7 @@ CreateMarca() {
 
     setTimeout(() => {
       location.reload();
-    }, 1000);
+    }, 1000); 
   } , error => {
 
     let errorMessage = '';

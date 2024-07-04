@@ -26,7 +26,6 @@ class DatabaseSeeder extends Seeder
         $this->call([
 
 
-           
             RoleSeeder::class,
             CentroCostoSeeder::class,
             DepartamentoSeeder::class,
@@ -35,6 +34,7 @@ class DatabaseSeeder extends Seeder
             tipo_equipo_seeder::class,
             ModeloSeeder::class,
             ModeloEmpleadoSeeder::class,
+            UsuarioTISeeder::class,
             #marca_seeder::class,
             #EmpresaC::class,
             #UserPnmntSeeder::class,sasssss

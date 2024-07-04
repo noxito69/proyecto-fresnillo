@@ -13,7 +13,9 @@ class EtiquetaContratistaController extends Controller
 {
     public function index()
     {
-        $etiquetasContratistas = EtiquetaContratista::all();
+
+        
+        $etiquetasContratistas = EtiquetaContratista::select("*")->paginate(20, ['*'], 'page', 1);
         return response()->json($etiquetasContratistas);
     }
 

@@ -104,7 +104,7 @@ class UserController extends Controller
     public function login(Request $request) {
         $validate = Validator::make($request->all(), [
             "email" => "required|email",
-            "password" => "required|max:8"
+            "password" => "required"
         ]);
 
         if($validate->fails()) {

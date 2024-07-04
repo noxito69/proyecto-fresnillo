@@ -113,7 +113,7 @@ export class NewEtiquetaComponent implements AfterViewInit {
   getTags() {
     this.http.get("http://127.0.0.1:8000/api/auth/etiquetas_contratistas/index").subscribe(
       (data: any) => {
-        this.etiquetas = data;
+        this.etiquetas = data.data;
         this.filteredEtiquetas = data; // Initialize filteredEtiquetas
       }
     );

@@ -19,7 +19,21 @@ export class LayoutComponent {
   ngOnInit() {
     const jsonData = localStorage.getItem('user_data')
 
-    this.user_data = JSON.parse(jsonData?? "")
+    if (!jsonData) {
+      // Si no hay datos de usuario, redirige al login
+      this.router.navigate(['/login']);
+    } else {
+      this.user_data = JSON.parse(jsonData);
+    }
+    
+  }
+
+  logout() {
+    // Paso 1: Eliminar la información del usuario de localStorage
+    localStorage.removeItem('user_data');
+  
+    // Paso 2: Redireccionar al usuario a la vista de login
+    this.router.navigate(['/login']);
   }
 
   constructor(private router:Router) { }
