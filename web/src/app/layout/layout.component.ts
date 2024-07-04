@@ -13,6 +13,15 @@ export class LayoutComponent {
 
   openMenu: string = '';
 
+  public user_data: any;
+
+
+  ngOnInit() {
+    const jsonData = localStorage.getItem('user_data')
+
+    this.user_data = JSON.parse(jsonData?? "")
+  }
+
   constructor(private router:Router) { }
 
   toggleSubmenu(menu:string){

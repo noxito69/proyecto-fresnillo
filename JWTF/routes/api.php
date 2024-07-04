@@ -64,6 +64,7 @@ Route::group([
     Route::post('post',[UserController::class,'store']);
     Route::delete('delete/{id}',[UserController::class,'destroy'])->middleware('authrole')->where('id','[0-9]+');
     Route::put('put/{id}',[UserController::class,'update'])->middleware('authrole2')->where('id','[0-9]+');
+    Route::post("login/user", [UserController::class,"login"]);
 
     //centro de costos
     Route::get('centro_costos/index', [CentroCostoController::class, 'index']);

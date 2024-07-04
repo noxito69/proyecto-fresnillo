@@ -23,7 +23,7 @@ class AuthController extends Controller
     public function __construct()
     {
         $this->middleware('auth:api',['except' => ['login','register','activate']]);
-       
+
     }
 
     /**
@@ -38,7 +38,6 @@ class AuthController extends Controller
         if (! $token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-       
 
         return $this->respondWithToken($token);
     }
@@ -72,7 +71,7 @@ class AuthController extends Controller
      */
     public function refresh()
     {
-        
+
         return $this->respondWithToken(auth()->refresh());
     }
 
@@ -113,7 +112,7 @@ class AuthController extends Controller
             $user->email = $request->email;
             //$user->role_id=3;
             //$user->is_active=false;
-            
+
             $user->password = Hash::make($request->password);
             $user->save();
             $signedroute = URL::temporarySignedRoute(
@@ -129,8 +128,8 @@ class AuthController extends Controller
     {
         $user->is_active=true;
         $user->save();
-        
-      
+
+
     }
 
 }

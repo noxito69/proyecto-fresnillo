@@ -100,4 +100,24 @@ class UserController extends Controller
 
 
     }
+
+    public function login(Request $request) {
+        $validate = Validator::make($request->all(), [
+            "email" => "required|email",
+            "password" => "required|max:8"
+        ]);
+
+        if($validate->fails()) {
+            return response()->json(["error" => $validate->errors()], 400);
+        }
+
+        $user = User::where("email", $request->email)->first();
+
+        if ($user && Hash::check($request->password, $user->password)) {
+            return response()->json($user);
+        }
+
+        return response()->json(["error" => "Contraseña incorrecta"], 400);
+
+    }
 }
