@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
 
+
 @Component({
   selector: 'app-new-marca',
   standalone: true,
@@ -16,11 +17,21 @@ import Swal from 'sweetalert2';
 export class NewMarcaComponent {
 
 
+  marca = {
+
+    nombre: ''    
+
+  };
+
 
   selectedMarcaId: string | null = null;
   marcas: any[] = [];
   id: string = '';
   nombre: string = '';
+  
+
+
+
 
  constructor(private http: HttpClient, private router: Router) { }
 
@@ -72,6 +83,7 @@ UpdateMarca() {
       // Actualiza el modelo con los datos recibidos, si es necesario
       this.nombre = data.nombre;
       Swal.fire('Success', 'Marca actualizada correctamente', 'success');
+      
       setTimeout(() => {
         location.reload();
       }, 1000);
@@ -82,6 +94,39 @@ UpdateMarca() {
       Swal.fire('Error', 'Hubo un error al actualizar la marca', 'error');
     }
   );
+}
+
+
+
+
+
+CreateMarca() {
+
+  this.http.post('http://127.0.0.1:8000/api/auth/marca/post', this.marca)
+  .subscribe( response => {
+
+    Swal.fire({
+      icon: 'success',
+      title: 'Marca creada con éxito'
+    });
+
+    setTimeout(() => {
+      location.reload();
+    }, 1000);
+  } , error => {
+
+    let errorMessage = '';
+    for (let key in error.error.message) {
+      errorMessage += error.error.message[key] + ' ';
+    }
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: errorMessage,
+    });
+  } )
+
+
 }
 
 openEditModal(id: string) {

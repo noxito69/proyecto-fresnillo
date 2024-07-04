@@ -112,12 +112,12 @@
                           <div class="form-level form-horizontal">
                               <div class="mb-3">
                                   <label for="Nombre marca" class="form-label">Nombre Marca</label>
-                                  <input type="text" class="form-control" id="nombreMarca"  name="nombreMarca" placeholder="" >
+                                  <input type="text" class="form-control" id="nombreMarca"  name="nombreMarca" placeholder="" [(ngModel)]="marca.nombre">
                               </div>
                           </div>
           
                           <div class="form-level form-level-buttons">
-                            <button type="button" class="btn btn-success" >Crear</button>
+                            <button type="button" class="btn btn-success" (click)="CreateMarca()" >Crear</button>
                         
 
                         </div>
