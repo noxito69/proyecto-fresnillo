@@ -17,6 +17,9 @@ class UserController extends Controller
        return response()->json(["msg"=>"Users finded",
         "data: "=>User::all(),],200);
     }
+
+
+    
     public function store(Request $request)
     {
 
@@ -53,7 +56,7 @@ class UserController extends Controller
         $validate = Validator::make(
             $request->all(),[
                 "name"=>"required|max:30",
-                "email"=>"unique:users|email",
+                "email"=>"required|unique:users|email",
                 "role_id"=>"numeric|between:1,3",
                 "password"=>"min:8|string"
             ]

@@ -5,6 +5,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule, NgFor } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -90,7 +92,7 @@ export class RegisterComponent implements OnInit {
   register() {
     console.log(typeof this.rol)
     console.log(this.rol)
-    if(this.nombre === "" || this.contrasena === "" || this.confirmar_contrasena === "" || this.rol === 0){
+    if(this.nombre === "" || this.contrasena === "" || this.confirmar_contrasena === "" || this.rol === 0 || this.email ===""){
       Swal.fire("Error", "Favor de llenar todos los campos", 'error')
       return
     }
@@ -109,10 +111,24 @@ export class RegisterComponent implements OnInit {
       name: this.nombre,
       password: this.contrasena,
       rol_id: this.rol,
-    }).subscribe(data => {
-      console.log("si")
-      Swal.fire("Éxito", "Usuario registrado correctamente", 'success')
-    })
+    }).pipe(
+      catchError(error => {
+        // Aquí manejas el error
+        let message = "Ocurrió un error inesperado.";
+        if (error.status === 422) {
+          // Si el error es 422, significa que hay errores de validación
+          const errors = error.error.data; // Asegúrate de que la ruta de acceso a los errores sea correcta
+          message = Object.keys(errors).map(key => errors[key].join('\n')).join('\n');
+        }
+        // Muestra el mensaje con SweetAlert2
+        Swal.fire("Error", message, 'error');
+        // Lanza el error para que no se procese como una respuesta exitosa
+        return throwError(error);
+      })
+    ).subscribe(data => {
+      console.log("si");
+      Swal.fire("Éxito", "Usuario registrado correctamente", 'success');
+    });
 
     console.log("POST")
   }
