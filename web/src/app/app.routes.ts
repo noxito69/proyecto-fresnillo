@@ -4,7 +4,8 @@ import { NewUserPnmntComponent } from './new-user-pnmnt/new-user-pnmnt.component
 export const routes: Routes = [
 
 
-{path:'', redirectTo: 'home', pathMatch: 'full'},
+{path:'', redirectTo: 'login', pathMatch: 'full'},
+{path: "login", loadComponent: () => import("./login/login.component").then(l => l.LoginComponent) },
 {path: 'home', loadComponent: () => import('./home/home.component').then(h => h.HomeComponent)},
 {path: 'stock', loadComponent: () => import('./stock/stock.component').then(s => s.StockComponent)},
 {path:'historial', loadComponent: () => import('./historial/historial.component').then(h => h.HistorialComponent)},
