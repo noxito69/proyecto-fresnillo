@@ -19,8 +19,10 @@ export class NewUserPnmntComponent {
     nombre: '',
     num_empleado: '',
     email: '',
-    departamento_id: null,
-    centro_costos_id: null
+    departamento: '',
+    centro_costos: '',
+
+    
   };
 
   departamento: any[] = [];
@@ -61,10 +63,10 @@ export class NewUserPnmntComponent {
   }
 
   onDepartamentoChange(event: any) {
-    const selectedDeptId = event.target.value;
-    const selectedDept = this.departamento.find(dep => dep.id === +selectedDeptId);
+    const selectedDeptName = event.target.value;
+    const selectedDept = this.departamento.find(dep => dep.nombre === selectedDeptName);
     if (selectedDept) {
-      this.user.centro_costos_id = selectedDept.centro_costos_id;
+      this.user.centro_costos = selectedDept.centro_costos;
     }
   }
 

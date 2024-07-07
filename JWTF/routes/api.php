@@ -161,6 +161,7 @@ Route::group([
     Route::get('etiquetas_contratistas/equipos',[EtiquetaContratistaController::class,'empresa_equipos']);
     Route::get('etiquetas_contratistas/equipos_general', [EtiquetaContratistaController::class, 'grafica_grande']);
     Route::get('etiquetas_contratistas/getByNumber/{num_etiqueta}', [EtiquetaContratistaController::class, 'getbynumer']);
+    Route::get('etiquetas_contratistas/export', [EtiquetaContratistaController::class, 'export']);
 
 
     //Usuarios Penmont

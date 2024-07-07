@@ -24,19 +24,29 @@ class UserController extends Controller
     {
 
         $validate = Validator::make(
-            $request->all(),[
-                "name"=>"required|max:30",
-                "email"=>"required|unique:users|email",
-                "rol_id"=>"numeric|between:1,4",
-                "password"=>"required|min:8|string",
-                "num_empleado"=> "required"
+            $request->all(), [
+                "name" => "required|max:30",
+                "email" => "required|unique:users|email",
+                "rol_id" => "numeric|between:1,4",
+                "password" => "required|min:8|string",
+                "num_empleado" => "required"
+            ], [
+                // Mensajes de error personalizados
+                "name.required" => "El campo nombre es obligatorio.",
+                "name.max" => "El nombre no debe ser mayor a 30 caracteres.",
+                "email.required" => "El campo correo electrónico es obligatorio.",
+                "email.unique" => "El correo electrónico ya está en uso.",
+                "email.email" => "El correo electrónico debe ser una dirección válida.",
+                "rol_id.numeric" => "El rol debe ser un número.",
+                "rol_id.between" => "El rol debe estar entre 1 y 4.",
+                "password.required" => "La contraseña es obligatoria.",
+                "password.min" => "La contraseña debe tener al menos 8 caracteres.",
+                "num_empleado.required" => "El número de empleado es obligatorio."
             ]
         );
-
-        if($validate->fails())
-        {
-            return response()->json(["msg"=>"Data failed",
-            "data:"=>$validate->errors()],422);
+        
+        if ($validate->fails()) {
+            return response()->json(["msg" => "Validación fallida", "errors" => $validate->errors()], 422);
         }
 
         $user = new User();

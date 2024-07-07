@@ -11,7 +11,7 @@ class UsuarioPenmont extends Model
     protected $table = 'usuarios_penmont';
     use HasFactory;
 
-    protected $fillable = ['num_empleado', 'email', 'nombre', 'departamento_id', 'centro_costos'];
+    protected $fillable = ['num_empleado', 'email', 'nombre', 'departamento', 'centro_costos'];
 
     public function departamento()
     {

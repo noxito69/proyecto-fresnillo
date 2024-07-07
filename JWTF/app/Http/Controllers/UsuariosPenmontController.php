@@ -28,9 +28,7 @@ class UsuariosPenmontController extends Controller
             'email.email' => 'El correo electrónico debe ser una dirección de correo electrónico válida.',
             'nombre.required' => 'El nombre es requerido.',
             'nombre.string' => 'El nombre debe ser una cadena de texto.',
-            'departamento_id.required' => 'El ID del departamento es requerido.',
-            'departamento_id.integer' => 'El ID del departamento debe ser un número entero.',
-            'departamento_id.exists' => 'El ID del departamento no existe.',
+            'departamento.required' => 'El departamento es requerido.',
             'centro_costos.required' => 'El centro de costos es requerido.'
            
 
@@ -40,7 +38,7 @@ class UsuariosPenmontController extends Controller
             'num_empleado' => 'required|string|unique:usuarios_penmont,num_empleado',
             'email' => 'required|email',
             'nombre' => 'required|string',
-            'departamento_id' => 'required|integer|exists:departamentos,id',
+            'departamento' => 'required|string',
             'centro_costos' => 'required'
         ], $messages);
 
@@ -85,10 +83,7 @@ class UsuariosPenmontController extends Controller
                 'email.required' => 'El correo electrónico es requerido.',
                 'email.email' => 'El correo electrónico debe ser una dirección de correo electrónico válida.',
                 'nombre.required' => 'El nombre es requerido.',
-                'nombre.string' => 'El nombre debe ser una cadena de texto.',
-                'departamento_id.required' => 'El ID del departamento es requerido.',
-                'departamento_id.integer' => 'El ID del departamento debe ser un número entero.',
-                'departamento_id.exists' => 'El ID del departamento no existe.',
+                'departamento.required' => 'El departamento es requerido.',
                 'centro_costos.required' => 'El centro de costos es requerido.'
             ];
 
@@ -96,7 +91,7 @@ class UsuariosPenmontController extends Controller
                 'num_empleado' => 'required|string|unique:usuarios_penmont,num_empleado,'.$usuarioPenmont->id,
                 'email' => 'required|email',
                 'nombre' => 'required|string',
-                'departamento_id' => 'required|integer|exists:departamentos,id',
+                'departamento' => 'required|string',
                 'centro_costos' => 'required'
             ], $messages);
 

@@ -5,43 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario por Niveles</title>
     <style>
-        .form-level {
-            margin-bottom: 20px;
-        }
-        .form-horizontal {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-        }
-        .container-centered {
-            display: flex;
-            justify-content: center;
-        }
-        .container-form {
-            max-width: 800px;
-            width: 100%;
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .form-control, .form-select {
-            height: calc(1.5em + 1rem + 2px);
-            font-size: 1.25rem;
-        }
-        .btn {
-            font-size: 1.25rem;
-        }
-        .form-level-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-        }
-
-        .table-container {
-            max-height: 900px; /* Ajusta según tus necesidades */
-            overflow-y: auto;
-          }
+        
     </style>
 </head>
 <body>
@@ -75,8 +39,8 @@
                               <td>{{etiqueta.numero_etiqueta}}</td>
                               <td>{{etiqueta.usuario}}</td>
                            
-                            
                               <td>
+                                
                                 <button data-bs-dismiss="modal" class="btn btn-success" [routerLink]="['/update-etiqueta', etiqueta.numero_etiqueta]">
                                   <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -89,6 +53,10 @@
                             </tr>
                           </tbody>
                         </table>
+
+
+                        
+
                       </div>
                     </div>
                   </div>
@@ -216,8 +184,16 @@
                 <div class="vigencia">{{fecha_vigencia}}</div>
                 <div class="tipo_equipo">{{tipo_equipo}}</div>
 
+
+                
+
             </div>
+
+
+            
         </section>
+
+        
 
 
     </app-layout>

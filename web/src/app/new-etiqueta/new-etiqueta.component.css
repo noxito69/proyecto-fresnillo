@@ -99,3 +99,41 @@ th, td {
   left: 480px;
   font-size: 48px;
 }
+
+.form-level {
+  margin-bottom: 20px;
+}
+.form-horizontal {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+.container-centered {
+  display: flex;
+  justify-content: center;
+}
+.container-form {
+  max-width: 800px;
+  width: 100%;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.form-control, .form-select {
+  height: calc(1.5em + 1rem + 2px);
+  font-size: 1.25rem;
+}
+.btn {
+  font-size: 1.25rem;
+}
+.form-level-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.table-container {
+  max-height: 900px; /* Ajusta según tus necesidades */
+  overflow-y: auto;
+}

@@ -25,6 +25,7 @@ export class RegisterComponent implements OnInit {
   confirmar_contrasena: string = '';
 
 
+
   roles: any[] = [];
 
 
@@ -89,22 +90,19 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+ 
+
   register() {
-    console.log(typeof this.rol)
-    console.log(this.rol)
-    if(this.nombre === "" || this.contrasena === "" || this.confirmar_contrasena === "" || this.rol === 0 || this.email ===""){
-      Swal.fire("Error", "Favor de llenar todos los campos", 'error')
-      return
+    if(this.nombre === "" || this.contrasena === "" || this.confirmar_contrasena === "" || this.rol === 0 || this.email === ""){
+      Swal.fire("Error", "Favor de llenar todos los campos", 'error');
+      return;
     }
-
-
+  
     if(this.confirmar_contrasena !== this.contrasena){
-      Swal.fire("Error", "Las contraseñas no coinciden", 'error')
-      return
+      Swal.fire("Error", "Las contraseñas no coinciden", 'error');
+      return;
     }
-
-    console.log(this.nombre, this.contrasena, this.rol, this.numEmpleado)
-
+  
     this.http.post("http://127.0.0.1:8000/api/auth/post", {
       num_empleado: this.numEmpleado,
       email: this.email,
@@ -113,12 +111,11 @@ export class RegisterComponent implements OnInit {
       rol_id: this.rol,
     }).pipe(
       catchError(error => {
-        // Aquí manejas el error
         let message = "Ocurrió un error inesperado.";
         if (error.status === 422) {
-          // Si el error es 422, significa que hay errores de validación
-          const errors = error.error.data; // Asegúrate de que la ruta de acceso a los errores sea correcta
-          message = Object.keys(errors).map(key => errors[key].join('\n')).join('\n');
+          // Asegura que TypeScript entienda que 'errors' es un objeto con claves de tipo string y valores de tipo string[].
+          const errors = error.error.errors as { [key: string]: string[] };
+          message = Object.values(errors).map((msgArray) => msgArray.join('\n')).join('\n');
         }
         // Muestra el mensaje con SweetAlert2
         Swal.fire("Error", message, 'error');
@@ -126,12 +123,11 @@ export class RegisterComponent implements OnInit {
         return throwError(error);
       })
     ).subscribe(data => {
-      console.log("si");
       Swal.fire("Éxito", "Usuario registrado correctamente", 'success');
     });
-
-    console.log("POST")
   }
+
+
 
   navigateTo(route:string){
 

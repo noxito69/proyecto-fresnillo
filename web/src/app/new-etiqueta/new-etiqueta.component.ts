@@ -21,27 +21,37 @@ import * as XLSX from 'xlsx';
 })
 export class NewEtiquetaComponent implements AfterViewInit {
 
-  tipo_equipo: number = 0;
-  marca: number = 0;
+
   modelo: string = '';
   numero_serie: string = '';
   usuario: string = '';
-  empresa: number = 0;
   fecha_vigencia: string = '';
   fecha_actual: string = '';
+  search: string = "";
+
+  numero_etiqueta: number = 0;
+  empresa: number = 0;
+  tipo_equipo: number = 0;
+  marca: number = 0;
 
   tipo_equipo_a: any[] = [];
   marcas: any[] = [];
   empresas: any[] = [];
   etiquetas: any[] = [];
   filteredEtiquetas: any[] = [];
-  numero_etiqueta: number = 0;
 
-  search: string = "";
+
 
   etiquetaImage: HTMLImageElement | null = null;
   imgWidth: number = 0;
   imgHeight: number = 0;
+
+
+  page: number = 1;
+  pageSize: number = 5;
+  totalItems: number = 0;
+  totalPages: number = 0;
+  currentPage: number = 0;
 
   @ViewChild('search-tag') searchInput!: ElementRef;
 
@@ -78,11 +88,11 @@ export class NewEtiquetaComponent implements AfterViewInit {
   }
 
   exportToExcel() {
-    const url = "http://127.0.0.1:8000/api/auth/etiquetas_contratistas/index";
+    const url = "http://127.0.0.1:8000/api/auth/etiquetas_contratistas/export";
     this.http.get<any[]>(url).subscribe(
       (data: any[]) => {
         // Verificar si los datos se recibieron correctamente
-        console.log(data);
+        
 
         // Convertir los datos a un formato que XLSX pueda manejar
         const worksheet = XLSX.utils.json_to_sheet(data);
@@ -111,6 +121,7 @@ export class NewEtiquetaComponent implements AfterViewInit {
   
 
   getTags() {
+  
     this.http.get("http://127.0.0.1:8000/api/auth/etiquetas_contratistas/index").subscribe(
       (data: any) => {
         this.etiquetas = data.data;
@@ -118,6 +129,45 @@ export class NewEtiquetaComponent implements AfterViewInit {
       }
     );
   }
+
+
+
+  previousPage() {
+    if (this.page > 1) {
+      this.page--;
+      this.getTags();
+    }
+  }
+
+  nextPage() {
+    if (this.page < this.totalPages) {
+      this.page++;
+      this.getTags();
+    }
+  }
+
+  goToPage(page: number) {
+    this.page = page;
+    this.getTags();
+  }
+
+  get pages(): number[] {
+    const half = Math.floor(this.pageSize / 2);
+    let start = Math.max(this.currentPage - half, 1);
+    let end = Math.min(start + this.pageSize - 1, this.totalPages);
+
+    if (end - start < this.pageSize - 1) {
+      start = Math.max(end - this.pageSize + 1, 1);
+    }
+
+    const pages = [];
+    for (let i = start; i <= end; i++) {
+      pages.push(i);
+    }
+    return pages;
+  }
+
+
 
   ngOnInit() {
     this.getLastTag();
@@ -181,7 +231,7 @@ export class NewEtiquetaComponent implements AfterViewInit {
       return;
     }
 
-    if(this.empresa === 0) {
+    if(this.empresa === 0) { 
 
       Swal.fire("Error", 'Verifica la empresa', 'error');
       return;
@@ -224,8 +274,7 @@ export class NewEtiquetaComponent implements AfterViewInit {
         });
     }
   
-  );
-    
+  );  
   }
 
   generatePdf() {

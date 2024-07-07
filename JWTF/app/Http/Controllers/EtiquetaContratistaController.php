@@ -21,6 +21,16 @@ class EtiquetaContratistaController extends Controller
 
     
 
+    public function export(){
+
+        $etiquetaContratista = EtiquetaContratista::all();
+        return response()->json($etiquetaContratista);
+
+
+    }
+
+    
+
 
     public function store(Request $request)
     {

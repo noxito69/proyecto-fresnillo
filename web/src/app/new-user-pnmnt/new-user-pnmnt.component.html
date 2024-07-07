@@ -58,7 +58,7 @@
                 <div class="form-level form-horizontal">
                     <div class="mb-3">
                         <label for="nombreEmpleado" class="form-label">Nombre empleado:</label>
-                        <input type="text" class="form-control" id="nombreEmpleado" [(ngModel)]="user.nombre" name="nombreEmpleado" placeholder="">
+                        <input type="text" class="form-control" id="nombreEmpleado" [(ngModel)]="user.nombre" name="nombreEmpleado" placeholder="" (ngModelChange)="user.nombre=$event.toUpperCase()">
                     </div>
                 </div>
 
@@ -75,9 +75,9 @@
                 <div class="form-level form-horizontal">
                     <div class="mb-3">
                         <label for="departamento" class="form-label">Departamento</label>
-                        <select class="form-select" id="departamento" (change)="onDepartamentoChange($event)" [(ngModel)]="user.departamento_id" name="departamento">
+                        <select class="form-select" id="departamento" (change)="onDepartamentoChange($event)" [(ngModel)]="user.departamento" name="departamento">
                             <option selected disabled>Seleccione el Departamento</option>
-                            <option *ngFor="let departa of departamento" [value]="departa.id">{{departa.nombre}}</option>
+                            <option *ngFor="let departa of departamento" [value]="departa.nombre">{{departa.nombre}}</option>
                         </select>
                     </div>
                 </div>
@@ -85,7 +85,7 @@
                 <div class="form-level form-horizontal">
                     <div class="mb-3">
                        
-                        <input type="number" class="form-control" id="centroCostosId" [(ngModel)]="user.centro_costos_id" name="centroCostosId" placeholder="" disabled style="display: none;">
+                        <input type="number" class="form-control" id="centroCostosId" [(ngModel)]="user.centro_costos" name="centroCostosId" placeholder="" disabled style="display: none;">
                     </div>
                 </div>
             

@@ -51,7 +51,6 @@ export class HistorialComponent implements OnInit {
       this.totalItems = response.total;
       this.totalPages = response.last_page;
       this.currentPage = response.current_page;
-      // Actualiza las opciones de filtro después de recibir los datos
       this.centroCostoOptions = Array.from(new Set(response.data.map((item: any) => item.centro_costos)));
       this.departamentoOptions = Array.from(new Set(response.data.map((item: any) => item.departamento)));
       this.folioOptions = Array.from(new Set(response.data.map((item: any) => item.id)));
