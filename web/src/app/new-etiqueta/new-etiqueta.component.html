@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario por Niveles</title>
     <style>
-        
+
     </style>
 </head>
 <body>
@@ -26,7 +26,7 @@
                   <div class="modal-body justify-content-center align-items-center">
                     <div class="row g-3">
                       <div class="col-md-12">
-                        <table class="table; table-container">
+                        <table class="table table-container">
                           <thead>
                             <tr>
                               <th>Numero etiqueta</th>
@@ -38,9 +38,9 @@
                             <tr *ngFor="let etiqueta of etiquetas">
                               <td>{{etiqueta.numero_etiqueta}}</td>
                               <td>{{etiqueta.usuario}}</td>
-                           
+
                               <td>
-                                
+
                                 <button data-bs-dismiss="modal" class="btn btn-success" [routerLink]="['/update-etiqueta', etiqueta.numero_etiqueta]">
                                   <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -55,7 +55,7 @@
                         </table>
 
 
-                        
+
 
                       </div>
                     </div>
@@ -136,7 +136,7 @@
                     </div>
                 </div>
 
-          
+
 
                 <!-- Quinto Nivel -->
                 <div class="form-level form-horizontal">
@@ -185,15 +185,15 @@
                 <div class="tipo_equipo">{{tipo_equipo}}</div>
 
 
-                
+
 
             </div>
 
 
-            
+
         </section>
 
-        
+
 
 
     </app-layout>
