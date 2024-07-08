@@ -10,9 +10,19 @@ class EtiquetasEmpleadosController extends Controller
 {
     public function index()
     {
-        $etiquetasempleados = EtiquetaEmpleado::all();
+        $etiquetasempleados = EtiquetaEmpleado::select("*")->paginate(20, ['*'], 'page', 1);
         return response()->json($etiquetasempleados); 
     }
+
+    public function search(Request $request) {
+        $query = $request->input('query');
+        $results = EtiquetaEmpleado::where("numero_etiqueta", "LIKE", "%$query%")->orWhere("usuario", "LIKE", "%$query%")->orWhere("numero_serie", "LIKE","%$query%")->paginate(20);
+        return response()->json($results);
+    }
+
+
+
+
 
     public function store(Request $request)
     {

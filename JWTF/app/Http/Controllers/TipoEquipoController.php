@@ -14,6 +14,29 @@ class TipoEquipoController extends Controller
         return response()->json($tipoequipos);
     }
 
+    public function paginatedIndex(Request $request){
+
+        $query = $request->query();
+
+        $page = (int)$query['page'];
+        $perPage = (int)$query['pageSize'];
+
+
+        $tipoequipos = TipoEquipo::select('*')->paginate($perPage, ['*'], 'page', $page); 
+        return response()->json($tipoequipos);
+    }
+
+
+    public function search(Request $request) {
+        $query = $request->input('query');
+        $results = TipoEquipo::where("nombre", "LIKE", "%$query%")->paginate(20);
+        return response()->json($results);
+    }
+
+
+
+
+
     public function store(Request $request)
     {
         $request->validate([

@@ -31,7 +31,7 @@ export class NewEtiquetaComponent implements AfterViewInit {
   usuario: string = '';
   fecha_vigencia: string = '';
   fecha_actual: string = '';
-  // search: string = "";
+  
 
   numero_etiqueta: number = 0;
   empresa: number = 0;
@@ -43,6 +43,8 @@ export class NewEtiquetaComponent implements AfterViewInit {
   empresas: any[] = [];
   etiquetas: any[] = [];
   filteredEtiquetas: any[] = [];
+
+
 
 
 
@@ -209,7 +211,7 @@ export class NewEtiquetaComponent implements AfterViewInit {
   }
 
   ObtenerMarca() {
-    this.http.get<any[]>('http://127.0.0.1:8000/api/auth/marca/index').subscribe(
+    this.http.get<any[]>('http://127.0.0.1:8000/api/auth/marca/getMarcas').subscribe(
       data => {
         this.marcas = data;
       },

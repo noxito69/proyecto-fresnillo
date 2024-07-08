@@ -13,18 +13,18 @@
 
         <section>
 
-            <!-- Modal DBexcel -->
+       
             <div class="modal fade right justify-content-center; modal-dialog-scrollable" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
                   <div class="modal-content">
                     <div class="modal-header">
                       <h4 class="modal-title" id="exampleModalLabel">Seleccionar etiqueta a editar</h4>
-                      <input type="text" name="" id="search-tag" #searchInput class="form-control ms-auto" style="width: 300px;" [(ngModel)]="search" placeholder="Buscar etiqueta...">
+                      <input type="text" name="" id="search-tag" #searchInput class="form-control ms-auto" style="width: 300px;" [(ngModel)]="searchQuery" (ngModelChange)="onSearchChange($event)" placeholder="Buscar etiqueta...">
                     </div>
                     <div class="modal-body  justify-content-center align-items-center">
                       <div class="row g-3">
                         <div class="col-md-12">
-                          <table class="table">
+                          <table class="table table-striped">
                             <thead>
                               <tr>
                                 <th>Numero etiqueta</th>
@@ -33,7 +33,7 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr *ngFor="let etiqueta of filteredEtiquetas">
+                              <tr *ngFor="let etiqueta of etiquetas">
                                 <td>{{ etiqueta.id }}</td>
                                 <td>{{ etiqueta.usuario }}</td>
 
@@ -177,7 +177,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="fechaActual" class="form-label">Fecha actual</label>
-                        <input type="date" class="form-control" id="fechaActual" disabled >
+                        <input type="date" class="form-control" id="fechaActual" disabled [(ngModel)]="fecha_actual" >
                     </div>
                 </div>
 

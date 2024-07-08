@@ -13,6 +13,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 import autoTable from 'jspdf-autotable';
 import * as XLSX from 'xlsx';
+import { debounceTime, distinctUntilChanged, Observable, Subject, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-new-etiqueta-pnmnt',
@@ -23,6 +24,10 @@ import * as XLSX from 'xlsx';
 })
 export class NewEtiquetaPNMNTComponent {
 
+
+
+  searchQuery: string = '';
+  private searchSubject: Subject<string> = new Subject<string>();
 
   numero_serie: string = '';
   usuario: string = '';
@@ -52,7 +57,7 @@ export class NewEtiquetaPNMNTComponent {
 
 
 
-  search: string = "";
+
 
   etiquetaImage: HTMLImageElement | null = null;
   imgWidth: number = 0;
@@ -64,7 +69,7 @@ export class NewEtiquetaPNMNTComponent {
     
     this.getLastTag();
     this.getTags();
-    
+
     this.ObtenerDepartamento();
     this.ObtenerAnexo();
     this.ObtenerModelo();
@@ -83,9 +88,24 @@ export class NewEtiquetaPNMNTComponent {
     date.setFullYear(date.getFullYear());
     this.fecha_actual = date2.toISOString().split('T')[0];
 
+    this.searchSubject.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      switchMap((query: string) => this.search(query))
+    ).subscribe((results: any) => {
+      this.etiquetas = results.data;
+    })
+
   }
 
   
+  onSearchChange(query: string) {
+    this.searchSubject.next(query);
+  }
+
+  search(query: string): Observable<any[]> {
+    return this.http.get<any[]>(`http://127.0.0.1:8000/api/auth/etiquetas_empleados/search?query=${query}`);
+  }
 
   buscarEmpleado() {
     if (!this.numEmpleado) {
@@ -186,8 +206,8 @@ export class NewEtiquetaPNMNTComponent {
   getTags(){
   this.http.get("http://127.0.0.1:8000/api/auth/etiquetas_empleados/index").subscribe(
     (data:any) => {
-      this.etiquetas = data;
-      this.filteredEtiquetas = data; 
+      this.etiquetas = data.data;
+      this.filteredEtiquetas = data.data; 
     }
   );
   }
@@ -229,7 +249,7 @@ export class NewEtiquetaPNMNTComponent {
   }
 
   ObtenerDepartamento(){
-    this.http.get<any[]>("http://127.0.0.1:8000/api/auth/departamentos/index").subscribe(
+    this.http.get<any[]>("http://127.0.0.1:8000/api/auth/departamentos/indexAlfa").subscribe(
 
       data => {
         this.departamentos = data;

@@ -9,27 +9,44 @@ use Illuminate\Http\Request;
 class DepartamentoController extends Controller
 {
     
-    public function index()
+    public function index(Request $request)
     {
-        $departamentos = Departamento::all();
+        $query = $request->query();
+
+        $page = (int)$query['page'];
+        $perPage = (int)$query['pageSize'];
+
+        $departamentos = Departamento::select('*')->paginate($perPage, ['*'], 'page', $page); 
         return response()->json($departamentos);
     }
 
+    public function search(Request $request) {
+        $query = $request->input('query');
+        $results = Departamento::where("nombre", "LIKE", "%$query%")->orWhere("centro_costos", "LIKE", "%$query%")->paginate(20);
+        return response()->json($results);
+    }
+
     
+    public function indexAlfa(){
+        $marcas = Departamento::orderBy('nombre')->get();
+        return response()->json($marcas);
+    }
     
     public function store(Request $request)
     {
         $messages = [
             'nombre.required' => 'El nombre es requerido.',
-            'nombre.u' => 'Este nombre ya existe.',
+            'nombre.unique' => 'Este nombre ya existe.',
             'nombre.max' => 'El nombre no debe exceder los 255 caracteres.',
-            'centro_costos_id.required' => 'El ID del centro de costos es requerido.',
-            'centro_costos_id.exists' => 'El ID del centro de costos no existe.',
+            'centro_costos.required' => 'El centro de costos es requerido.',
+           
         ];
 
         $validated = Validator::make($request->all(), [
+
             'nombre' => 'required|unique:departamentos|max:255',
-            'centro_costos_id' => 'required|exists:centro_costos,id',
+            'centro_costos' => 'required',
+
         ], $messages);
 
         if($validated->fails()){
@@ -62,8 +79,7 @@ class DepartamentoController extends Controller
             'nombre.required' => 'El nombre es requerido.',
             'nombre.unique' => 'Este nombre ya existe.',
             'nombre.max' => 'El nombre no debe exceder los 255 caracteres.',
-            'centro_costos.required' => 'El ID del centro de costos es requerido.',
-            
+            'centro_costos.required' => 'El centro de costos es requerido.',
         ];
 
         $validated = Validator::make($request->all(), [

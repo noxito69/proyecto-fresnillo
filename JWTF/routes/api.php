@@ -80,6 +80,8 @@ Route::group([
     Route::get('departamentos/get/{id}', [DepartamentoController::class, 'show']);
     Route::put('departamentos/put/{id}', [DepartamentoController::class, 'update']);
     Route::delete('departamentos/delete/{id}', [DepartamentoController::class, 'destroy']);
+    Route::get('departamentos/search', [DepartamentoController::class, 'search']);
+    Route::get('departamentos/indexAlfa', [DepartamentoController::class, 'indexAlfa']);
 
 
 
@@ -111,15 +113,19 @@ Route::group([
     Route::get('tipo_equipo/get/{id}',[TipoEquipoController::class,'show']);
     Route::put('tipo_equipo/put/{id}',[TipoEquipoController::class,'update']);
     Route::delete('tipo_equipo/delete/{id}',[TipoEquipoController::class,'destroy']);
+    Route::get('tipo_equipo/search', [TipoEquipoController::class, 'search']);
+    Route::get('tipo_equipo/paginatedIndex', [TipoEquipoController::class, 'paginatedIndex']);
 
 
     //Marca
 
+    Route::get('marca/getMarcas',[MarcaController::class,'getMarcas']);
     Route::get('marca/index',[MarcaController::class,'index']);
     Route::post('marca/post',[MarcaController::class,'store']);
     Route::get('marca/get/{id}',[MarcaController::class,'show']);
     Route::put('marca/put/{id}',[MarcaController::class,'update']);
     Route::delete('marca/delete/{id}',[MarcaController::class,'destroy']);
+    Route::get("marca/search", [MarcaController::class, "search"]);
 
     //Modelos
 
@@ -183,6 +189,7 @@ Route::group([
     Route::put('etiquetas_empleados/put/{id}',[EtiquetasEmpleadosController::class,'update']);
     Route::delete('etiquetas_empleados/delete/{id}',[EtiquetasEmpleadosController::class,'destroy']);
     Route::get('etiquetas_empleados/getByNumeroEtiqueta/{numero_etiqueta}',[EtiquetasEmpleadosController::class,'getByNumeroEtiqueta']);
+    Route::get('etiquetas_empleados/search',[EtiquetasEmpleadosController::class,'search']);
 
 
 

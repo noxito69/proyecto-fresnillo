@@ -14,7 +14,19 @@ class MarcaController extends Controller
         $page = (int)$query['page'];
         $perPage = (int)$query['pageSize'];
 
-        $marcas = Marca::select('*')->paginate($perPage, ['*'], 'page', $page); // páginado para las marcas
+        $marcas = Marca::select('*')->paginate($perPage, ['*'], 'page', $page); 
+        return response()->json($marcas);
+    }
+
+    public function search(Request $request) {
+        $query = $request->input('query');
+        $results = Marca::where("nombre", "LIKE", "%$query%")->paginate(20);
+        return response()->json($results);
+    }
+
+
+    public function getMarcas(){
+        $marcas = Marca::all();
         return response()->json($marcas);
     }
 

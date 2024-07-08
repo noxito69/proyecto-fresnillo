@@ -5,6 +5,7 @@ import { NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
+import { debounceTime, distinctUntilChanged, Observable, Subject, switchMap } from 'rxjs';
 
 
 @Component({
@@ -16,6 +17,8 @@ import Swal from 'sweetalert2';
 })
 export class NewMarcaComponent {
 
+  searchQuery: string = '';
+  private searchSubject: Subject<string> = new Subject<string>();
 
   marca = {
 
@@ -24,7 +27,7 @@ export class NewMarcaComponent {
   };
 
   page: number = 1;
-  pageSize: number = 5;
+  pageSize: number = 20;
   totalItems: number = 0;
   totalPages: number = 0;
   currentPage: number = 0;
@@ -54,9 +57,29 @@ export class NewMarcaComponent {
  constructor(private http: HttpClient, private router: Router) { }
 
 
- ngOnInit() { // Corrige el nombre aquí
+ ngOnInit() { 
   this.getMarca();
+
+  this.searchSubject.pipe(
+    debounceTime(300),
+    distinctUntilChanged(),
+    switchMap((query: string) => this.search(query))
+  ).subscribe((results: any) => {
+    this.marcas = results.data;
+  })
+
 }
+
+
+
+onSearchChange(query: string) {
+  this.searchSubject.next(query);
+}
+
+search(query: string): Observable<any[]> {
+  return this.http.get<any[]>(`http://127.0.0.1:8000/api/auth/marca/search?query=${query}`);
+}
+
 
 
 getMarca() {
@@ -115,22 +138,22 @@ obtenerNombre() {
 
 UpdateMarca() {
   const url = `http://127.0.0.1:8000/api/auth/marca/put/${this.selectedMarcaId}`;
-  // Asegúrate de que el objeto que envías coincide con lo que tu backend espera
+
   const body = {
     nombre: this.nombre,
-    // Incluye aquí cualquier otro campo que necesites actualizar
+
   };
 
   this.http.put<any>(url, body).subscribe(
     data => {
-      // Actualiza el modelo con los datos recibidos, si es necesario
+
       this.nombre = data.nombre;
       Swal.fire('Success', 'Marca actualizada correctamente', 'success');
 
       setTimeout(() => {
         location.reload();
       }, 1000);
-      // Aquí podrías querer recargar los datos de la tabla o realizar alguna otra acción para reflejar la actualización
+  
     },
     error => {
       console.error('Error al actualizar', error);

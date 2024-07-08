@@ -16,7 +16,7 @@
           <div class="modal-dialog modal-dialog-centered modal-md">
             <div class="modal-content">
               <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLabel">Selecciona el departamento a editar</h4>
+                <h4 class="modal-title" id="exampleModalLabel">Selecciona el Tipo Equipo a editar</h4>
 
               </div>
               <div class="modal-body  justify-content-center align-items-center">
@@ -25,7 +25,7 @@
 
                     <div class="container mt-5 container-centered">
                       <div class="container-form">
-                          <h1 class="text-center mb-4">Actualizar </h1>
+                          <h1 class="text-center mb-4">Actualizar tipo equipo </h1>
 
                           <!-- Primer Nivel -->
                           <div class="form-level form-horizontal">
@@ -38,26 +38,16 @@
                           <!-- Segundo Nivel -->
                           <div class="form-level form-horizontal">
                               <div class="mb-3">
-                                  <label for="nombreDepartamento" class="form-label">Departamento</label>
-                                  <input type="text" class="form-control" [(ngModel)]="departamento.nombre"   placeholder="" >
+                                  <label for="nombreDepartamento" class="form-label">Tipo equipo</label>
+                                  <input type="text" class="form-control" [(ngModel)]="tipo_equipo.nombre"   placeholder="" >
                               </div>
                           </div>
 
-                          <div class="form-level form-horizontal">
-                            <div class="mb-3">
-                                <label for="nombreEmpleado" class="form-label">Centro de costos</label>
-                                <select class="form-select" [(ngModel)]="departamento.centro_costos">
-                                    <option selected value="0">Selecciona un centro de costos</option>
-                                    <option *ngFor="let centro of centrosCostos">{{centro.nombre}}</option>
-                                  
-                                </select>
-                            </div>
-                        </div>
-                          
+                   
                           
 
                           <div class="form-level form-level-buttons">
-                            <button type="button" class="btn btn-warning" (click)="UpdateDepartamento()">Actualizar Departamento</button>
+                            <button type="button" class="btn btn-warning" (click)="UpdateTipoEquipo()">Actualizar tipo equipo</button>
 
 
                         </div>
@@ -88,29 +78,19 @@
 
                     <div class="container mt-5 container-centered">
                       <div class="container-form">
-                          <h1 class="text-center mb-4">Crear Departamento Nuevo </h1>
+                          <h1 class="text-center mb-4">Crear nuevo tipo equipo </h1>
 
                           <!-- Segundo Nivel -->
                           <div class="form-level form-horizontal">
                               <div class="mb-3">
-                                  <label for="Nombre depa" class="form-label">Nombre Departamento</label>
-                                  <input type="text" class="form-control" id="nombreMarca"  name="nombreMarca" placeholder="" [(ngModel)]="departamento.nombre">
+                                  <label for="Nombre depa" class="form-label">Nombre tipo equipo</label>
+                                  <input type="text" class="form-control" id="nombreMarca"  name="nombreMarca" placeholder="" [(ngModel)]="tipo_equipo.nombre">
                               </div>
                           </div>
 
-                          <div class="form-level form-horizontal">
-                            <div class="mb-3">
-                                <label for="nombreEmpleado" class="form-label">Centro de costos</label>
-                                <select class="form-select" [(ngModel)]="departamento.centro_costos">
-                                    <option selected value="0">Selecciona un centro de costos</option>
-                                    <option *ngFor="let centro of centrosCostos">{{centro.nombre}}</option>
-                                  
-                                </select>
-                            </div>
-                        </div>
 
                           <div class="form-level form-level-buttons">
-                            <button type="button" class="btn btn-success" (click)="crearDepartamento()">Crear</button>
+                            <button type="button" class="btn btn-success" (click)="crearTipoEquipo()">Crear</button>
                         </div>
                       </div>
                   </div>
@@ -130,7 +110,7 @@
           <div class="modal-dialog modal-dialog-centered modal-md">
             <div class="modal-content">
               <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLabel">Eliminar departamento</h4>
+                <h4 class="modal-title" id="exampleModalLabel">Eliminar tipo equipo</h4>
 
               </div>
               <div class="modal-body  justify-content-center align-items-center">
@@ -139,14 +119,14 @@
 
                     <div class="container mt-5 container-centered">
                       <div class="container-form">
-                          <h1 class="text-center mb-4">¿Deseas eliminar el departamento?</h1>
+                          <h1 class="text-center mb-4">¿Deseas eliminar el tipo equipo?</h1>
 
 
                           <input type="text" class="form-control" id="nombre_marca" [(ngModel)]="selectedMarcaId" name="nombre_marca" placeholder="" [value]="selectedMarcaId" disabled [hidden]="true">
 
                           <div class="form-level ">
                             <div class="d-flex justify-content-between">
-                              <button type="button" class="btn btn-success" (click)="DeleteMarca()" >Si</button>
+                              <button type="button" class="btn btn-success" (click)="DeleteTipoEquipo()" >Si</button>
                               <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>
                             </div>
                           </div>
@@ -176,7 +156,7 @@
 
           <div class="w-100 d-flex justify-end">
             <button type="button" class="btn btn-success ms-auto mb-3" data-bs-toggle="modal" data-bs-target="#AddModal">
-              Agregar Departamento
+              Agregar tipo equipo
               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="54" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                 <path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z" />
@@ -206,17 +186,16 @@
 
                     <th style="text-align: center;">ID</th>
                     <th>Nombre</th>
-                    <th>Centro de costos</th>
                     <th>Acciones</th>
                   </tr>
                 </thead>
                 <tbody >
-                  <tr *ngFor="let depa of departamentos">
-                    <td>{{depa.id}}</td>
-                    <td style="text-align: center;">{{depa.nombre}}</td>
-                    <td style="text-align: center;">{{depa.centro_costos}}</td>
+                  <tr *ngFor="let eqp of equipos">
+                    <td>{{eqp.id}}</td>
+                    <td style="text-align: center;">{{eqp.nombre}}</td>
+ 
                     <td style="width: 300px;">
-                      <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updateModal" (click)="openEditModal(depa.id)" >
+                      <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updateModal" (click)="openEditModal(eqp.id)" >
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="54" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                           <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                           <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
@@ -225,7 +204,7 @@
                         </svg>
                       </button>
 
-                      <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal" (click)="openEditModal(depa.id)" c>
+                      <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal" (click)="openEditModal(eqp.id)" c>
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="54" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                           <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                           <path d="M10 10l4 4m0 -4l-4 4" />

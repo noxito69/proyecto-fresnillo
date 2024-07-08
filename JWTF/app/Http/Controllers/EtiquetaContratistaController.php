@@ -19,7 +19,7 @@ class EtiquetaContratistaController extends Controller
 
     public function search(Request $request) {
         $query = $request->input('query');
-        $results = EtiquetaContratista::where("numero_etiqueta", "LIKE", "%$query%")->orWhere("usuario", "LIKE", "%$query%")->paginate(20);
+        $results = EtiquetaContratista::where("numero_etiqueta", "LIKE", "%$query%")->orWhere("usuario", "LIKE", "%$query%")->orWhere("numero_serie", "LIKE","%$query%")->paginate(20);
         return response()->json($results);
     }
 

@@ -1,37 +1,23 @@
-.form-level {
-    margin-bottom: 20px;
-  }
-  
-  .form-horizontal {
+.form-container {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     gap: 20px;
-  }
-  
-  th, td {
-    text-align: center;
-  }
-  
-  .form-select {
-    width: 200px; /* Ajusta este valor para cambiar el ancho */
-  }
-  
-  #carouselExampleFade {
-    z-index: 0;
-  }
-  
-  .carousel {
+}
+
+.modal.right .modal-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    transition: transform 0.3s ease-out;
+}
+.modal.right .modal-content {
     height: 100%;
-    width: 100%;
-  }
-  
-  .carousel .carousel-item {
-    height: 100%;
-    width: 100%;
-  }
-  
-  .carousel .carousel-item img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover; /* Asegura que las imágenes se escalen correctamente */
-  }
-  
+    overflow-y: auto;
+}
+
+.modal.right .modal-body {
+    padding: 1rem;
+}

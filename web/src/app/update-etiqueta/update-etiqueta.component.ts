@@ -87,7 +87,7 @@ export class UpdateEtiquetaComponent {
   }
 
   ObtenerMarca() {
-    this.http.get<any[]>('http://127.0.0.1:8000/api/auth/marca/index').subscribe(
+    this.http.get<any[]>('http://127.0.0.1:8000/api/auth/marca/getMarcas').subscribe(
       data => {
         this.marcas = data;
       },
