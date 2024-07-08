@@ -82,21 +82,23 @@
         </section>
 
         <div class="container mt-5 container-centered">
-            <div class="container-form">
+            <div class="container-form row">
                 <h1 class="text-center mb-4">Etiquetas Empleados</h1>
 
                 <!-- Primer Nivel -->
-                <div class="form-level form-horizontal">
-                    <div class="mb-3">
+                <div class="col-md-12 row mb-3">
+                    <div class="col-md-6  ">
                         <label for="numeroEtiqueta" class="form-label">Número de Etiqueta</label>
                         <input type="number" class="form-control" id="numeroEtiqueta" placeholder="Número de Etiqueta" disabled="true" [(ngModel)]="numero_etiqueta">
                     </div>
 
-                    <div class="mb-3">
+                    <div class="col-md-6 mb-3">
                         <label for="empleadoclave" class="form-label">Numero Empleado</label>
                         <input type="text" class="form-control" [(ngModel)]="numEmpleado" id="Empleadoclave" placeholder="Coloca la clave del empleado">
-                        <button type="button" class="btn btn-info" (click)="buscarEmpleado()">Buscar</button>
-                    </div>
+                      </div>
+                      <div class="col-md-12">
+                        <button type="button" class="btn btn-info w-100" (click)="buscarEmpleado()">Buscar</button>
+                      </div>
 
                 </div>
 
@@ -126,11 +128,6 @@
                         </select>
                     </div>
 
-
-
-
-
-
                     <div class="mb-3">
                         <label for="mac" class="form-label">Mac Address</label>
                         <input type="text" class="form-control" id="mac" placeholder="Mac Address" [(ngModel)]="mac" (ngModelChange)="mac=$event.toUpperCase()" (keyup)="formatMacAddress()">
@@ -150,8 +147,6 @@
                         <label for="tipoEquipo" class="form-label">Numero de Serie</label>
                         <input type="text" class="form-control" id="NodeSerie" [(ngModel)]="numero_serie" placeholder="Numero de serie" (ngModelChange)="numero_serie=$event.toUpperCase()">
                     </div>
-
-
                 </div>
 
                 <!-- Quinto Nivel -->
@@ -170,13 +165,9 @@
                         <select class="form-select" id="departamento" [(ngModel)]="departamento">
                             <option selected value="0">Seleccione el departamento</option>
                             <option *ngFor="let departa of departamentos">{{departa.nombre}}</option>
-
                         </select>
                     </div>
-
                 </div>
-
-
 
                 <!-- Séptimo Nivel -->
                 <div class="form-level form-horizontal">

@@ -42,59 +42,58 @@
     </style>
 </head>
 <body>
-    
+
     <app-layout>
 
 
 
         <div class="container mt-5 container-centered">
-            <div class="container-form">
+            <div class="container-form row">
                 <h1 class="text-center mb-4">Ingreso Accesorios Nuevos</h1>
-
-
-                <div class="form-level form-horizontal">
+                <div class="col-md-2">
                     <div class="mb-3">
                         <label for="cantidad" class="form-label"  >Cantidad:</label>
                         <input type="number" class="form-control" id="cantidad" [(ngModel)]="cantidad"  placeholder="" min="1">
                     </div>
-                
+
                 </div>
-                
+
                 <!-- Primer Nivel -->
-                <div class="form-level form-horizontal">
+                <div class="col-md-10">
                     <div class="mb-3">
                         <label for="articulo" class="form-label" >Articulo:</label>
                         <input type="text" class="form-control" id="articulo" [(ngModel)]="articulo" placeholder="" (input)="articulo = articulo.toUpperCase()">
                     </div>
-                
+
                 </div>
-            
+
                 <!-- Segundo Nivel -->
-                <div class="form-level form-horizontal">
+                <div class="col-md-6">
 
                     <div class="mb-3">
                         <label for="marca" class="form-label"  >Marca:</label>
                         <input type="text" class="form-control" [(ngModel)]="marca" id="marca" placeholder="" (input)="marca = marca.toUpperCase()">
                     </div>
                 </div>
-            
-                <div class="form-level form-horizontal">
+
+                <div class="col-md-6">
                     <div class="mb-3">
                         <label for="cbarras" class="form-label" >Codigo de barras:</label>
                         <input type="string" class="form-control" [(ngModel)]="codigo_barras"  id="cbarras" placeholder="">
                     </div>
-                
+
                 </div>
-            
-            
-            
-               
-            
+
+
+
+
+
                 <!-- Octavo Nivel -->
-                <div class="form-level form-level-buttons">
-                    <button type="submit" class="btn btn-primary" (click)="crearAccesorio()">Registrar Accesorio</button>
-                    <button type="button" class="btn btn-danger">Salir</button>
-                    
+                <div class="col-md-6">
+                  <button type="submit" class="btn btn-primary w-100" (click)="crearAccesorio()">Registrar Accesorio</button>
+                </div>
+                <div class="col-md-6">
+                  <button type="button" class="btn btn-danger w-100">Salir</button>
                 </div>
             </div>
         </div>

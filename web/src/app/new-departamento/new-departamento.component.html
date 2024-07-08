@@ -43,31 +43,33 @@
 
     <app-layout>
         <div class="container mt-5 container-centered">
-            <div class="container-form">
-                <h1 class="text-center mb-4">Registrar Departamentos</h1>
+          <div class="container-form row">
+          <h1 class="text-center mb-4">Registrar Departamentos</h1>
 
                 <!-- Primer Nivel -->
-                <div class="form-level form-horizontal">
+                <div class="col-md-12">
                     <div class="mb-3">
                         <label for="departamento" class="form-label">Departamento:</label>
-                        <input type="text" class="form-control" [(ngModel)]="departamento.nombre" id="departamento" placeholder="">
+                        <input type="text" class="form-control" placeholder="Departamento Uno" [(ngModel)]="departamento.nombre" id="departamento" >
                     </div>
                 </div>
 
                 <!-- Segundo Nivel -->
-                <div class="form-level form-horizontal">
+                <div class="col-md-12">
                     <div class="mb-3">
                         <label for="centrodecostos" class="form-label">Centro de costos:</label>
-                        <select class="form-select" [(ngModel)]="departamento.centro_costos_id" id="ccostos">
+                        <select class="form-select w-100" [(ngModel)]="departamento.centro_costos_id" id="ccostos">
                             <option *ngFor="let centro of centrosCostos" [value]="centro.id">{{centro.nombre}}</option>
                         </select>
                     </div>
                 </div>
 
                 <!-- Octavo Nivel -->
-                <div class="form-level form-level-buttons">
-                    <button type="button" class="btn btn-primary" (click)="crearDepartamento()">Crear registro</button>
-                    <button type="button" class="btn btn-danger" (click)="navigateTo('/')">Salir</button>
+                <div class="col-md-8">
+                  <button type="button" class="btn btn-primary w-100" (click)="crearDepartamento()">Crear registro</button>
+                </div>
+                <div class="col-md-4">
+                  <button type="button" class="btn btn-danger w-100" (click)="navigateTo('/')">Salir</button>
                 </div>
             </div>
         </div>
