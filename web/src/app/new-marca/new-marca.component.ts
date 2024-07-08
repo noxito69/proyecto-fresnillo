@@ -19,18 +19,36 @@ export class NewMarcaComponent {
 
   marca = {
 
-    nombre: ''    
+    nombre: ''
 
   };
+
+  page: number = 1;
+  pageSize: number = 5;
+  totalItems: number = 0;
+  totalPages: number = 0;
+  currentPage: number = 0;
 
 
   selectedMarcaId: string | null = null;
   marcas: any[] = [];
   id: string = '';
   nombre: string = '';
-  
 
 
+  previousPage() {
+    if (this.page > 1) {
+      this.page--;
+      this.getMarca();
+    }
+  }
+
+  nextPage() {
+    if (this.page < this.totalPages) {
+      this.page++;
+      this.getMarca();
+    }
+  }
 
 
  constructor(private http: HttpClient, private router: Router) { }
@@ -42,15 +60,40 @@ export class NewMarcaComponent {
 
 
 getMarca() {
-  this.http.get('http://127.0.0.1:8000/api/auth/marca/index').subscribe({
+  const params = `?page=${this.page}&pageSize=${this.pageSize}`;
+  this.http.get(`http://127.0.0.1:8000/api/auth/marca/index${params}`).subscribe({
     next: (data: any) => {
-      this.marcas = data;
-      
+      this.marcas = data.data;
+      this.totalItems = data.total;
+      this.totalPages = data.last_page;
+      this.currentPage = data.current_page;
+
     },
     error: (error) => {
       console.error('There was an error!', error);
     }
   });
+}
+
+get pages(): number[] {
+  const half = Math.floor(this.pageSize / 2);
+  let start = Math.max(this.currentPage - half, 1);
+  let end = Math.min(start + this.pageSize - 1, this.totalPages);
+
+  if (end - start < this.pageSize - 1) {
+    start = Math.max(end - this.pageSize + 1, 1);
+  }
+
+  const pages = [];
+  for (let i = start; i <= end; i++) {
+    pages.push(i);
+  }
+  return pages;
+}
+
+goToPage(page: number) {
+  this.page = page;
+  this.getMarca();
 }
 
 
@@ -60,7 +103,7 @@ obtenerNombre() {
     data => {
       // Paso 2: Actualizar el modelo con los datos recibidos
       // Asumiendo que tienes propiedades en tu componente para cada uno de estos campos
-  
+
       this.nombre = data.nombre;
     },
     error => {
@@ -83,7 +126,7 @@ UpdateMarca() {
       // Actualiza el modelo con los datos recibidos, si es necesario
       this.nombre = data.nombre;
       Swal.fire('Success', 'Marca actualizada correctamente', 'success');
-      
+
       setTimeout(() => {
         location.reload();
       }, 1000);
@@ -101,7 +144,7 @@ DeleteMarca() {
   const url = `http://127.0.0.1:8000/api/auth/marca/delete/${this.selectedMarcaId}`;
 
 
-  
+
   this.http.delete<any>(url).subscribe(
 
 
@@ -117,13 +160,14 @@ DeleteMarca() {
 
 
   );
-  
+
 }
 
 CreateMarca() {
 
-  this.http.post('http://127.0.0.1:8000/api/auth/marca/post', this.marca)
-  .subscribe( response => {
+  this.http.post('http://127.0.0.1:8000/api/auth/marca/post', this.marca).subscribe( response => {
+
+    console.log(response)
 
     Swal.fire({
       icon: 'success',
@@ -132,7 +176,7 @@ CreateMarca() {
 
     setTimeout(() => {
       location.reload();
-    }, 1000); 
+    }, 1000);
   } , error => {
 
     let errorMessage = '';
@@ -152,9 +196,9 @@ CreateMarca() {
 openEditModal(id: string) {
   this.selectedMarcaId = id;
   this.obtenerNombre();
- 
- 
-  
+
+
+
 }
   navigateTo(route:string){
 

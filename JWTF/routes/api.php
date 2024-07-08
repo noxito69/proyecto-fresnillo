@@ -163,6 +163,8 @@ Route::group([
     Route::get('etiquetas_contratistas/getByNumber/{num_etiqueta}', [EtiquetaContratistaController::class, 'getbynumer']);
     Route::get('etiquetas_contratistas/export', [EtiquetaContratistaController::class, 'export']);
 
+    Route::get("etiquetas_contratistas/search", [EtiquetaContratistaController::class, "search"]);
+
 
     //Usuarios Penmont
     Route::get('usuarios_penmont/index',[UsuariosPenmontController::class,'index']);

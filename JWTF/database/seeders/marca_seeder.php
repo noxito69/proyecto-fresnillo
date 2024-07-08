@@ -20,5 +20,10 @@ class marca_seeder extends Seeder
         Marca::create(['nombre' => 'Marca 3']);
         Marca::create(['nombre' => 'Marca 4']);
         Marca::create(['nombre' => 'Marca 5']);
+        Marca::create(['nombre' => 'Marca 6']);
+        Marca::create(['nombre' => 'Marca 7']);
+        Marca::create(['nombre' => 'Marca 8']);
+        Marca::create(['nombre' => 'Marca 9']);
+        Marca::create(['nombre' => 'Marca 10']);
     }
 }

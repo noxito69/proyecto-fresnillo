@@ -13,23 +13,22 @@ class EtiquetaContratistaController extends Controller
 {
     public function index()
     {
-
-        
         $etiquetasContratistas = EtiquetaContratista::select("*")->paginate(20, ['*'], 'page', 1);
         return response()->json($etiquetasContratistas);
     }
 
-    
-
-    public function export(){
-
-        $etiquetaContratista = EtiquetaContratista::all();
-        return response()->json($etiquetaContratista);
-
-
+    public function search(Request $request) {
+        $query = $request->input('query');
+        $results = EtiquetaContratista::where("numero_etiqueta", "LIKE", "%$query%")->orWhere("usuario", "LIKE", "%$query%")->paginate(20);
+        return response()->json($results);
     }
 
-    
+    public function export(){
+        $etiquetaContratista = EtiquetaContratista::all();
+        return response()->json($etiquetaContratista);
+    }
+
+
 
 
     public function store(Request $request)
@@ -128,7 +127,7 @@ class EtiquetaContratistaController extends Controller
 
 
 
-    
+
     public function destroy($id)
     {
         $etiquetaContratista = EtiquetaContratista::find($id);
@@ -159,13 +158,13 @@ class EtiquetaContratistaController extends Controller
     public function empresa_equipos()
     {
         $currentYear = now()->year; // Obtén el año actual
-    
+
         $companies = EtiquetaContratista::select('empresa', 'tipo_equipo')
             ->selectRaw('count(*) as total')
             ->selectRaw("SUM(CASE WHEN YEAR(fecha_vigencia) >= $currentYear THEN 1 ELSE 0 END) as vigentes") // Suma condicional para contar solo las etiquetas vigentes
             ->groupBy('empresa', 'tipo_equipo')
             ->get();
-    
+
         $result = [];
         foreach ($companies as $company) {
             // Inicializa la empresa si aún no existe en el resultado
@@ -175,21 +174,21 @@ class EtiquetaContratistaController extends Controller
                     'tipos_equipo' => [] // Inicializa los tipos de equipo
                 ];
             }
-    
+
             // Agrega el tipo de equipo y sus detalles
             $result[$company->empresa]['tipos_equipo'][] = [
                 'tipo_equipo' => $company->tipo_equipo,
                 'total' => $company->total,
-              
+
             ];
-    
+
             // Suma al total de vigentes por empresa
             $result[$company->empresa]['total_vigentes'] += $company->vigentes;
         }
-    
+
         return response()->json($result);
     }
-    
+
 
 
     public function grafica_grande()
@@ -221,10 +220,10 @@ public function getbynumer($numero_etiqueta)
 
 
 
-   
 
 
-    
+
+
 
 }
 

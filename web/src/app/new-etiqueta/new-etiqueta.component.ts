@@ -11,6 +11,7 @@ import { Router, RouterLink } from '@angular/router';
 
 import autoTable from 'jspdf-autotable';
 import * as XLSX from 'xlsx';
+import { Observable, Subject, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-new-etiqueta',
@@ -22,12 +23,15 @@ import * as XLSX from 'xlsx';
 export class NewEtiquetaComponent implements AfterViewInit {
 
 
+  searchQuery: string = '';
+  private searchSubject: Subject<string> = new Subject<string>();
+
   modelo: string = '';
   numero_serie: string = '';
   usuario: string = '';
   fecha_vigencia: string = '';
   fecha_actual: string = '';
-  search: string = "";
+  // search: string = "";
 
   numero_etiqueta: number = 0;
   empresa: number = 0;
@@ -53,7 +57,7 @@ export class NewEtiquetaComponent implements AfterViewInit {
   totalPages: number = 0;
   currentPage: number = 0;
 
-  @ViewChild('search-tag') searchInput!: ElementRef;
+
 
   constructor(private http: HttpClient, private router: Router) {
     const date = new Date();
@@ -64,6 +68,22 @@ export class NewEtiquetaComponent implements AfterViewInit {
     const date2 = new Date();
     date.setFullYear(date.getFullYear());
     this.fecha_actual = date2.toISOString().split('T')[0];
+
+    this.searchSubject.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      switchMap((query: string) => this.search(query))
+    ).subscribe((results: any) => {
+      this.etiquetas = results.data;
+    })
+  }
+
+  onSearchChange(query: string) {
+    this.searchSubject.next(query);
+  }
+
+  search(query: string): Observable<any[]> {
+    return this.http.get<any[]>(`http://127.0.0.1:8000/api/auth/etiquetas_contratistas/search?query=${query}`);
   }
 
   ngAfterViewInit() {
@@ -92,7 +112,7 @@ export class NewEtiquetaComponent implements AfterViewInit {
     this.http.get<any[]>(url).subscribe(
       (data: any[]) => {
         // Verificar si los datos se recibieron correctamente
-        
+
 
         // Convertir los datos a un formato que XLSX pueda manejar
         const worksheet = XLSX.utils.json_to_sheet(data);
@@ -118,10 +138,10 @@ export class NewEtiquetaComponent implements AfterViewInit {
     );
   }
 
-  
+
 
   getTags() {
-  
+
     this.http.get("http://127.0.0.1:8000/api/auth/etiquetas_contratistas/index").subscribe(
       (data: any) => {
         this.etiquetas = data.data;
@@ -231,13 +251,13 @@ export class NewEtiquetaComponent implements AfterViewInit {
       return;
     }
 
-    if(this.empresa === 0) { 
+    if(this.empresa === 0) {
 
       Swal.fire("Error", 'Verifica la empresa', 'error');
       return;
 
     }
-    
+
 
     const url = 'http://127.0.0.1:8000/api/auth/etiquetas_contratistas/post';
     const body = {
@@ -249,11 +269,11 @@ export class NewEtiquetaComponent implements AfterViewInit {
       usuario: this.usuario,
       empresa: this.empresa,
       fecha_vigencia: this.fecha_vigencia,
-     
+
     };
 
     this.http.post(url, body).subscribe(
-      response => { 
+      response => {
         this.generatePdf();
         Swal.fire('¡Éxito!', 'Etiqueta creada con éxito.', 'success');
 
@@ -273,8 +293,8 @@ export class NewEtiquetaComponent implements AfterViewInit {
             text: errorMessage,
         });
     }
-  
-  );  
+
+  );
   }
 
   generatePdf() {

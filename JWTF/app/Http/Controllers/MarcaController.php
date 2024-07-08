@@ -7,11 +7,17 @@ use Illuminate\Http\Request;
 
 class MarcaController extends Controller
 {
-    public function index(){
-        $marcas = Marca::all();
+    public function index(Request $request){
+
+        $query = $request->query();
+
+        $page = (int)$query['page'];
+        $perPage = (int)$query['pageSize'];
+
+        $marcas = Marca::select('*')->paginate($perPage, ['*'], 'page', $page); // páginado para las marcas
         return response()->json($marcas);
     }
-    
+
     public function store(Request $request){
         $request->validate([
             'nombre' => 'required|max:255',
