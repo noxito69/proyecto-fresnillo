@@ -9,16 +9,33 @@ class ModeloEmpleadoController extends Controller
 {
     public function index(){
 
-        $modelos = ModeloEmpleado::all();
+        $modelos = ModeloEmpleado::OrderBy('nombre')->get();
         return response()->json($modelos);
         
 
     }
 
+    public function indexPg(Request $request){
+
+        $query = $request->query();
+        $page = (int)$query['page'];
+        $perPage = (int)$query['pageSize'];
+
+        $modelos = ModeloEmpleado::orderBy('nombre')->paginate($perPage, ['*'], 'page', $page); 
+        return response()->json($modelos);
+
+    }
+
+    public function search(Request $request) {
+        $query = $request->input('query');
+        $results = ModeloEmpleado::where("nombre", "LIKE", "%$query%")->paginate(20);
+        return response()->json($results);
+    }
+
     public function store(Request $request){
 
         $request->validate([
-            'nombre' => 'required|max:50',
+            'nombre' => 'required|max:50|unique:modelo_empleados',
         ]);
 
         $modelo = ModeloEmpleado::create($request->all());

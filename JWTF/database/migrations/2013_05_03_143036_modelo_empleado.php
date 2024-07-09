@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('modelo_empleado', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre', 50);
+            $table->string('nombre', 50)->unique();
             $table->timestamps();
         });
     }

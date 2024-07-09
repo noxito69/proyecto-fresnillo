@@ -10,7 +10,6 @@
 
     <app-layout>
 
-
         <section>
 
        
@@ -29,13 +28,15 @@
                               <tr>
                                 <th>Numero etiqueta</th>
                                 <th>Nombre</th>
+                                <th>Numero Serie</th>
                                 <th>Editar</th>
                               </tr>
                             </thead>
                             <tbody>
                               <tr *ngFor="let etiqueta of etiquetas">
-                                <td>{{ etiqueta.id }}</td>
+                                <td>{{ etiqueta.numero_etiqueta}}</td>
                                 <td>{{ etiqueta.usuario }}</td>
+                                <td>{{ etiqueta.numero_serie }}</td>
 
                                 <td>
                                   <button data-bs-dismiss="modal" class="btn btn-success" [routerLink]="['/update-etiqueta-pnmnt', etiqueta.id]">
@@ -87,7 +88,7 @@
 
                 <!-- Primer Nivel -->
                 <div class="col-md-12 row mb-3">
-                    <div class="col-md-6  ">
+                    <div class="col-md-6">
                         <label for="numeroEtiqueta" class="form-label">Número de Etiqueta</label>
                         <input type="number" class="form-control" id="numeroEtiqueta" placeholder="Número de Etiqueta" disabled="true" [(ngModel)]="numero_etiqueta">
                     </div>
@@ -103,17 +104,25 @@
                 </div>
 
                 <!-- Segundo Nivel -->
-                <div class="form-level form-horizontal">
+                <div class="col-md-12 row mb-3">
 
-                    <div class="mb-3">
+                    <div class="col-md-6">
                         <label for="usuario" class="form-label">Usuario</label>
                         <input type="text" class="form-control" id="usuario" placeholder="Usuario" [(ngModel)]="nombre">
                     </div>
 
-                    <div class="mb-3">
+                    <div class="col-md-12">
                         <label for="modelo" class="form-label">Host</label>
                         <input type="text" class="form-control" id="host" placeholder="Host" [(ngModel)]="host">
                     </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+
+                  
+
+
                 </div>
 
                 <!-- Tercer Nivel -->

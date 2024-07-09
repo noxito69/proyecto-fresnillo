@@ -55,10 +55,8 @@
                       </svg> TI</span>
                     <div *ngIf="openMenu === 'ti'" class="submenu">
                         <a (click)="navigateTo('/register')">• Nuevo Usuario TI</a>
-                        <a (click)="navigateTo('/new-departamento')" *ngIf="user_data.rol_id == 1">• Nuevo departamento</a>
                         <a (click)="navigateTo('/new-user-pnmnt')" *ngIf="user_data.rol_id == 1">• Nuevo empleado</a>
-                        <a (click)="navigateTo('/new-marca')">• Marcas</a>
-                        <a (click)="navigateTo('/tipo-equipo')">• Tipos equipos</a>
+                        
                     </div>
                 </div>
                 <div class="sidebar-item" (click)="toggleSubmenu('labels')">
@@ -69,6 +67,23 @@
                     <div *ngIf="openMenu === 'labels'" class="submenu">
                         <a (click)="navigateTo('/new-etiqueta')">• Contratistas</a>
                         <a (click)="navigateTo('/new-etiqueta-pnmnt')">• Empleados</a>
+                    </div>
+                </div>
+
+
+                <div class="sidebar-item" (click)="toggleSubmenu('tables')">
+                    <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-table" viewBox="0 0 16 16">
+                        <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm15 2h-4v3h4zm0 4h-4v3h4zm0 4h-4v3h3a1 1 0 0 0 1-1zm-5 3v-3H6v3zm-5 0v-3H1v2a1 1 0 0 0 1 1zm-4-4h4V8H1zm0-4h4V4H1zm5-3v3h4V4zm4 4H6v3h4z"/>
+                      </svg> Gestion </span>
+                    <div *ngIf="openMenu === 'tables'" class="submenu">
+                        <a (click)="navigateTo('/new-departamento')" *ngIf="user_data.rol_id == 1">• Departamentos</a>
+                        <a (click)="navigateTo('/new-marca')">• Marcas</a>
+                        <a (click)="navigateTo('/tipo-equipo')">• Tipos de equipos</a>
+                        <a (click)="navigateTo('/new-empresa')">• Empresas Contratistas</a>
+                        <a (click)="navigateTo('/anexo')">• Anexos</a>
+                        <a (click)="navigateTo('/modelos')">• Modelos Penmont</a>
+                        <a (click)="navigateTo('/centro-costos')">• Centros de costos</a>
+                      
 
                     </div>
 

@@ -16,7 +16,7 @@ class ModeloSeeder extends Seeder
     public function run()
     {
         Modelo::create([
-            'nombre' => 'Modelo 1',
+            'nombre' => '',
             
         ]);
 

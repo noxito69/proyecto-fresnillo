@@ -72,6 +72,8 @@ Route::group([
     Route::get('centro_costos/get/{id}', [CentroCostoController::class, 'show']);
     Route::put('centro_costos/put/{id}', [CentroCostoController::class, 'update']);
     Route::delete('centro_costos/delete/{id}', [CentroCostoController::class, 'destroy']);
+    Route::get('centro_costos/search', [CentroCostoController::class, 'search']);
+    Route::get('centro_costos/indexPg', [CentroCostoController::class, 'indexPg']);
 
 
     //departamentos
@@ -104,6 +106,8 @@ Route::group([
     Route::get('anexos/get/{id}',[AnexoController::class,'show']);
     Route::put('anexos/put/{id}',[AnexoController::class,'update']);
     Route::delete('anexos/delete/{id}',[AnexoController::class,'destroy']);
+    Route::get('anexos/search', [AnexoController::class, 'search']);
+    Route::get('anexos/indexPg', [AnexoController::class, 'indexPg']);
 
 
 
@@ -143,7 +147,8 @@ Route::group([
     Route::get('modelo_empleado/get/{id}',[ModeloEmpleadoController::class,'show']);
     Route::put('modelo_empleado/put/{id}',[ModeloEmpleadoController::class,'update']);
     Route::delete('modelo_empleado/delete/{id}',[ModeloEmpleadoController::class,'destroy']);
-
+    Route::get('modelo_empleado/search', [ModeloEmpleadoController::class, 'search']);
+    Route::get('modelo_empleado/indexPg', [ModeloEmpleadoController::class, 'indexPg']);
 
 
 
@@ -153,7 +158,8 @@ Route::group([
     Route::get('empresa_contratista/get/{id}',[EmpresaContratistaController::class,'show']);
     Route::put('empresa_contratista/put/{id}',[EmpresaContratistaController::class,'update']);
     Route::delete('empresa_contratista/delete/{id}',[EmpresaContratistaController::class,'destroy']);
-    Route::get('empresa_contratista/indexAlfabetic',[EmpresaContratistaController::class,'indexAlphabetically']);
+    Route::get('empresa_contratista/indexPg',[EmpresaContratistaController::class,'indexPg']);
+    Route::get('empresa_contratista/search',[EmpresaContratistaController::class,'search']);
 
 
 
@@ -168,7 +174,6 @@ Route::group([
     Route::get('etiquetas_contratistas/equipos_general', [EtiquetaContratistaController::class, 'grafica_grande']);
     Route::get('etiquetas_contratistas/getByNumber/{num_etiqueta}', [EtiquetaContratistaController::class, 'getbynumer']);
     Route::get('etiquetas_contratistas/export', [EtiquetaContratistaController::class, 'export']);
-
     Route::get("etiquetas_contratistas/search", [EtiquetaContratistaController::class, "search"]);
 
 

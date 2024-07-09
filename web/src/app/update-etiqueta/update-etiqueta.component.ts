@@ -145,10 +145,8 @@ export class UpdateEtiquetaComponent {
 
       const pdfBlob = pdf.output('blob');
       const pdfUrl = URL.createObjectURL(pdfBlob);
-      const link = document.createElement('a');
-      link.href = pdfUrl;
-      link.download = 'etiqueta.pdf';
-      link.click();
+      
+      window.open(pdfUrl, '_blank');
     }).catch(error => {
       console.error("Error generating PDF:", error);
       Swal.fire('Error', 'Ocurrió un error al generar el PDF.', 'error');

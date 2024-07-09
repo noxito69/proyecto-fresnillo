@@ -25,5 +25,9 @@ export const routes: Routes = [
 {path:'chart-js', loadComponent: () => import('./chart-js/chart-js.component').then(cj => cj.ChartJsComponent)},
 {path:'new-marca', loadComponent: () => import('./new-marca/new-marca.component').then(nm => nm.NewMarcaComponent)},
 {path:'tipo-equipo', loadComponent: () => import('./tipo-equipo/tipo-equipo.component').then(te => te.TipoEquipoComponent)},    
+{path:'new-empresa', loadComponent: () => import('./nueva-empresa/nueva-empresa.component').then(ne => ne.NuevaEmpresaComponent)},
+{path:'anexo', loadComponent: () => import('./anexos/anexos.component').then(a => a.AnexosComponent)},
+{path:'modelos', loadComponent: () => import('./modelos/modelos.component').then(m => m.ModelosComponent)},
+{path:'centro-costos', loadComponent: () => import('./centro-costos/centro-costos.component').then(cc => cc.CentroCostosComponent)},
 
 ];

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('impresoras', function (Blueprint $table) {
             $table->id();
-            $table->string('numero_serie');
+            $table->string('numero_serie')->unique();
             $table->foreignId('departamento_id')->constrained('departamentos')->onDelete('cascade');
             $table->string('IP');
             $table->string('ubicacion');

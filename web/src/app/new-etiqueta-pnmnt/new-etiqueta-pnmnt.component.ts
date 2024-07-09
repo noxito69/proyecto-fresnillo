@@ -208,6 +208,7 @@ export class NewEtiquetaPNMNTComponent {
     (data:any) => {
       this.etiquetas = data.data;
       this.filteredEtiquetas = data.data; 
+      
     }
   );
   }

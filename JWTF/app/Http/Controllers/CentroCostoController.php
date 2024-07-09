@@ -10,8 +10,24 @@ class CentroCostoController extends Controller
 {
     public function index()
     {
-        $centroCostos = CentroCosto::all();
+        $centroCostos = CentroCosto::OrderBy('nombre')->get();
         return response()->json($centroCostos);
+    }
+
+    public function indexPg(Request $request)
+    {
+        $query = $request->query();
+        $page = (int)$query['page'];
+        $perPage = (int)$query['pageSize'];
+
+        $centroCostos = CentroCosto::orderBy('nombre')->paginate($perPage, ['*'], 'page', $page); 
+        return response()->json($centroCostos);
+    }
+
+    public function search(Request $request) {
+        $query = $request->input('query');
+        $results = CentroCosto::where("nombre", "LIKE", "%$query%")->paginate(20);
+        return response()->json($results);
     }
 
     

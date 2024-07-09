@@ -96,9 +96,7 @@ export class TipoEquipoComponent {
     const url = `http://127.0.0.1:8000/api/auth/tipo_equipo/get/${this.selectedMarcaId}`;
     this.http.get<any>(url).subscribe(
       data => {
-        // Paso 2: Actualizar el modelo con los datos recibidos
-        // Asumiendo que tienes propiedades en tu componente para cada uno de estos campos
-  
+    
         this.tipo_equipo.nombre = data.nombre;
 
       },

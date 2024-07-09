@@ -3,11 +3,12 @@ import { LayoutComponent } from '../layout/layout.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-new-accesorios',
   standalone: true,
-  imports: [LayoutComponent,HttpClientModule,FormsModule],
+  imports: [LayoutComponent,HttpClientModule,FormsModule,RouterLink],
   templateUrl: './new-accesorios.component.html',
   styleUrl: './new-accesorios.component.css'
 })
@@ -19,7 +20,7 @@ export class NewAccesoriosComponent {
   marca: string = '';
   codigo_barras: string = '';
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private router:Router) { }
 
   
   crearAccesorio() {
@@ -41,6 +42,12 @@ export class NewAccesoriosComponent {
     );
   }
 
+  navigateTo(route:string){
+
+
+    this.router.navigate([route]);
+  
+  } 
   
 
 }

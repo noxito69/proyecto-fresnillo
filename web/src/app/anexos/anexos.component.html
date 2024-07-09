@@ -1,0 +1,269 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    <app-layout>
+
+      <section>
+
+
+        <div class="modal fade right justify-content-center modal-dialog-scrollable" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-md">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">Selecciona el anexo a editar</h4>
+
+              </div>
+              <div class="modal-body  justify-content-center align-items-center">
+                <div class="row g-3">
+                  <div class="col-md-12">
+
+                    <div class="container mt-5 container-centered">
+                      <div class="container-form">
+                          <h1 class="text-center mb-4">Actualizar anexo</h1>
+
+                          <!-- Primer Nivel -->
+                          <div class="form-level form-horizontal">
+                              <div class="mb-3">
+
+                                  <input type="text" class="form-control" id="nombre_empresa" [(ngModel)]="id" name="nombre_id" placeholder="" [value]="selectedMarcaId" disabled [hidden]="true">
+                              </div>
+                          </div>
+
+                 
+                          <div class="form-level form-horizontal">
+                              <div class="mb-3">
+                                  <label for="nombreanexp" class="form-label">Nombre Anexo</label>
+                                  <input type="text" class="form-control" [(ngModel)]="anexo.nombre"   placeholder="" >
+                              </div>
+                          </div>
+
+                        <div class="form-level form-horizontal">
+                            <div class="mb-3">
+                                <label for="fechaanexp" class="form-label">Fecha Anexo</label>
+                                <input type="date" class="form-control" [(ngModel)]="anexo.fecha_caducidad" placeholder="">
+                            </div>
+                        </div>
+
+                   
+                          
+
+                          <div class="form-level form-level-buttons">
+                            <button type="button" class="btn btn-warning" (click)="UpdateAnexo()">Actualizar</button>
+
+
+                        </div>
+
+                      </div>
+                  </div>
+
+
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade right justify-content-center modal-dialog-scrollable" id="AddModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-md">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel"></h4>
+              </div>
+              <div class="modal-body  justify-content-center align-items-center">
+                <div class="row g-3">
+                  <div class="col-md-12">
+
+                    <div class="container mt-5 container-centered">
+                      <div class="container-form">
+                          <h1 class="text-center mb-4">Crear nuevo Anexo</h1>
+
+                          <!-- Segundo Nivel -->
+                          <div class="form-level form-horizontal">
+                              <div class="mb-3">
+                                  <label for="Nombre depa" class="form-label">Nombre Anexo</label>
+                                  <input type="text" class="form-control" id="nombreanexo"  name="nombreempresa" placeholder="" [(ngModel)]="anexo.nombre">
+                              </div>
+                          </div>
+
+
+                          <div class="form-level form-horizontal">
+                            <div class="mb-3">
+                                <label for="fechaanexp" class="form-label">Fecha Anexo</label>
+                                <input type="date" class="form-control" [(ngModel)]="anexo.fecha_caducidad" placeholder="">
+                            </div>
+                        </div>
+
+
+                          <div class="form-level form-level-buttons">
+                            <button type="button" class="btn btn-success" (click)="crearAnexo()">Crear</button>
+                        </div>
+                      </div>
+                  </div>
+
+
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade right justify-content-center modal-dialog-scrollable" id="DeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-md">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">Eliminar Anexo</h4>
+
+              </div>
+              <div class="modal-body  justify-content-center align-items-center">
+                <div class="row g-3">
+                  <div class="col-md-12">
+
+                    <div class="container mt-5 container-centered">
+                      <div class="container-form">
+                          <h1 class="text-center mb-4">¿Deseas eliminar el anexo?</h1>
+
+
+                          <input type="text" class="form-control" id="nombre_empresa" [(ngModel)]="selectedMarcaId" name="nombre_marca" placeholder="" [value]="selectedMarcaId" disabled [hidden]="true">
+
+                          <div class="form-level ">
+                            <div class="d-flex justify-content-between">
+                              <button type="button" class="btn btn-success" (click)="DeleteAnexo()" >Si</button>
+                              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>
+                            </div>
+                          </div>
+
+                      </div>
+                  </div>
+
+
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+  
+      </section>
+
+
+        <br>
+        <section>
+
+          <div class="w-100 d-flex justify-end">
+            <button type="button" class="btn btn-success ms-auto mb-3" data-bs-toggle="modal" data-bs-target="#AddModal">
+              Agregar Anexo
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="54" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z" />
+                <path d="M15 12h-6" />
+                <path d="M12 9v6" />
+              </svg>
+            </button>
+          </div>
+
+          <div class="w-100 d-flex justify-end">
+
+
+            <input type="text" name="" id="search-tag" [(ngModel)]="searchQuery" (ngModelChange)="onSearchChange($event)" #searchInput class="form-control ms-auto" style="width: 300px;"  placeholder="Buscar etiqueta...">
+
+
+
+          </div>
+
+          <div class="row g-3">
+
+            <div class="col-md-12">
+
+
+              <table class="table table-bordered" id="data-table">
+                <thead class="table-dark">
+                  <tr>
+
+                    <th style="text-align: center;">ID</th>
+                    <th>Nombre</th>
+                    <th>Fecha de caducidad</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody >
+                  <tr *ngFor="let anex of anexos">
+                    <td>{{anex.id}}</td>
+                    <td style="text-align: center;">{{anex.nombre}}</td>
+                    <td style="text-align: center;">{{anex.fecha_caducidad}}</td>
+ 
+                    <td style="width: 300px;">
+                      <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updateModal" (click)="openEditModal(anex.id)" >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="54" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                          <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
+                          <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
+                          <path d="M16 5l3 3" />
+                        </svg>
+                      </button>
+
+                      <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal" (click)="openEditModal(anex.id)" c>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="54" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                          <path d="M10 10l4 4m0 -4l-4 4" />
+                          <path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z" />
+                        </svg>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            
+
+
+            </div>
+
+
+
+          </div>
+
+      </section>
+
+      <section>
+
+
+
+
+        <div class="container">
+          <div class="pagination-controls btn-group m-auto bg-white">
+            <button class="btn btn-primary" (click)="previousPage()" [disabled]="currentPage === 1">Anterior</button>
+            <ng-container *ngFor="let page of pages">
+              <button class="btn" [class.btn-secondary]="page === currentPage" (click)="goToPage(page)">
+                {{ page }}
+              </button>
+            </ng-container>
+            <button class="btn btn-primary" (click)="nextPage()" [disabled]="currentPage === totalPages">Siguiente</button>
+          </div>
+        </div>
+
+      </section>
+    </app-layout>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+AY1dYbF2y1Upp6CTF0k6yH66f26X" crossorigin="anonymous"></script>
+</body>
+</html>

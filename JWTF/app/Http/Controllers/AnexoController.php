@@ -10,8 +10,24 @@ class AnexoController extends Controller
 {
     public function index()
     {
-        $anexos = Anexo::all();
+        $anexos = Anexo::OrderBy('nombre')->get();
         return response()->json($anexos);
+    }
+
+    public function indexPg(Request $request)
+    {
+        $query = $request->query();
+        $page = (int)$query['page'];
+        $perPage = (int)$query['pageSize'];
+
+        $anexos = Anexo::orderBy('nombre')->paginate($perPage, ['*'], 'page', $page); 
+        return response()->json($anexos);
+    }   
+    
+    public function search(Request $request) {
+        $query = $request->input('query');
+        $results = Anexo::where("nombre", "LIKE", "%$query%")->orWhere("fecha_caducidad","LIKE","%$query%")->paginate(20);
+        return response()->json($results);
     }
 
     
@@ -20,12 +36,13 @@ class AnexoController extends Controller
         $messages = [
             'nombre.required' => 'El nombre es requerido.',
             'nombre.max' => 'El nombre no debe exceder los 255 caracteres.',
+            'nombre.unique' => 'El nombre ya está en uso.',
             'fecha_caducidad.date' => 'La fecha de caducidad debe ser una fecha válida.',
             'fecha_caducidad.after_or_equal' => 'La fecha de caducidad no puede ser una fecha pasada.',
         ];
 
         $validated = Validator::make($request->all(), [
-            'nombre' => 'required|string|max:255',
+            'nombre' => 'required|string|max:255|unique:anexos',
             'fecha_caducidad' => 'nullable|date|after_or_equal:today',
         ], $messages);
 
@@ -58,12 +75,13 @@ class AnexoController extends Controller
         $messages = [
             'nombre.required' => 'El nombre es requerido.',
             'nombre.max' => 'El nombre no debe exceder los 255 caracteres.',
+            'nombre.unique' => 'El nombre ya está en uso.',
             'fecha_caducidad.date' => 'La fecha de caducidad debe ser una fecha válida.',
             'fecha_caducidad.after_or_equal' => 'La fecha de caducidad no puede ser una fecha pasada.',
         ];
 
         $validated = Validator::make($request->all(), [
-            'nombre' => 'required|string|max:255',
+            'nombre' => 'required|string|max:255|unique:anexos',
             'fecha_caducidad' => 'nullable|date|after_or_equal:today',
         ], $messages);
 

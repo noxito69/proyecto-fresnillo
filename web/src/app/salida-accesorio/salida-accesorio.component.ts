@@ -98,6 +98,11 @@ export class SalidaAccesorioComponent {
   }
   getAccesorioByBarCode() {
 
+    if (this.articulosIds.length >= 10) {
+      Swal.fire('Error', 'No se pueden agregar más de 10 accesorios distintos', 'error');
+      return;
+    }
+
     if(this.codigoBarras == ''){
       Swal.fire('Error', 'Favor de escribir un codigo de barras', 'warning')
       return;

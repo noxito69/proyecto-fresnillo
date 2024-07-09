@@ -10,8 +10,24 @@ class EmpresaContratistaController extends Controller
 {
     public function index()
     {
-        $empresaContratistas = EmpresaContratista::all();
+        $empresaContratistas = EmpresaContratista::OrderBy('nombre')->get();
         return response()->json($empresaContratistas);
+    }
+
+    public function indexPg(Request $request)
+    {
+        $query = $request->query();
+        $page = (int)$query['page'];
+        $perPage = (int)$query['pageSize'];
+
+        $empresaContratistas = EmpresaContratista::orderBy('nombre')->paginate($perPage, ['*'], 'page', $page); 
+        return response()->json($empresaContratistas);
+    }
+
+    public function search(Request $request) {
+        $query = $request->input('query');
+        $results = EmpresaContratista::where("nombre", "LIKE", "%$query%")->paginate(20);
+        return response()->json($results);
     }
 
 
