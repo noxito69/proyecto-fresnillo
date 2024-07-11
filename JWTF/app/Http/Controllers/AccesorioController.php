@@ -9,11 +9,34 @@ use Illuminate\Http\Request;
 
 class AccesorioController extends Controller
 {
+
+    
     
     public function index()
     {
         $accesorios = Accesorio::all();
         return response()->json($accesorios);
+    }
+
+    public function indexPg(Request $request)
+    {
+        $query = $request->query();
+
+        $page = (int)$query['page'];
+        $perPage = (int)$query['pageSize'];
+
+        $accesorios = Accesorio::select('*')->paginate($perPage, ['*'], 'page', $page); 
+        return response()->json($accesorios);
+    }
+
+    public function search(Request $request) {
+        $query = $request->input('query');
+        $results = Accesorio::where("articulo", "LIKE", "%$query%")->orWhere("marca", "LIKE", "%$query%")
+        ->orWhere("codigo_barras", "LIKE", "%$query%")
+        ->orWhere("marca", "LIKE", "%$query%")
+
+        ->paginate(20);
+        return response()->json($results);
     }
 
    

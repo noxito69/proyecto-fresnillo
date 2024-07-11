@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('nombre')->unique();
             $table->string('centro_costos');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

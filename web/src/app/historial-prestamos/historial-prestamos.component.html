@@ -12,18 +12,11 @@
 
     <app-layout>
 
-        <section>
-            <div class="form-container">
-                
+      <section>
 
-                    
-                    <input type="text" name="" id="search-tag" [(ngModel)]="searchQuery" (ngModelChange)="onSearchChange($event)" #searchInput class="form-control ms-auto" style="width: 300px;"  placeholder="Buscar ...">
-                    
+        <input type="text" name="" id="search-tag" [(ngModel)]="searchQuery" (ngModelChange)="onSearchChange($event)" #searchInput class="form-control ms-auto" style="width: 300px;"  placeholder="Buscar ...">
 
-              
-
-            </div>
-        </section>
+      </section>
 
         <br>
         <section>
@@ -31,7 +24,8 @@
             <thead class="table-dark">
               <tr>
                 <th>Folio</th>
-                <th>Fecha</th>
+                <th>Fecha entrega</th>
+                <th>fecha devolucion</th>
                 <th>Numero de Empleado</th>
                 <th>Nombre</th>
                 <th>Articulo</th>
@@ -39,12 +33,14 @@
                 <th>Cantidad</th>
                 <th>Departamento</th>
                 <th>Centro de costos</th>
+                
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let history of historial" >
+              <tr *ngFor="let history of historial " >
                 <td>{{ history.id }}</td>
                 <td>{{ isoDateToFormattedWithTime(history.created_at) }}</td>
+                <td [ngClass]="{'fecha-pasada': esFechaPasada(history.fecha_devolucion)}">{{ history.fecha_devolucion }}</td>
                 <td>{{ history.num_empleado }}</td>
                 <td>{{ history.usuario }}</td>
                 <td>{{ history.articulo }}</td>

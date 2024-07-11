@@ -6,32 +6,105 @@ import { NgFor, UpperCasePipe } from '@angular/common';
 import { jsPDF } from 'jspdf'; 
 import autoTable from 'jspdf-autotable';
 import * as XLSX from 'xlsx';
+import { debounceTime, distinctUntilChanged, Observable, Subject, switchMap } from 'rxjs';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-stock',
   standalone: true,
-  imports: [LayoutComponent, HttpClientModule, NgFor, UpperCasePipe],
+  imports: [LayoutComponent, HttpClientModule, NgFor, UpperCasePipe, FormsModule],
   templateUrl: './stock.component.html',
   styleUrl: './stock.component.css'
 })
 export class StockComponent implements OnInit {
-  data: any[] = [];
-  filteredData: any[] = [];
+
+  searchQuery: string = '';
+  private searchSubject: Subject<string> = new Subject<string>();
+
+
+  stock: any[] = [];
+  articulos: any[] = [];
   totalArticulos: number = 0;
-  isSecondSelectEnabled: boolean = false;
-  secondSelectOptions: string[] = [];
-  filterType: string = '';
+
+
+  page: number = 1;
+  pageSize: number = 20;
+  totalItems: number = 0;
+  totalPages: number = 0;
+  currentPage: number = 0;
+
+  previousPage() {
+    if (this.page > 1) {
+      this.page--;
+      this.getArticulos();
+    }
+  }
+
+  nextPage() {
+    if (this.page < this.totalPages) {
+      this.page++;
+      this.getArticulos();
+    }
+  }
 
   constructor(private http: HttpClient) {}
+
+
 
   ngOnInit(): void {
     this.getTotalArticulos();
 
-    this.http.get<any[]>('http://127.0.0.1:8000/api/auth/accesorios/index').subscribe((data: any[]) => {
-      this.data = data;
-      this.filteredData = data;
+    this.getStock(); 
+    this.getArticulos();
+
+    this.searchSubject.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      switchMap((query: string) => this.search(query))
+    ).subscribe((results: any) => {
+      this.articulos= results.data;
+    })
+    
+  }
+
+  onSearchChange(query: string) {
+    this.searchSubject.next(query);
+  }
+
+  search(query: string): Observable<any[]> {
+    return this.http.get<any[]>(`http://127.0.0.1:8000/api/auth/accesorios/search?query=${query}`);
+  }
+
+
+
+
+  getArticulos() {
+    const params = `?page=${this.page}&pageSize=${this.pageSize}`;
+    this.http.get(`http://127.0.0.1:8000/api/auth/accesorios/indexPg${params}`).subscribe({
+      next: (data: any) => {
+        this.articulos = data.data;
+        this.totalItems = data.total;
+        this.totalPages = data.last_page;
+        this.currentPage = data.current_page;
+  
+      },
+      error: (error) => {
+        console.error('There was an error!', error);
+      }
     });
   }
+
+
+
+   getStock() {
+
+    this.http.get<any[]>('http://127.0.0.1:8000/api/auth/accesorios/index').subscribe((data: any[]) => {
+      this.stock = data;
+     
+    });
+
+
+   }
 
   getTotalArticulos() {
     this.http.get('http://127.0.0.1:8000/api/auth/accesorios/getTotal').subscribe((data: any) => {
@@ -39,39 +112,33 @@ export class StockComponent implements OnInit {
     });
   }
 
-  onFilterChange(event: any) {
-    const value = event.target.value;
-    this.filterType = value;
-    this.isSecondSelectEnabled = !!value;
-
-    if (value === 'marca') {
-      this.secondSelectOptions = Array.from(new Set(this.data.map(item => item.marca)));
-    } else if (value === 'articulo') {
-      this.secondSelectOptions = Array.from(new Set(this.data.map(item => item.articulo)));
-    } else {
-      this.secondSelectOptions = [];
-      this.filteredData = this.data; // Reset filteredData when "Sin filtro" is selected
+  get pages(): number[] {
+    const half = Math.floor(this.pageSize / 2);
+    let start = Math.max(this.currentPage - half, 1);
+    let end = Math.min(start + this.pageSize - 1, this.totalPages);
+  
+    if (end - start < this.pageSize - 1) {
+      start = Math.max(end - this.pageSize + 1, 1);
     }
+  
+    const pages = [];
+    for (let i = start; i <= end; i++) {
+      pages.push(i);
+    }
+    return pages;
+  }
+  
+  goToPage(page: number) {
+    this.page = page;
+    this.getArticulos();
   }
 
-  onFilterValueChange(event: any) {
-    const value = event.target.value;
-    if (!value) {
-      this.filteredData = this.data; // Reset filteredData when no option is selected
-      return;
-    }
-    
-    if (this.filterType === 'marca') {
-      this.filteredData = this.data.filter(item => item.marca === value);
-    } else if (this.filterType === 'articulo') {
-      this.filteredData = this.data.filter(item => item.articulo === value);
-    } else {
-      this.filteredData = this.data;
-    }
-  }
+
+
+
 
   downloadAsExcel() {
-    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.filteredData); 
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.stock); 
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'tablastock');
     XLSX.writeFile(wb, 'inventario.xlsx');

@@ -15,4 +15,9 @@ class Accesorio extends Model
     {
         return $this->hasMany(Historial::class);
     }
+
+    public function prestamos()
+    {
+        return $this->hasMany(Historial_prestamos::class);
+    }
 }

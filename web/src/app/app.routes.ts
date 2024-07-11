@@ -29,5 +29,6 @@ export const routes: Routes = [
 {path:'anexo', loadComponent: () => import('./anexos/anexos.component').then(a => a.AnexosComponent)},
 {path:'modelos', loadComponent: () => import('./modelos/modelos.component').then(m => m.ModelosComponent)},
 {path:'centro-costos', loadComponent: () => import('./centro-costos/centro-costos.component').then(cc => cc.CentroCostosComponent)},
-
+{path:'historial-prestamos', loadComponent: () => import('./historial-prestamos/historial-prestamos.component').then(hp => hp.HistorialPrestamosComponent)},
+{path:'prestamos', loadComponent: () => import('./prestamos/prestamos.component').then(p => p.PrestamosComponent)},
 ];

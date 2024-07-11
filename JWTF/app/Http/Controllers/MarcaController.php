@@ -26,7 +26,7 @@ class MarcaController extends Controller
 
 
     public function getMarcas(){
-        $marcas = Marca::all();
+        $marcas = Marca::orderBy('nombre')->get();
         return response()->json($marcas);
     }
 

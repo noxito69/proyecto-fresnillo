@@ -36,6 +36,7 @@ class DatabaseSeeder extends Seeder
             ModeloEmpleadoSeeder::class,
             UserPnmntSeeder::class,
             UsuarioTISeeder::class,
+            HPSeeder::class,
             #marca_seeder::class,
             #EmpresaC::class,
             #ECseeder::class,

@@ -35,6 +35,7 @@ use App\Http\Controllers\CentroCostoController;
 use App\Http\Controllers\EmpresaContratistaController;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\EtiquetaContratistaController;
+use App\Http\Controllers\historial_prestamo_controller;
 use App\Http\Controllers\UsuariosPenmontController;
 use GuzzleHttp\Middleware;
 use App\Http\Controllers\HistorialImpresorasController;
@@ -77,11 +78,13 @@ Route::group([
 
 
     //departamentos
+    
+    Route::get('departamentos/indexPg', [DepartamentoController::class, 'indexPg']);
     Route::get('departamentos/index', [DepartamentoController::class, 'index']);
     Route::post('departamentos/post', [DepartamentoController::class, 'store']);
     Route::get('departamentos/get/{id}', [DepartamentoController::class, 'show']);
     Route::put('departamentos/put/{id}', [DepartamentoController::class, 'update']);
-    Route::delete('departamentos/delete/{id}', [DepartamentoController::class, 'destroy']);
+    Route::patch('departamentos/delete/{id}', [DepartamentoController::class, 'delete']);
     Route::get('departamentos/search', [DepartamentoController::class, 'search']);
     Route::get('departamentos/indexAlfa', [DepartamentoController::class, 'indexAlfa']);
 
@@ -97,6 +100,8 @@ Route::group([
     Route::put('accesorios/updateQuantity/{codigo_barras}', [AccesorioController::class, 'updateQuantity']);
     Route::put('accesorios/updateQuantityMinus/{id}', [AccesorioController::class, 'updateQuantityMinus']);
     Route::get('accesorios/getTotal', [AccesorioController::class, 'getTotal']);
+    Route::get('accesorios/search', [AccesorioController::class, 'search']);
+    Route::get('accesorios/indexPg', [AccesorioController::class, 'indexPg']);
 
 
 
@@ -197,14 +202,13 @@ Route::group([
     Route::get('etiquetas_empleados/search',[EtiquetasEmpleadosController::class,'search']);
 
 
-
     //Historial
     Route::get('historial/index',[HistorialController::class,'index']);
     Route::post('historial/post',[HistorialController::class,'store']);
     Route::get('historial/get/{id}',[HistorialController::class,'show']);
     Route::put('historial/put/{id}',[HistorialController::class,'update']);
     Route::delete('historial/delete/{id}',[HistorialController::class,'destroy']);
-
+    Route::get('historial/search',[HistorialController::class,'search']);
 
 
     //Tonner
@@ -237,6 +241,13 @@ Route::group([
     Route::get('historial_impresoras/get/{id}',[HistorialImpresorasController::class,'show']);
     Route::put('historial_impresoras/put/{id}',[HistorialImpresorasController::class,'update']);
     Route::delete('historial_impresoras/delete/{id}',[HistorialImpresorasController::class,'destroy']);
+
+
+    //Historial prestamo
+
+    Route::get('historial_prestamo/index',[historial_prestamo_controller::class,'index']);
+    Route::post('historial_prestamo/post',[historial_prestamo_controller::class,'store']);
+    Route::get('historial_prestamo/search',[historial_prestamo_controller::class,'search']);
 
     //Roles
     Route::get('roles/index',[RoleController::class, 'index']);

@@ -10,17 +10,39 @@ class HistorialController extends Controller
     public function index(Request $request)
     {
         $query = $request->query();
-
+    
         // Obtener la página actual y la cantidad de elementos por página
-        $page = (int)$query['page'];
-        $perPage = (int)$query['pageSize'];
-
-        // Consultar y paginar resultados
-        $historial = Historial::join('accesorios', 'historial.articulo_id', '=', 'accesorios.id')
-                              ->select('historial.*', 'accesorios.articulo', 'accesorios.marca')
-                              ->paginate($perPage, ['*'], 'page', $page);
-
+        $page = isset($query['page']) ? (int)$query['page'] : 1;
+        $perPage = isset($query['pageSize']) ? (int)$query['pageSize'] : 20;
+    
+        // Consultar y paginar resultados con join
+        $historial = Historial::select(
+            "historial.*", 
+            "accesorios.articulo as articulo", 
+            "accesorios.marca as marca"
+        )
+        ->join("accesorios", "historial.articulo_id", "=", "accesorios.id")
+        ->paginate($perPage, ['*'], 'page', $page);
+    
         return response()->json($historial);
+
+    }
+
+    public function search(Request $request) {
+        $query = $request->input('query');
+        $results = Historial::query()
+            ->join('accesorios', 'historial.articulo_id', '=', 'accesorios.id')
+            ->where("historial.num_empleado", "LIKE", "%$query%")
+            ->orWhere("historial.usuario", "LIKE", "%$query%")
+            ->orWhere("accesorios.articulo", "LIKE", "%$query%")
+            ->orWhere("accesorios.marca", "LIKE", "%$query%")
+            ->orWhere("historial.id", "LIKE", "%$query%")
+            ->orWhere("historial.departamento", "LIKE", "%$query%")
+            ->orWhere("historial.centro_costos", "LIKE", "%$query%")
+            ->select('historial.*', 'accesorios.articulo as articulo', 'accesorios.marca as marca')
+            ->paginate(20);
+    
+        return response()->json($results);
     }
 
     public function store(Request $request)

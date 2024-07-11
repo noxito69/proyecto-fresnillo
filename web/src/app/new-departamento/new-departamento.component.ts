@@ -24,7 +24,9 @@ export class NewDepartamentoComponent {
   
   departamento = {
     nombre: '',
-    centro_costos: ''	
+    centro_costos: '',
+    is_active: true
+    
   };
 
   id: string = '';
@@ -84,8 +86,9 @@ export class NewDepartamentoComponent {
 
   getDepartamento() {
     const params = `?page=${this.page}&pageSize=${this.pageSize}`;
-    this.http.get(`http://127.0.0.1:8000/api/auth/departamentos/index${params}`).subscribe({
+    this.http.get(`http://127.0.0.1:8000/api/auth/departamentos/indexPg${params}`).subscribe({
       next: (data: any) => {
+        
         this.departamentos = data.data;
         this.totalItems = data.total;
         this.totalPages = data.last_page;
@@ -213,7 +216,24 @@ DeleteMarca() {
 }
 
 
-  
+  toggleIsActive(departmentId: number, isActive: boolean) {
+    // Lógica para enviar la actualización al backend
+    // Por ejemplo, usando HttpClient
+    this.http.put(`url-to-update-department/${departmentId}`, { isActive: isActive })
+      .subscribe({
+        next: (response) => {
+          // Manejar respuesta exitosa
+          console.log('Estado actualizado', response);
+        },
+        error: (error) => {
+          // Manejar error
+          console.error('Error al actualizar estado', error);
+        }
+      });
+  }
+
+
+
 
 
   obtenerCentrosCostos() {

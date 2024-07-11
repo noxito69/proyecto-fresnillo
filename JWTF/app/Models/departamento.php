@@ -9,7 +9,7 @@ class departamento extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nombre', 'centro_costos'];
+    protected $fillable = ['nombre', 'centro_costos', 'is_active'];
 
 
     public function usuariosPenmont()
@@ -30,5 +30,10 @@ class departamento extends Model
     public function historial()
     {
         return $this->hasMany(Historial::class);
+    }
+
+    public function historialPrestamos()
+    {
+        return $this->hasMany(Historial_prestamos::class);
     }
 }

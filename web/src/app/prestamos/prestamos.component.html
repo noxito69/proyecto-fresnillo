@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario por Niveles</title>
+    <style>
+        .form-level {
+            margin-bottom: 20px;
+        }
+        .form-horizontal {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+        .container-centered {
+            display: flex;
+            justify-content: center;
+        }
+        .container-form {
+            max-width: 800px;
+            width: 100%;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-control, .form-select {
+            height: calc(1.5em + 1rem + 2px);
+            font-size: 1.25rem;
+        }
+        .btn {
+            font-size: 1.25rem;
+        }
+        .form-level-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+
+    <app-layout>
+
+
+
+        <div class="container mt-5 container-centered">
+            <div class="container-form">
+                <h1 class="text-center mb-4">Salida de Accesorios</h1>
+
+
+                <div class="form-level form-horizontal">
+                    <div class="mb-3 w-75">
+                        <label for="noEmpleado" class="form-label">Numero de Empleado:</label>
+                        <input type="text" [(ngModel)]="numEmpleado"  class="form-control" id="noEmpleado" placeholder=""><br>
+                        <button type="button"  class="btn btn-success w-100"  (click)="buscarEmpleado()">Buscar</button>
+                    </div>
+
+                </div>
+
+                <!-- Primer Nivel -->
+                <div class="form-level form-horizontal">
+                    <div class="mb-3 w-75">
+                        <label for="nombre" class="form-label">Nombre:</label>
+                        <input type="text" [(ngModel)]="nombre" disabled="true" class="form-control" id="nombre" placeholder="">
+                    </div>
+
+                </div>
+
+                <!-- Segundo Nivel -->
+                <div class="form-level form-horizontal">
+
+                    <div class="mb-3 w-75">
+                        <label for="departamento" class="form-label">Departamento</label>
+                        <input type="text" [(ngModel)]="departamento" disabled="true" class="form-control" id="nombre" placeholder="">
+                    </div>
+                </div>
+
+                <div class="form-level form-horizontal">
+                    <div class="mb-3 w-75">
+                        <label for="Ccostos" class="form-label">Centro de costos:</label>
+                        <input type="Ccostos" [(ngModel)]="centroCostos" disabled="true" class="form-control" id="cbarras" placeholder="">
+                    </div>
+
+                </div>
+
+
+                <div class="form-level form-horizontal" [hidden]="isBarcodeHidden">
+                    <div class="mb-3 w-75">
+                        <label for="cb" class="form-label">Codigo de barras:</label>
+                        <input type="cb" class="form-control" id="cbarras" [(ngModel)]="codigoBarras" placeholder=""><br>
+                        <button type="button" class="btn btn-info w-100" (click)="getAccesorioByBarCode()"  >Agregar</button>
+                    </div>
+
+                </div>
+
+                <div class="form-level form-horizontal" >
+                    <div class="mb-3 w-75">
+                        <label for="cb" class="form-label">Fecha de devolucion:</label>
+                        <input type="date" class="form-control" id="cbarras" [(ngModel)]="fecha_devolucion" placeholder=""><br>
+                 
+                    </div>
+
+                </div>
+
+                <section>
+                    <table class="table table-bordered w-75 m-auto" [hidden]="isTableHidden" >
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Cantidad</th>
+                                <th>Articulo</th>
+                                <th>Marca</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let articulo of articulosIds">
+                              <td>{{articulo.cantidad}}</td>
+                              <td>{{articulo.articulo}}</td>
+                              <td>{{articulo.marca}}</td>
+                              <td class="btn-group">
+                                <button type="button" class="btn btn-success" (click)="incrementarCantidad(articulo.codigoBarras)">
+                                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-square-rounded-plus" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                    <path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z" />
+                                    <path d="M15 12h-6" />
+                                    <path d="M12 9v6" />
+                                  </svg>
+                                </button>
+                                <button type="button" class="btn btn-danger" (click)="decrementarCantidad(articulo.codigoBarras, articulo.cantidad)">
+                                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-square-rounded-minus" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                    <path d="M9 12h6" />
+                                    <path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z" />
+                                  </svg>
+                                </button>
+                                <button type="button" class="btn btn-warning" (click)="deleteArticulo(articulo.codigoBarras)">
+                                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-square-rounded-x" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                    <path d="M10 10l4 4m0 -4l-4 4" />
+                                    <path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z" />
+                                  </svg>
+                                </button>
+                              </td>
+                            </tr>
+                          </tbody>
+                    </table>
+
+                </section>
+
+            <br>
+                <!-- Octavo Nivel -->
+                <div class="form-level form-level-buttons w-75 m-auto">
+
+                    
+                    <button type="button" class="btn btn-primary w-75" (click)="generatePdf()" >Generar vale de custodia</button>
+                    <button type="button" class="btn btn-warning w-55" (click)="ResetInputs()">Limpiar</button>
+                    <button type="button" class="btn btn-danger  w-25" (click)="navigateTo('/')">Salir</button>
+
+                </div>
+
+            </div>
+        </div>
+
+        <br><br><br>
+
+
+            <section class="form-level form-horizontal" [hidden]="isDocHidden">
+                <div id="vale" #vale>
+                    <img src="../../assets/Saved Pictures/prestamo vale.jpg" alt="Imagen de fondo" style="width: 100%; height: 100%;">
+                    <div>
+                        <div class="nombre">{{nombre}}</div>
+                        <div class="x">{{x}}</div>
+                        <div class="departamento">{{departamento}}</div>
+                        <div class="centroCostos">{{centroCostos}}</div>
+                        <div class="fecha_dev">{{fecha_devolucion}}</div>
+
+                        <div class="tabla">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Cantidad</th>
+                                        <th scope="col">Articulo</th>
+                                        <th scope="col">Marca</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let articulo of articulosIds">
+                                        <td>{{articulo.cantidad}}</td>
+                                        <td>{{articulo.articulo}}</td>
+                                        <td>{{articulo.marca}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+    </app-layout>
+
+</body>
+</html>

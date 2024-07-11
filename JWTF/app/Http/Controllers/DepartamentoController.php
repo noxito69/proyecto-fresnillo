@@ -9,7 +9,14 @@ use Illuminate\Http\Request;
 class DepartamentoController extends Controller
 {
     
-    public function index(Request $request)
+    public function index()
+    {
+        $departamentos = Departamento::where('is_active', true)->orderBy('nombre')->get();
+        return response()->json($departamentos);
+    }
+
+
+    public function indexPg(Request $request)
     {
         $query = $request->query();
 
@@ -105,16 +112,15 @@ class DepartamentoController extends Controller
 
 
     
-    public function destroy($id)
+    public function delete($id)
     {
         $departamento = Departamento::find($id);
-
-        if (!$departamento) {
-            return response()->json(['message' => 'Departamento no encontrado'], 404);
+        if ($departamento) {
+            $departamento->is_active = false;
+            $departamento->save();
+            return response()->json(['message' => 'Departamento deshabilitado correctamente.']);
+        } else {
+            return response()->json(['message' => 'Departamento no encontrado.'], 404);
         }
-
-        $departamento->delete();
-
-        return response()->json(null, 204);
     }
 }
