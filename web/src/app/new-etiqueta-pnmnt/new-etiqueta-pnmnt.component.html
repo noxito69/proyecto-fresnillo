@@ -12,7 +12,7 @@
 
         <section>
 
-       
+
             <div class="modal fade right justify-content-center; modal-dialog-scrollable" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
                   <div class="modal-content">
@@ -89,12 +89,12 @@
                 <!-- Primer Nivel -->
                 <div class="col-md-12 row mb-3">
                     <div class="col-md-6">
-                        <label for="numeroEtiqueta" class="form-label">Número de Etiqueta</label>
+                        <label for="numeroEtiqueta" class="form-label required">Número de Etiqueta</label>
                         <input type="number" class="form-control" id="numeroEtiqueta" placeholder="Número de Etiqueta" disabled="true" [(ngModel)]="numero_etiqueta">
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label for="empleadoclave" class="form-label">Numero Empleado</label>
+                        <label for="empleadoclave" class="form-label required">Numero Empleado</label>
                         <input type="text" class="form-control" [(ngModel)]="numEmpleado" id="Empleadoclave" placeholder="Coloca la clave del empleado">
                       </div>
                       <div class="col-md-12">
@@ -107,12 +107,12 @@
                 <div class="col-md-12 row mb-3">
 
                     <div class="col-md-6">
-                        <label for="usuario" class="form-label">Usuario</label>
+                        <label for="usuario" class="form-label required">Usuario</label>
                         <input type="text" class="form-control" id="usuario" placeholder="Usuario" [(ngModel)]="nombre">
                     </div>
 
                     <div class="col-md-6">
-                        <label for="modelo" class="form-label">Host</label>
+                        <label for="modelo" class="form-label required">Host</label>
                         <input type="text" class="form-control" id="host" placeholder="Host" [(ngModel)]="host">
                     </div>
                 </div>
@@ -120,61 +120,58 @@
                 <!-- Tercer Nivel -->
                 <div class="col-md-12 row mb-3">
                   <div class="col-md-6">
-                    <label for="modelo" class="form-label">Modelo</label>
-                    <select class="form-select" id="modelo" [(ngModel)]="modelo">
+                    <label for="modelo" class="form-label required">Modelo</label>
+                    <select class="form-select w-100" id="modelo" [(ngModel)]="modelo">
                       <option selected value="0">Seleccione el Modelo</option>
                       <option *ngFor="let mod of modelos">{{mod.nombre}}</option>
                     </select>
                   </div>
 
                   <div class="col-md-6">
-                    <label for="mac" class="form-label">Mac Address</label>
+                    <label for="mac" class="form-label required">Mac Address</label>
                     <input type="text" class="form-control" id="mac" placeholder="Mac Address" [(ngModel)]="mac" (ngModelChange)="mac=$event.toUpperCase()" (keyup)="formatMacAddress()">
                   </div>
                 </div>
 
                 <!-- Cuarto Nivel -->
-                <div class="form-level form-horizontal">
+                 <div class="row mb-3">
+                   <div class="col-md-6">
+                       <label for="correo" class="form-label required">Correo</label>
+                       <input type="email" class="form-control " id="mail" placeholder="Correo electrónico"[(ngModel)]="email">
+                   </div>
 
-                    <div class="mb-3">
-                        <label for="correo" class="form-label">Correo</label>
-                        <input type="email" class="form-control" id="mail" placeholder="Correo electrónico"[(ngModel)]="email">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="tipoEquipo" class="form-label">Numero de Serie</label>
-                        <input type="text" class="form-control" id="NodeSerie" [(ngModel)]="numero_serie" placeholder="Numero de serie" (ngModelChange)="numero_serie=$event.toUpperCase()">
-                    </div>
-                </div>
+                   <div class="col-md-6">
+                       <label for="tipoEquipo" class="form-label required">Numero de Serie</label>
+                       <input type="text" class="form-control" id="NodeSerie" [(ngModel)]="numero_serie" placeholder="Numero de serie" (ngModelChange)="numero_serie=$event.toUpperCase()">
+                   </div>
+                 </div>
 
                 <!-- Quinto Nivel -->
-                <div class="form-level form-horizontal">
+                 <div class="row mb-3">
+                   <div class="col-md-6">
+                       <label for="anexo" class="form-label required">Anexo</label>
+                       <select class="form-select w-100" id="anexo" [(ngModel)]="anexo">
+                           <option selected value="0">Seleccione el Anexo</option>
+                           <option *ngFor="let anex of anexos">{{anex.nombre}}</option>
+                       </select>
+                   </div>
 
-                    <div class="mb-3">
-                        <label for="anexo" class="form-label">Anexo</label>
-                        <select class="form-select" id="anexo" [(ngModel)]="anexo">
-                            <option selected value="0">Seleccione el Anexo</option>
-                            <option *ngFor="let anex of anexos">{{anex.nombre}}</option>
-                        </select>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="departamento" class="form-label">Departamento</label>
-                        <select class="form-select" id="departamento" [(ngModel)]="departamento">
-                            <option selected value="0">Seleccione el departamento</option>
-                            <option *ngFor="let departa of departamentos">{{departa.nombre}}</option>
-                        </select>
-                    </div>
-                </div>
-
+                   <div class="col-md-6">
+                       <label for="departamento" class="form-label required">Departamento</label>
+                       <select class="form-select w-100" id="departamento" [(ngModel)]="departamento">
+                           <option selected value="0">Seleccione el departamento</option>
+                           <option *ngFor="let departa of departamentos">{{departa.nombre}}</option>
+                       </select>
+                   </div>
+                 </div>
                 <!-- Séptimo Nivel -->
-                <div class="form-level form-horizontal">
-                    <div class="mb-3">
-                        <label for="fechaVigencia" class="form-label">Fecha de vigencia</label>
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <label for="fechaVigencia" class="form-label required">Fecha de vigencia</label>
                         <input type="date" class="form-control" id="fechaVigencia" disabled [(ngModel)]="fecha_vigencia" >
                     </div>
-                    <div class="mb-3">
-                        <label for="fechaActual" class="form-label">Fecha actual</label>
+                    <div class="col-md-6">
+                        <label for="fechaActual" class="form-label required">Fecha actual</label>
                         <input type="date" class="form-control" id="fechaActual" disabled [(ngModel)]="fecha_actual" >
                     </div>
                 </div>
