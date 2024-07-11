@@ -83,14 +83,14 @@
                 <h1 class="text-center mb-4">Etiquetas Contratistas</h1>
 
                 <!-- Primer Nivel -->
-                <div class="form-level form-horizontal">
-                    <div class="mb-3">
-                        <label for="numeroEtiqueta" class="form-label">Número de Etiqueta</label>
+                <div class="col-md-12 row mb-3">
+                    <div class="col-md-6">
+                        <label for="numeroEtiqueta" class="form-label required">Número de Etiqueta</label>
                         <input type="number" class="form-control" id="numeroEtiqueta" [(ngModel)]="numero_etiqueta" placeholder="Número de Etiqueta" disabled="true">
                     </div>
-                    <div class="mb-3">
-                        <label for="tipoEquipo" class="form-label">Tipo de Equipo</label>
-                        <select class="form-select" id="tipoEquipo" [(ngModel)]="tipo_equipo">
+                    <div class="col-md-6">
+                        <label for="tipoEquipo" class="form-label required">Tipo de Equipo</label>
+                        <select class="form-select w-100" id="tipoEquipo" [(ngModel)]="tipo_equipo">
                             <option selected value="0" >Seleccione el Tipo de Equipo</option>
                             <option  *ngFor="let tipoequipo of tipo_equipo_a">{{tipoequipo.nombre}}</option>
 
@@ -99,31 +99,31 @@
                 </div>
 
 
-                <div class="form-level form-horizontal">
-                    <div class="mb-3">
-                        <label for="marca" class="form-label">Marca</label>
-                        <select class="form-select" id="marca" [(ngModel)]="marca">
+                <div class="col-md-12 row mb-3">
+                    <div class="col-md-6">
+                        <label for="marca" class="form-label required">Marca</label>
+                        <select class="form-select w-100" id="marca" [(ngModel)]="marca">
                             <option selected value="0" disabled>Seleccione la Marca</option>
                             <option  *ngFor="let marca of marcas">{{marca.nombre}}</option>
 
                         </select>
                     </div>
-                    <div class="mb-3">
-                        <label for="modelo" class="form-label">Modelo</label>
+                    <div class="col-md-6">
+                        <label for="modelo" class="form-label required">Modelo</label>
                         <input type="text" class="form-control" id="modelo" placeholder="Modelo" [(ngModel)]="modelo">
                     </div>
                 </div>
 
                 <!-- Tercer Nivel -->
-                <div class="form-level form-horizontal">
-                    <div class="mb-3">
-                        <label for="numeroSerie" class="form-label">Número de Serie</label>
+                <div class="col-md-12 row mb-3">
+                    <div class="col-md-6">
+                        <label for="numeroSerie" class="form-label required">Número de Serie</label>
                         <input type="text" class="form-control" id="numeroSerie" placeholder="Número de Serie" [(ngModel)]="numero_serie">
                     </div>
 
 
-                    <div class="mb-3">
-                        <label for="usuario" class="form-label">Usuario</label>
+                    <div class="col-md-6">
+                        <label for="usuario" class="form-label required">Usuario</label>
                         <input type="text" class="form-control" id="usuario" placeholder="Usuario" [(ngModel)]="usuario" maxlength="34">
                     </div>
                 </div>
@@ -131,10 +131,10 @@
 
 
                 <!-- Quinto Nivel -->
-                <div class="form-level form-horizontal">
-                    <div class="mb-3">
-                        <label for="empresa" class="form-label">Empresa</label>
-                        <select class="form-select" id="marca" [(ngModel)]="empresa" >
+                <div class="col-md-12 row mb-3">
+                    <div class="">
+                        <label for="empresa" class="form-label required">Empresa</label>
+                        <select class="form-select w-100" id="marca" [(ngModel)]="empresa" >
                             <option selected value="0" disabled>Seleccione la Empresa</option>
                             <option  *ngFor="let empresa of empresas">{{empresa.nombre}}</option>
 
@@ -142,14 +142,14 @@
                     </div>
                 </div>
                 <!-- Séptimo Nivel -->
-                <div class="form-level form-horizontal">
-                    <div class="mb-3">
-                        <label for="fechaVigencia" class="form-label">Fecha de vigencia</label>
+                <div class="col-md-12 row mb-3">
+                    <div class="col-md-6">
+                        <label for="fechaVigencia" class="form-label required">Fecha de vigencia</label>
                         <input type="date" class="form-control" id="fechaVigencia" [value]="fecha_vigencia" disabled [(ngModel)]="fecha_vigencia">
                       </div>
 
-                    <div class="mb-3">
-                        <label for="fechaActual" class="form-label">Fecha actual</label>
+                    <div class="col-md-6">
+                        <label for="fechaActual" class="form-label required">Fecha actual</label>
                         <input type="date" class="form-control" id="fechaActual" [value]="fecha_actual" [(ngModel)]="fecha_actual" disabled="true" >
                     </div>
                 </div>

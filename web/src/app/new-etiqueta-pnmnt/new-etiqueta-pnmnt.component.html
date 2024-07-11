@@ -111,10 +111,15 @@
                         <input type="text" class="form-control" id="usuario" placeholder="Usuario" [(ngModel)]="nombre">
                     </div>
 
+
+                    <!--correo-->
+
                     <div class="col-md-6">
-                        <label for="modelo" class="form-label required">Host</label>
-                        <input type="text" class="form-control" id="host" placeholder="Host" [(ngModel)]="host">
+                      <label for="correo" class="form-label required">Correo</label>
+                      <input type="email" class="form-control " id="mail" placeholder="Correo electrónico"[(ngModel)]="email">
                     </div>
+
+                    
                 </div>
 
                 <!-- Tercer Nivel -->
@@ -135,10 +140,14 @@
 
                 <!-- Cuarto Nivel -->
                  <div class="row mb-3">
-                   <div class="col-md-6">
-                       <label for="correo" class="form-label required">Correo</label>
-                       <input type="email" class="form-control " id="mail" placeholder="Correo electrónico"[(ngModel)]="email">
-                   </div>
+
+                  <!---host-->
+
+                  <div class="col-md-6">
+                    <label for="modelo" class="form-label required">Host</label>
+                    <input type="text" class="form-control" id="host" placeholder="Host" [(ngModel)]="host">
+                </div>
+                   
 
                    <div class="col-md-6">
                        <label for="tipoEquipo" class="form-label required">Numero de Serie</label>
