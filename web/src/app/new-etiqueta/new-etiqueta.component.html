@@ -155,11 +155,15 @@
                 </div>
 
                 <!-- Octavo Nivel -->
-                <div class="form-level form-level-buttons">
-                    <button type="button" class="btn btn-primary" (click)="CrearEtiqueta()">Generar Etiqueta</button>
-                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updateModal" >Actualizar Etiqueta</button>
-                    <button type="button" class="btn btn-success" id="openModalBtn" data-bs-toggle="modal" data-bs-target="#myModal3">Exportar BD a Excel</button>
+                <div class="col-md-12 row mb-3 ">
+                    
+             
+                      <button type="button" class="btn btn-warning col-md-6" data-bs-toggle="modal" data-bs-target="#updateModal" >Actualizar Etiqueta</button>
+                      <button type="button" class="btn btn-success col-md-6" id="openModalBtn" data-bs-toggle="modal" data-bs-target="#myModal3">Exportar BD a Excel</button>
+
+           
                 </div>
+                
             </div>
         </div>
         <br><br>
@@ -181,10 +185,15 @@
 
             </div>
 
-
+            
 
         </section>
 
+        <div class="form-horizontal">
+
+        <button type="button" class="btn btn-primary col-md-6" (click)="CrearEtiqueta()">Generar Etiqueta</button>
+
+        </div>
 
 
 

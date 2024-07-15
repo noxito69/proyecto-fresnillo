@@ -3,41 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario por Niveles</title>
-    <style>
-        .form-level {
-            margin-bottom: 20px;
-        }
-        .form-horizontal {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-        }
-        .container-centered {
-            display: flex;
-            justify-content: center;
-        }
-        .container-form {
-            max-width: 800px;
-            width: 100%;
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .form-control, .form-select {
-            height: calc(1.5em + 1rem + 2px);
-            font-size: 1.25rem;
-        }
-        .btn {
-            font-size: 1.25rem;
-        }
-        .form-level-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-        }
-    </style>
+    <title>Prestamos</title>
+    
 </head>
 <body>
 
@@ -47,7 +14,7 @@
 
         <div class="container mt-5 container-centered">
             <div class="container-form">
-                <h1 class="text-center mb-4">Salida de Accesorios</h1>
+                <h1 class="text-center mb-4">Prestamo de Accesorios</h1>
 
 
                 <div class="form-level form-horizontal">
@@ -154,7 +121,7 @@
                 <div class="form-level form-level-buttons w-75 m-auto">
 
                     
-                    <button type="button" class="btn btn-primary w-75" (click)="generatePdf()" >Generar vale de custodia</button>
+                    <button type="button" class="btn btn-primary w-75" (click)="generatePdf()" >Generar vale de Prestamo</button>
                     <button type="button" class="btn btn-warning w-55" (click)="ResetInputs()">Limpiar</button>
                     <button type="button" class="btn btn-danger  w-25" (click)="navigateTo('/')">Salir</button>
 
