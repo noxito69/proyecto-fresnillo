@@ -19,7 +19,7 @@ class UserController extends Controller
     }
 
 
-    
+
     public function store(Request $request)
     {
 
@@ -44,7 +44,7 @@ class UserController extends Controller
                 "num_empleado.required" => "El número de empleado es obligatorio."
             ]
         );
-        
+
         if ($validate->fails()) {
             return response()->json(["msg" => "Validación fallida", "errors" => $validate->errors()], 422);
         }
@@ -132,5 +132,37 @@ class UserController extends Controller
 
         return response()->json(["error" => "Contraseña incorrecta"], 400);
 
+    }
+
+    public function recoverPassword(Request $request) {
+        $validate = Validator::make($request->all(), [
+            "email" => "required|email",
+            "password" => "required",
+            "confirm_password" => "required"
+        ]);
+
+        if($validate->fails()){
+            return response()->json(["error" => $validate->errors()], 400);
+        }
+
+        $user = User::where("email", $request->email)->first();
+
+        if(!$user) {
+            return response()->json(["error" => "Usuario no encontrado"], 404);
+        }
+
+        if($request->password === "" || $request->confirm_password === "") {
+            return response()->json(["error" => "Debes de escribir una contraseña"], 400);
+        }
+
+        if($request->password !== $request->confirm_password) {
+            return response()->json(["error" => "Las contraseñas no coinciden"]);
+        }
+
+        $user->password = Hash::make($request->password);
+
+        $user->save();
+
+        return response()->json("Contraseña actualizada con éxito");
     }
 }

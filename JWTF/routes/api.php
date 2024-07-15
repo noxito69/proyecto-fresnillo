@@ -67,6 +67,8 @@ Route::group([
     Route::put('put/{id}',[UserController::class,'update'])->middleware('authrole2')->where('id','[0-9]+');
     Route::post("login/user", [UserController::class,"login"]);
 
+    Route::put("user/editPassword",[UserController::class,"recoverPassword"]);
+
     //centro de costos
     Route::get('centro_costos/index', [CentroCostoController::class, 'index']);
     Route::post('centro_costos/post', [CentroCostoController::class, 'store']);
@@ -78,13 +80,13 @@ Route::group([
 
 
     //departamentos
-    
+
     Route::get('departamentos/indexPg', [DepartamentoController::class, 'indexPg']);
     Route::get('departamentos/index', [DepartamentoController::class, 'index']);
     Route::post('departamentos/post', [DepartamentoController::class, 'store']);
     Route::get('departamentos/get/{id}', [DepartamentoController::class, 'show']);
     Route::put('departamentos/put/{id}', [DepartamentoController::class, 'update']);
-    Route::patch('departamentos/delete/{id}', [DepartamentoController::class, 'delete']);
+    Route::put('departamentos/delete/{id}', [DepartamentoController::class, 'delete']);
     Route::get('departamentos/search', [DepartamentoController::class, 'search']);
     Route::get('departamentos/indexAlfa', [DepartamentoController::class, 'indexAlfa']);
 

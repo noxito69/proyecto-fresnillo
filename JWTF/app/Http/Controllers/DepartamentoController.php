@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class DepartamentoController extends Controller
 {
-    
+
     public function index()
     {
         $departamentos = Departamento::where('is_active', true)->orderBy('nombre')->get();
@@ -23,7 +23,7 @@ class DepartamentoController extends Controller
         $page = (int)$query['page'];
         $perPage = (int)$query['pageSize'];
 
-        $departamentos = Departamento::select('*')->paginate($perPage, ['*'], 'page', $page); 
+        $departamentos = Departamento::select('*')->paginate($perPage, ['*'], 'page', $page);
         return response()->json($departamentos);
     }
 
@@ -33,12 +33,12 @@ class DepartamentoController extends Controller
         return response()->json($results);
     }
 
-    
+
     public function indexAlfa(){
         $marcas = Departamento::orderBy('nombre')->get();
         return response()->json($marcas);
     }
-    
+
     public function store(Request $request)
     {
         $messages = [
@@ -46,7 +46,7 @@ class DepartamentoController extends Controller
             'nombre.unique' => 'Este nombre ya existe.',
             'nombre.max' => 'El nombre no debe exceder los 255 caracteres.',
             'centro_costos.required' => 'El centro de costos es requerido.',
-           
+
         ];
 
         $validated = Validator::make($request->all(), [
@@ -64,9 +64,9 @@ class DepartamentoController extends Controller
             return response()->json($departamento, 201);
         }
     }
- 
 
-    
+
+
     public function show($id)
     {
         $departamento = Departamento::find($id);
@@ -78,8 +78,8 @@ class DepartamentoController extends Controller
         return response()->json($departamento);
     }
 
-    
-    
+
+
     public function update(Request $request, $id)
     {
         $messages = [
@@ -111,16 +111,24 @@ class DepartamentoController extends Controller
     }
 
 
-    
+
     public function delete($id)
     {
         $departamento = Departamento::find($id);
-        if ($departamento) {
+
+        if(!$departamento) {
+            return response()->json(["error" => "Departamento no encontrado"], 404);
+        }
+
+        if($departamento->is_active) {
             $departamento->is_active = false;
             $departamento->save();
             return response()->json(['message' => 'Departamento deshabilitado correctamente.']);
-        } else {
-            return response()->json(['message' => 'Departamento no encontrado.'], 404);
         }
+        $departamento->is_active = true;
+        $departamento->save();
+
+        return response()->json(['message' => 'Departamento habilitado correctamente.']);
+
     }
 }

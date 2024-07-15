@@ -39,14 +39,14 @@ export class NewEtiquetaPNMNTComponent {
   departamento: string = '';
   anexo: string = '';
   fecha_vigencia: string = '';
-  fecha_actual: string = ''; 
+  fecha_actual: string = '';
 
   modelos: any[] = [];
-  anexos: any[] = []; 
+  anexos: any[] = [];
   departamentos: any[] = [];
   etiquetas: any[] = [];
   filteredEtiquetas: any[] = [];
- 
+
 
   numero_etiqueta: number = 0;
 
@@ -63,10 +63,10 @@ export class NewEtiquetaPNMNTComponent {
   imgWidth: number = 0;
   imgHeight: number = 0;
 
-  
+
   ngOnInit(): void {
 
-    
+
     this.getLastTag();
     this.getTags();
 
@@ -98,7 +98,7 @@ export class NewEtiquetaPNMNTComponent {
 
   }
 
-  
+
   onSearchChange(query: string) {
     this.searchSubject.next(query);
   }
@@ -123,9 +123,9 @@ export class NewEtiquetaPNMNTComponent {
         this.centroCostos = data.centro_costos;
         this.departamento = data.departamento;
         this.email = data.email;
-    
 
-     
+
+
       },
       error: (error) => {
         let errorMessage = 'Ocurrió un error inesperado'; // Mensaje por defecto
@@ -138,7 +138,7 @@ export class NewEtiquetaPNMNTComponent {
           errorMessage = errors[Object.keys(errors)[0]][0]; // Obtiene el primer mensaje de error de la respuesta
         }
         Swal.fire('Error', errorMessage, 'error');
-   
+
       }
     });
   }
@@ -207,23 +207,23 @@ export class NewEtiquetaPNMNTComponent {
   this.http.get("http://127.0.0.1:8000/api/auth/etiquetas_empleados/index").subscribe(
     (data:any) => {
       this.etiquetas = data.data;
-      this.filteredEtiquetas = data.data; 
-      
+      this.filteredEtiquetas = data.data;
+
     }
   );
   }
 
- 
+
 
   formatMacAddress() {
     if (!this.mac) return;
-  
+
     // Elimina caracteres no hexadecimales y los dos puntos anteriores para empezar de cero
     let cleanInput = this.mac.replace(/[^0-9A-F]/gi, '');
-  
+
     // Añade los dos puntos después de cada par de caracteres
     let formattedMac = cleanInput.match(/.{1,2}/g)?.join(':').slice(0, 17) || '';
-  
+
     this.mac = formattedMac;
   }
 
@@ -231,7 +231,7 @@ export class NewEtiquetaPNMNTComponent {
 
 
 
- 
+
   ObtenerModelo(){
 
     this.http.get<any[]>("http://127.0.0.1:8000/api/auth/modelo_empleado/index").subscribe(
@@ -250,7 +250,7 @@ export class NewEtiquetaPNMNTComponent {
   }
 
   ObtenerDepartamento(){
-    this.http.get<any[]>("http://127.0.0.1:8000/api/auth/departamentos/indexAlfa").subscribe(
+    this.http.get<any[]>("http://127.0.0.1:8000/api/auth/departamentos/index").subscribe(
 
       data => {
         this.departamentos = data;
@@ -303,11 +303,11 @@ export class NewEtiquetaPNMNTComponent {
       anexo: this.anexo,
       fecha_vigencia: this.fecha_vigencia,
 
-    }; 
+    };
 
     this.http.post(url,body).subscribe(
       response =>{
-        this.generatePdf(); 
+        this.generatePdf();
         Swal.fire("Exito", 'Etiqueta creada correctamente', 'success');
         setTimeout(() => {
           location.reload();
@@ -321,7 +321,7 @@ export class NewEtiquetaPNMNTComponent {
                     : 'Error al crear la etiqueta';
           Swal.fire('Error', errorMessage, 'error');
         }
-      );     
+      );
   }
 
 
@@ -336,10 +336,10 @@ export class NewEtiquetaPNMNTComponent {
       const contentDataURL = canvas.toDataURL('image/png');
       const pdf = new jsPDF('landscape', 'mm', [this.imgWidth, this.imgHeight]);
       pdf.addImage(contentDataURL, 'PNG', 0, 0, this.imgWidth, this.imgHeight);
-  
+
       const pdfBlob = pdf.output('blob');
       const pdfUrl = URL.createObjectURL(pdfBlob);
-  
+
       // Abrir el PDF en una nueva pestaña
       window.open(pdfUrl, '_blank');
     }).catch(error => {

@@ -12,7 +12,7 @@ import { debounceTime, distinctUntilChanged, Observable, Subject, switchMap } fr
   standalone: true,
   imports: [LayoutComponent,HttpClientModule,NgFor,FormsModule,RouterLink],
   templateUrl: './new-departamento.component.html',
-  styleUrl: './new-departamento.component.css'  
+  styleUrl: './new-departamento.component.css'
 })
 export class NewDepartamentoComponent {
 
@@ -21,12 +21,12 @@ export class NewDepartamentoComponent {
   searchQuery: string = '';
   private searchSubject: Subject<string> = new Subject<string>();
 
-  
+
   departamento = {
     nombre: '',
     centro_costos: '',
     is_active: true
-    
+
   };
 
   id: string = '';
@@ -38,11 +38,11 @@ export class NewDepartamentoComponent {
   currentPage: number = 0;
 
   selectedMarcaId: string | null = null;
-  centrosCostos: any[] = [];  
+  centrosCostos: any[] = [];
   departamentos: any[] = [];
 
 
-  
+
   previousPage() {
     if (this.page > 1) {
       this.page--;
@@ -56,10 +56,8 @@ export class NewDepartamentoComponent {
       this.getDepartamento();
     }
   }
-  
+
   constructor(private http: HttpClient, private router:Router) { }
-  
-  
   ngOnInit() {
     this.obtenerCentrosCostos();
 
@@ -88,12 +86,15 @@ export class NewDepartamentoComponent {
     const params = `?page=${this.page}&pageSize=${this.pageSize}`;
     this.http.get(`http://127.0.0.1:8000/api/auth/departamentos/indexPg${params}`).subscribe({
       next: (data: any) => {
-        
+
         this.departamentos = data.data;
         this.totalItems = data.total;
         this.totalPages = data.last_page;
         this.currentPage = data.current_page;
-  
+
+
+        // console.log({data: data.data})
+
       },
       error: (error) => {
         console.error('There was an error!', error);
@@ -108,7 +109,7 @@ export class NewDepartamentoComponent {
       data => {
         // Paso 2: Actualizar el modelo con los datos recibidos
         // Asumiendo que tienes propiedades en tu componente para cada uno de estos campos
-  
+
         this.departamento.nombre = data.nombre;
         this.departamento.centro_costos = data.centro_costos;
       },
@@ -118,29 +119,29 @@ export class NewDepartamentoComponent {
       }
     );
   }
-  
+
 
   get pages(): number[] {
     const half = Math.floor(this.pageSize / 2);
     let start = Math.max(this.currentPage - half, 1);
     let end = Math.min(start + this.pageSize - 1, this.totalPages);
-  
+
     if (end - start < this.pageSize - 1) {
       start = Math.max(end - this.pageSize + 1, 1);
     }
-  
+
     const pages = [];
     for (let i = start; i <= end; i++) {
       pages.push(i);
     }
     return pages;
   }
-  
+
   goToPage(page: number) {
     this.page = page;
     this.getDepartamento();
   }
-  
+
 
   crearDepartamento() {
     this.http.post('http://127.0.0.1:8000/api/auth/departamentos/post', this.departamento)
@@ -168,7 +169,7 @@ UpdateDepartamento() {
   const body = {
     nombre: this.departamento.nombre,
     centro_costos: this.departamento.centro_costos
-    
+
 
   };
 
@@ -182,7 +183,7 @@ UpdateDepartamento() {
       setTimeout(() => {
         location.reload();
       }, 1000);
-  
+
     },
     error => {
       console.error('Error al actualizar', error);
@@ -219,7 +220,7 @@ DeleteMarca() {
   toggleIsActive(departmentId: number, isActive: boolean) {
     // Lógica para enviar la actualización al backend
     // Por ejemplo, usando HttpClient
-    this.http.put(`url-to-update-department/${departmentId}`, { isActive: isActive })
+    this.http.put(`http://127.0.0.1:8000/api/auth/departamentos/delete/${departmentId}`, {})
       .subscribe({
         next: (response) => {
           // Manejar respuesta exitosa
@@ -249,11 +250,11 @@ DeleteMarca() {
   openEditModal(id: string) {
     this.selectedMarcaId = id;
     this.obtenerNombre();
-  
-  
-  
+
+
+
   }
-  
+
   navigateTo(route:string){
 
 

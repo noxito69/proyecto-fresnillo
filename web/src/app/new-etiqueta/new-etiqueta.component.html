@@ -12,14 +12,14 @@
 
     <app-layout>
         <section>
-            <div class="modal fade right justify-content-center; modal-dialog-scrollable" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade modal-dialog-scrollable" id="updateModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
                 <div class="modal-content">
                   <div class="modal-header">
                     <h4 class="modal-title" id="exampleModalLabel">Seleccionar etiqueta a editar</h4>
                     <input type="text" name="" id="search-tag" [(ngModel)]="searchQuery" (ngModelChange)="onSearchChange($event)" #searchInput class="form-control ms-auto" style="width: 300px;"  placeholder="Buscar etiqueta...">
                   </div>
-                  <div class="modal-body justify-content-center align-items-center">
+                  <div class="modal-body justify-content-center align-items-center" style="height: 550px;">
                     <div class="row g-3">
                       <div class="col-md-12">
                         <table class="table table-striped">
@@ -57,7 +57,7 @@
                 </div>
               </div>
             </div>
-            
+
 
             <div class="modal fade right justify-content-center" id="myModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -155,15 +155,15 @@
                 </div>
 
                 <!-- Octavo Nivel -->
-                <div class="col-md-12 row mb-3 ">
-                    
-             
-                      <button type="button" class="btn btn-warning col-md-6" data-bs-toggle="modal" data-bs-target="#updateModal" >Actualizar Etiqueta</button>
-                      <button type="button" class="btn btn-success col-md-6" id="openModalBtn" data-bs-toggle="modal" data-bs-target="#myModal3">Exportar BD a Excel</button>
-
-           
+                <div class="col-md-12 row mb-3">
+                  <div class="col-md-6">
+                    <button type="button" class="btn btn-warning w-100" data-bs-toggle="modal" data-bs-target="#updateModal" >Actualizar Etiqueta</button>
+                  </div>
+                  <div class="col-md-6">
+                    <button type="button" class="btn btn-success w-100" id="openModalBtn" data-bs-toggle="modal" data-bs-target="#myModal3">Exportar BD a Excel</button>
+                  </div>
                 </div>
-                
+
             </div>
         </div>
         <br><br>
@@ -184,18 +184,12 @@
 
 
             </div>
-
-            
-
         </section>
-
         <div class="form-horizontal">
 
-        <button type="button" class="btn btn-primary col-md-6" (click)="CrearEtiqueta()">Generar Etiqueta</button>
+        <button type="button" class="btn btn-primary col-md-11" (click)="CrearEtiqueta()">Generar Etiqueta</button>
 
         </div>
-
-
 
     </app-layout>
 
