@@ -14,7 +14,7 @@ class MarcaController extends Controller
         $page = (int)$query['page'];
         $perPage = (int)$query['pageSize'];
 
-        $marcas = Marca::select('*')->paginate($perPage, ['*'], 'page', $page); 
+        $marcas = Marca::orderBy('nombre')->paginate($perPage, ['*'], 'page', $page); 
         return response()->json($marcas);
     }
 
@@ -26,7 +26,7 @@ class MarcaController extends Controller
 
 
     public function getMarcas(){
-        $marcas = Marca::orderBy('nombre')->get();
+        $marcas = Marca::where('is_active', true)->orderBy('nombre')->get();
         return response()->json($marcas);
     }
 
@@ -76,21 +76,33 @@ class MarcaController extends Controller
         }
     }
 
-    public function destroy($id){
+    public function delete($id){
+        
+
         $marca = Marca::find($id);
 
-        if($marca)
-        {
-            $marca->delete();
-            return response()->json([
-                'message' => 'Marca deleted successfully'
-            ], 200);
-        }
-        else
+        if(!$marca)
         {
             return response()->json([
                 'message' => 'Marca not found'
             ], 404);
         }
+
+        if($marca->is_active){
+
+            $marca->is_active = false;
+            $marca->save();
+            return response()->json([
+                'message' => 'Marca deshabilitada'
+            ], 200);
+
+        }
+        $marca->is_active = true;
+        $marca->save();
+
+        return response()->json([
+            'message' => 'Marca habilitada'
+        ], 200);
+
     }
 }

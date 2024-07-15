@@ -22,6 +22,7 @@ export class CentroCostosComponent {
 
   centro = {
     nombre: '',
+    is_active: true
     	
   };
 
@@ -183,25 +184,24 @@ UpdateCentro() {
   );
 }
 
-DeleteCentro() {
-  const url = `http://127.0.0.1:8000/api/auth/centro_costos/delete/${this.selectedMarcaId}`;
-
-  this.http.delete<any>(url).subscribe(
-
-    data => {
-      Swal.fire('Success', 'Empresa eliminada con exito', 'success');
-      setTimeout(() => {
-        location.reload();
-      }, 1000);
-    },
-    error => {
-      console.error('Error al eliminar', error);
-      Swal.fire('Error', 'Hubo un error al eliminar la centro', 'error');}
 
 
-  );
 
+toggleIsActive(departmentId: number, isActive: boolean) {
+   this.http.put(`http://127.0.0.1:8000/api/auth/centro_costos/delete/${departmentId}`, {})
+    .subscribe({
+      next: (response) => {
+        // Manejar respuesta exitosa
+        console.log('Estado actualizado', response);
+      },
+      error: (error) => {
+        // Manejar error
+        console.error('Error al actualizar estado', error);
+      }
+    });
 }
+
+
 
 openEditModal(id: string) {
   this.selectedMarcaId = id;

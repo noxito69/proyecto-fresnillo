@@ -19,24 +19,24 @@
 
 
                 
-                <div class="form-level form-horizontal">
+                <div class="mb-3 col-md-12">
 
-                    <div class="mb-3">
-                        <label for="nombreEmpleado" class="form-label">Correo Electronico:</label>
+                    <div class="mb-6">
+                        <label for="nombreEmpleado" class="form-label required">Correo Electronico</label>
                         <input type="email" class="form-control" [(ngModel)]="email" id="correoEmpleados" placeholder="">
                     </div>
                 </div>
 
-                <div class="form-level form-horizontal">
+                <div class="mb-3 col-md-12">
 
-                    <div class="mb-3">
-                        <label for="contraseña" class="form-label">Contraseña:</label>
+                    <div class="mb-6">
+                        <label for="contraseña" class="form-label required">Contraseña</label>
                         <input type="password" class="form-control" id="contraseña" [(ngModel)]="password" placeholder="">
                     </div>
                 </div>
                 <!-- Octavo Nivel -->
                 <div class="form-level form-level-buttons">
-                    <button type="button" class="btn btn-primary"  (click)="login()">Iniciar Sesion</button>
+                    <button type="button" class="btn btn-primary mb-3 col-md-12"  (click)="login()">Iniciar Sesion</button>
                    
 
                 </div>

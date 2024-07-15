@@ -9,7 +9,7 @@ class ModeloEmpleadoController extends Controller
 {
     public function index(){
 
-        $modelos = ModeloEmpleado::OrderBy('nombre')->get();
+        $modelos = ModeloEmpleado::where('is_active', true)->orderBy('nombre')->get();
         return response()->json($modelos);
         
 
@@ -80,20 +80,25 @@ class ModeloEmpleadoController extends Controller
 
     }
 
-    public function destroy($id){
+    public function delete($id){
 
-        $modelo = ModeloEmpleado::find($id);
+        $modeloEmpleado = ModeloEmpleado::find($id);
 
-        if($modelo){
-            $modelo->delete();
-            return response()->json([
-                'message' => 'ModeloEmpleado deleted successfully'
-            ], 200);
-        }else{
-            return response()->json([
-                'message' => 'ModeloEmpleado not found'
-            ], 404);
+        if(!$modeloEmpleado) {
+            return response()->json(["error" => "Modelo no encontrado"], 404);
         }
+
+        if($modeloEmpleado->is_active) {
+            
+            $modeloEmpleado->is_active = false;
+            $modeloEmpleado->save();
+            return response()->json(['message' => 'Modelo deshabilitado correctamente.']);
+        }
+        $modeloEmpleado->is_active = true;
+        $modeloEmpleado->save();
+
+        return response()->json(['message' => 'Modelo habilitado correctamente.']);
+
 
     }
     

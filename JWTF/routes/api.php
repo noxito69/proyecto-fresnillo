@@ -74,7 +74,7 @@ Route::group([
     Route::post('centro_costos/post', [CentroCostoController::class, 'store']);
     Route::get('centro_costos/get/{id}', [CentroCostoController::class, 'show']);
     Route::put('centro_costos/put/{id}', [CentroCostoController::class, 'update']);
-    Route::delete('centro_costos/delete/{id}', [CentroCostoController::class, 'destroy']);
+    Route::put('centro_costos/delete/{id}', [CentroCostoController::class, 'delete']);
     Route::get('centro_costos/search', [CentroCostoController::class, 'search']);
     Route::get('centro_costos/indexPg', [CentroCostoController::class, 'indexPg']);
 
@@ -135,7 +135,7 @@ Route::group([
     Route::post('marca/post',[MarcaController::class,'store']);
     Route::get('marca/get/{id}',[MarcaController::class,'show']);
     Route::put('marca/put/{id}',[MarcaController::class,'update']);
-    Route::delete('marca/delete/{id}',[MarcaController::class,'destroy']);
+    Route::put('marca/delete/{id}',[MarcaController::class,'delete']);
     Route::get("marca/search", [MarcaController::class, "search"]);
 
     //Modelos
@@ -153,7 +153,7 @@ Route::group([
     Route::post('modelo_empleado/post',[ModeloEmpleadoController::class,'store']);
     Route::get('modelo_empleado/get/{id}',[ModeloEmpleadoController::class,'show']);
     Route::put('modelo_empleado/put/{id}',[ModeloEmpleadoController::class,'update']);
-    Route::delete('modelo_empleado/delete/{id}',[ModeloEmpleadoController::class,'destroy']);
+    Route::put('modelo_empleado/delete/{id}',[ModeloEmpleadoController::class,'delete']);
     Route::get('modelo_empleado/search', [ModeloEmpleadoController::class, 'search']);
     Route::get('modelo_empleado/indexPg', [ModeloEmpleadoController::class, 'indexPg']);
 

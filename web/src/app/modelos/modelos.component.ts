@@ -21,6 +21,7 @@ export class ModelosComponent {
 
   modelo = {
     nombre: '',
+    is_active: true
     	
   };
 
@@ -152,6 +153,23 @@ export class ModelosComponent {
 }
 
 
+
+toggleIsActive(departmentId: number, isActive: boolean) {
+  this.http.put(`http://127.0.0.1:8000/api/auth/modelo_empleado/delete/${departmentId}`, {})
+    .subscribe({
+      next: (response) => {
+        
+        console.log('Estado actualizado', response);
+      },
+      error: (error) => {
+        
+        console.error('Error al actualizar estado', error);
+      }
+    });
+}
+
+
+
 UpdateModelo() {
   const url = `http://127.0.0.1:8000/api/auth/modelo_empleado/put/${this.selectedMarcaId}`;
 
@@ -180,25 +198,6 @@ UpdateModelo() {
 }
 
 
-DeleteModelo() {
-  const url = `http://127.0.0.1:8000/api/auth/modelo_empleado/delete/${this.selectedMarcaId}`;
-
-  this.http.delete<any>(url).subscribe(
-
-    data => {
-      Swal.fire('Success', 'Modelo eliminado con exito', 'success');
-      setTimeout(() => {
-        location.reload();
-      }, 1000);
-    },
-    error => {
-      console.error('Error al eliminar', error);
-      Swal.fire('Error', 'Hubo un error al eliminar el modelo', 'error');}
-
-
-  );
-
-}
 
 
 openEditModal(id: string) {

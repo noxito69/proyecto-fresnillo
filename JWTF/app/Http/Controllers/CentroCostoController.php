@@ -10,7 +10,7 @@ class CentroCostoController extends Controller
 {
     public function index()
     {
-        $centroCostos = CentroCosto::OrderBy('nombre')->get();
+        $centroCostos = CentroCosto::where('is_active', true)->orderBy('nombre')->get();
         return response()->json($centroCostos);
     }
 
@@ -91,8 +91,8 @@ class CentroCostoController extends Controller
             }
     }
 
-    // Remove the specified resource from storage
-    public function destroy($id)
+    // Remove the specified resource from 
+    public function delete($id)
     {
         $centroCosto = CentroCosto::find($id);
 
@@ -100,9 +100,18 @@ class CentroCostoController extends Controller
             return response()->json(['message' => 'Centro de costos no encontrado'], 404);
         }
 
-        $centroCosto->delete();
+        if($centroCosto->is_active){
 
-        return response()->json(['message' => 'Borrado exitoso'], 204);
+            $centroCosto->is_active = false;
+            $centroCosto->save();
+            return response()->json(['message' => 'Centro de costos deshabilitado']);
+
+        }
+        $centroCosto->is_active = true;
+        $centroCosto->save();
+
+        return response()->json(['message' => 'Departamento habilitado correctamente']);
+
     }
 }
 

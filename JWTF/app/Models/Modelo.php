@@ -10,6 +10,6 @@ class Modelo extends Model
     use HasFactory;
 
     protected $table = 'modelos';
-    protected $fillable = ['nombre'];   
+    protected $fillable = ['nombre', 'is_active'];   
 
 }

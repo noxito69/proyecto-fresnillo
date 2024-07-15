@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('tipo_equipo', function (Blueprint $table) {
             $table->id();
             $table->string('nombre', 50)->unique();
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

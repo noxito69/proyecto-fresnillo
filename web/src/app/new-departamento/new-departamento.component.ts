@@ -193,33 +193,7 @@ UpdateDepartamento() {
 }
 
 
-DeleteMarca() {
-  const url = `http://127.0.0.1:8000/api/auth/departamentos/delete/${this.selectedMarcaId}`;
-
-
-
-  this.http.delete<any>(url).subscribe(
-
-
-    data => {
-      Swal.fire('Success', 'departamento eliminado correctamente', 'success');
-      setTimeout(() => {
-        location.reload();
-      }, 1000);
-    },
-    error => {
-      console.error('Error al eliminar', error);
-      Swal.fire('Error', 'Hubo un error al eliminar el departamento', 'error');}
-
-
-  );
-
-}
-
-
   toggleIsActive(departmentId: number, isActive: boolean) {
-    // Lógica para enviar la actualización al backend
-    // Por ejemplo, usando HttpClient
     this.http.put(`http://127.0.0.1:8000/api/auth/departamentos/delete/${departmentId}`, {})
       .subscribe({
         next: (response) => {

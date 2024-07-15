@@ -8,22 +8,21 @@ use Illuminate\Http\Request;
 
 class DepartamentoController extends Controller
 {
-
     public function index()
     {
+        
         $departamentos = Departamento::where('is_active', true)->orderBy('nombre')->get();
         return response()->json($departamentos);
+        
     }
-
 
     public function indexPg(Request $request)
     {
-        $query = $request->query();
-
+        $query = $request->query(); 
         $page = (int)$query['page'];
         $perPage = (int)$query['pageSize'];
 
-        $departamentos = Departamento::select('*')->paginate($perPage, ['*'], 'page', $page);
+        $departamentos = Departamento::orderBy('nombre')->paginate($perPage, ['*'], 'page', $page);
         return response()->json($departamentos);
     }
 
@@ -46,6 +45,7 @@ class DepartamentoController extends Controller
             'nombre.unique' => 'Este nombre ya existe.',
             'nombre.max' => 'El nombre no debe exceder los 255 caracteres.',
             'centro_costos.required' => 'El centro de costos es requerido.',
+
 
         ];
 
@@ -121,6 +121,7 @@ class DepartamentoController extends Controller
         }
 
         if($departamento->is_active) {
+            
             $departamento->is_active = false;
             $departamento->save();
             return response()->json(['message' => 'Departamento deshabilitado correctamente.']);

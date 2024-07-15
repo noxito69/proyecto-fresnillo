@@ -9,10 +9,10 @@ class CentroCosto extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nombre',];
+    protected $fillable = ['nombre', 'is_active'];
 
     public function centroCosto()
-    {
+    {   
         return $this->belongsTo(CentroCosto::class);
     }
   

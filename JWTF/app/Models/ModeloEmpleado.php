@@ -12,7 +12,8 @@ class ModeloEmpleado extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nombre'
+        'nombre',
+        'is_active'
     ];
 
 }

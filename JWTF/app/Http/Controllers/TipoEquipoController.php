@@ -10,7 +10,7 @@ class TipoEquipoController extends Controller
     
     public function index()
     {
-        $tipoequipos = TipoEquipo::all();
+        $tipoequipos = TipoEquipo::where('is_active', true)->orderBy('nombre')->get();
         return response()->json($tipoequipos);
     }
 
@@ -22,7 +22,7 @@ class TipoEquipoController extends Controller
         $perPage = (int)$query['pageSize'];
 
 
-        $tipoequipos = TipoEquipo::select('*')->paginate($perPage, ['*'], 'page', $page); 
+        $tipoequipos = TipoEquipo::orderBy('nombre')->paginate($perPage, ['*'], 'page', $page); 
         return response()->json($tipoequipos);
     }
 

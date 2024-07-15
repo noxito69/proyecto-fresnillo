@@ -3,6 +3,7 @@ import { LayoutComponent } from '../layout/layout.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recover',
@@ -17,7 +18,7 @@ export class RecoverComponent {
   public password: string = "";
   public confirm_password: string = "";
 
-  constructor(private http: HttpClient ) { }
+  constructor(private http: HttpClient, private router:Router ) { }
 
   updatePassword() {
     if(this.password !== this.confirm_password){
@@ -40,4 +41,12 @@ export class RecoverComponent {
     )
 
   }
+
+
+  navigateTo(route:string){
+
+    this.router.navigate([route]);
+
+  }
+
 }

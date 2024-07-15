@@ -11,7 +11,7 @@ class TipoEquipo extends Model
 
     protected $table = 'tipo_equipo'; 
 
-    protected $fillable = ['nombre'];
+    protected $fillable = ['nombre','is_active'];
 
   
 }

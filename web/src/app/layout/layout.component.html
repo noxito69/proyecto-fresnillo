@@ -58,6 +58,7 @@
                     <div *ngIf="openMenu === 'ti'" class="submenu">
                         <a (click)="navigateTo('/register')" *ngIf="user_data.rol_id == 1">• Nuevo Usuario TI</a>
                         <a (click)="navigateTo('/new-user-pnmnt')">• Nuevo empleado</a>
+                        <a (click)="navigateTo('/recover')" *ngIf="user_data.rol_id == 1">• Cambiar contraseña</a>
                         
                     </div>
                 </div>

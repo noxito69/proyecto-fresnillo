@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('articulo');
             $table->string('marca')->nullable();
             $table->string('codigo_barras')->unique();
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
 
           
